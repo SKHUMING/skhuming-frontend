@@ -47,9 +47,8 @@ const Container = styled.div`
     }
 
     img {
-        width: 32.375rem;
-        height: 10.75rem;
-        flex-shrink: 0;
+        width: 500px;
+        height: 150px;
     }
 `;
 
