@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../components/Header.js";
 
 const Container = styled.div`
     h1 {
@@ -10,6 +11,7 @@ const Container = styled.div`
 function SigninPage() {
     return (
         <Container>
+            <Header />
             <h1>SigninPage</h1>
         </Container>
     );
