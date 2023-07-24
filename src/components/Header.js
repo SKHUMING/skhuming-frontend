@@ -1,6 +1,42 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import LogoImg from "../images/skhumingLogo.png";
+
+// const slideIn = keyframes`
+// to{
+//     top: 0vh;
+// }
+// from{
+//     top: 5vh;
+// }
+// `;
+
+const slideBox1 = keyframes`
+to{
+    height: 30vh;
+}
+from{
+    height: 37vh;
+}
+`;
+
+const slideBox2 = keyframes`
+to{
+    height: 35vh;
+}
+from{
+    height: 42vh;
+}
+`;
+
+const slideBox3 = keyframes`
+to{
+    height: 40vh;
+}
+from{
+    height: 47vh;
+}
+`;
 
 const Container = styled.div`
     width: 100vw;
@@ -11,15 +47,17 @@ const Container = styled.div`
         height: 30vh;
         flex-shrink: 0;
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         position: fixed;
         z-index: 2;
 
         background: #2d6dcc;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        animation: ${slideBox1} 1.5s cubic-bezier(0.345, 0.77, 0.395, 0.92);
     }
 
     .box2 {
@@ -32,6 +70,8 @@ const Container = styled.div`
 
         background: #5a95ec;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        animation: ${slideBox2} 2s cubic-bezier(0.345, 0.77, 0.395, 0.92);
     }
 
     .box3 {
@@ -44,6 +84,8 @@ const Container = styled.div`
 
         background: #9dc4ff;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        animation: ${slideBox3} 2.5s cubic-bezier(0.345, 0.77, 0.395, 0.92);
     }
 
     img {
