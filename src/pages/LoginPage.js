@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Header from "../components/Header.js";
 
 const Container = styled.div`
@@ -89,7 +90,20 @@ const Container = styled.div`
     }
 
     .signinBtn {
+        width: 80px;
+        height: 30px;
+
+        padding: 5px;
+
+        border-radius: 15px;
+        border: #fbfbfb solid 2px;
+
         color: #3a73c9;
+
+        transition: border 0.3s ease-in-out;
+    }
+    .signinBtn:hover {
+        border: #9dc4ff solid 2px;
     }
 
     .loginBtn {
@@ -97,11 +111,46 @@ const Container = styled.div`
         height: 30px;
 
         padding: 5px;
-        margin-left: 25px;
+        margin-left: 15px;
 
         border-radius: 15px;
+        border: #3a73c9 solid 2px;
 
         background-color: #3a73c9;
+        color: #fbfbfb;
+
+        transition: all 0.3s ease-in-out;
+    }
+    .loginBtn:hover {
+        border: #9dc4ff solid 2px;
+        background-color: #9dc4ff;
+    }
+`;
+
+const StyledLink1 = styled(Link)`
+    color: #3a73c9;
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        color: #3a73c9;
+    }
+`;
+
+const StyledLink2 = styled(Link)`
+    color: #fbfbfb;
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
         color: #fbfbfb;
     }
 `;
@@ -130,8 +179,12 @@ function LoginPage() {
                     </div>
 
                     <div className="linkBox">
-                        <div className="signinBtn">SIGN IN</div>
-                        <div className="loginBtn">LOGIN</div>
+                        <div className="signinBtn">
+                            <StyledLink1 to="/signin">SIGN IN</StyledLink1>
+                        </div>
+                        <div className="loginBtn">
+                            <StyledLink2 to="/main">LOGIN</StyledLink2>
+                        </div>
                     </div>
                 </div>
             </div>
