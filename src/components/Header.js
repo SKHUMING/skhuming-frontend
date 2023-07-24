@@ -51,7 +51,7 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
 
-        position: fixed;
+        position: absolute;
         z-index: 2;
 
         background: #2d6dcc;
@@ -65,7 +65,7 @@ const Container = styled.div`
         height: 35vh;
         flex-shrink: 0;
 
-        position: fixed;
+        position: absolute;
         z-index: 1;
 
         background: #5a95ec;
@@ -79,7 +79,7 @@ const Container = styled.div`
         height: 40vh;
         flex-shrink: 0;
 
-        position: fixed;
+        position: absolute;
         z-index: 0;
 
         background: #9dc4ff;
