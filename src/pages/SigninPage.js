@@ -16,7 +16,7 @@ const Container = styled.div`
 
     .loginBox {
         width: 700px;
-        height: 650px;
+        height: 830px;
 
         padding: 60px 0;
 
@@ -66,6 +66,7 @@ const Container = styled.div`
         width: 70px;
 
         font-size: 18px;
+        font-weight: bold;
         color: #2d6dcc;
     }
 
@@ -86,9 +87,36 @@ const Container = styled.div`
         width: 30px;
         height: 30px;
 
+        margin-left: 10px;
+
         display: flex;
         justify-content: center;
         align-items: center;
+
+        font-size: 35px;
+
+        transition: font-size 0.3s ease-in-out;
+    }
+    .iconBox:hover {
+        cursor: pointer;
+        font-size: 40px;
+    }
+
+    .inputExplanation {
+        width: 400px;
+        margin-left: 105px;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .expDetail {
+        margin-left: 10px;
+        color: #9dc4ff;
+        font-size: 15px;
+    }
+    .expDetail > span {
+        font-weight: bold;
     }
 
     .linkBox {
@@ -162,7 +190,17 @@ function SigninPage() {
                                     type="email"
                                     placeholder="EMAIL   (@skhu.office.ac.kr)"
                                 ></input>
-                                <div className="iconBox">*</div>
+                                <div className="iconBox">📧</div>
+                            </div>
+                            <div className="inputExplanation">
+                                📢
+                                <div className="expDetail">
+                                    <span> @office.skhu.ac.kr</span> 이메일을
+                                    적고,
+                                    <br />
+                                    우측의 인증 메일 버튼을 통해
+                                    <span> 재학생 인증</span>을 받아주세요!
+                                </div>
                             </div>
 
                             <div className="inputBox">
@@ -173,6 +211,12 @@ function SigninPage() {
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
+                            <div className="inputExplanation">
+                                📢{" "}
+                                <div className="expDetail">
+                                    <span> 8자리 이상</span>으로 입력해주세요!
+                                </div>
+                            </div>
 
                             <div className="inputBox">
                                 <label>닉네임</label>
@@ -181,6 +225,13 @@ function SigninPage() {
                                     placeholder="NICKNAME"
                                 ></input>
                                 <div className="iconBox"></div>
+                            </div>
+                            <div className="inputExplanation">
+                                📢{" "}
+                                <div className="expDetail">
+                                    랭킹에 보여질 이름입니다. <br />
+                                    변경이 불가하오니 신중히 입력해주세요!
+                                </div>
                             </div>
 
                             <div className="inputBox">
