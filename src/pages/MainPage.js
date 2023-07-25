@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import MainHeader from "../components/MainHeader.js";
 
 const Container = styled.div`
     h1 {
@@ -10,6 +11,7 @@ const Container = styled.div`
 function MainPage() {
     return (
         <Container>
+            <MainHeader />
             <h1>MainPage</h1>
         </Container>
     );
