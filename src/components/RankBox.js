@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import MainHeader from "../components/MainHeader.js";
-import RankBox from "../components/RankBox.js";
 import tier_SS from "../images/tier_SS.png";
 
 const Container = styled.div`
@@ -15,7 +13,7 @@ const Container = styled.div`
     }
 
     .rankingTitle {
-        margin-bottom: 3vh;
+        margin-bottom: 5vh;
     }
 
     .rankingTitle > p {
@@ -33,6 +31,7 @@ const Container = styled.div`
     }
 
     .rank_box {
+        width: 43.5vw;
         margin: 2vh 0;
         padding: 0 1vw;
 
@@ -100,24 +99,25 @@ const Container = styled.div`
     }
 `;
 
-function RankingPage() {
+function RankBox() {
     return (
         <Container>
-            <MainHeader />
-            <div class="rankingBox">
-                <div className="rankingTitle">
-                    <p>SKHUMING RANKING</p>
-                    <hr />
-                </div>
-
-                <div className="ranking">
-                    <RankBox />
-                    <RankBox />
-                    <RankBox />
+            <div className="ranking">
+                <div className="rank_box">
+                    <div className="rank">1</div>
+                    <div className="rank_profile">
+                        <div className="rank_img">
+                            <img src={tier_SS} alt="tier"></img>
+                        </div>
+                        <div className="rank_user">
+                            <div className="rank_name">홍길동</div>
+                            <div className="rank_score">200점</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Container>
     );
 }
 
-export default RankingPage;
+export default RankBox;
