@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import tier_SS from "../images/tier_SS.png";
+import tier_S from "../images/tier_S.png";
+import tier_A from "../images/tier_A.png";
+import tier_B from "../images/tier_B.png";
+import tier_Un from "../images/tier_UN.png";
 
 const Container = styled.div`
     display: flex;
@@ -58,6 +62,7 @@ const Container = styled.div`
 
     .rank_profile {
         width: 33vw;
+        height: 12vh;
         padding: 0 2vw;
 
         display: flex;
@@ -99,19 +104,34 @@ const Container = styled.div`
     }
 `;
 
-function RankBox() {
+function rankImg(tier) {
+    // if (tier === "SS") return <img src={tier_SS} alt="tier"></img>;
+    // eslint-disable-next-line default-case
+    switch (tier) {
+        case "SS":
+            return <img src={tier_SS} alt="tier"></img>;
+        case "S":
+            return <img src={tier_S} alt="tier"></img>;
+        case "A":
+            return <img src={tier_A} alt="tier"></img>;
+        case "B":
+            return <img src={tier_B} alt="tier"></img>;
+        case "Un":
+            return <img src={tier_Un} alt="tier"></img>;
+    }
+}
+
+function RankBox({ rank, tier, name, score }) {
     return (
         <Container>
             <div className="ranking">
                 <div className="rank_box">
-                    <div className="rank">1</div>
+                    <div className="rank">{rank}</div>
                     <div className="rank_profile">
-                        <div className="rank_img">
-                            <img src={tier_SS} alt="tier"></img>
-                        </div>
+                        <div className="rank_img">{rankImg(tier)}</div>
                         <div className="rank_user">
-                            <div className="rank_name">홍길동</div>
-                            <div className="rank_score">200점</div>
+                            <div className="rank_name">{name}</div>
+                            <div className="rank_score">{score}점</div>
                         </div>
                     </div>
                 </div>

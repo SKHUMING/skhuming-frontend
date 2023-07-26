@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
-import tier_SS from "../images/tier_SS.png";
 
 const Container = styled.div`
     display: flex;
@@ -111,9 +110,11 @@ function RankingPage() {
                 </div>
 
                 <div className="ranking">
-                    <RankBox />
-                    <RankBox />
-                    <RankBox />
+                    <RankBox rank="1" tier="SS" name="침착맨" score="200" />
+                    <RankBox rank="2" tier="S" name="주펄" score="190" />
+                    <RankBox rank="3" tier="A" name="김풍" score="180" />
+                    <RankBox rank="4" tier="B" name="기안84" score="170" />
+                    <RankBox rank="5" tier="Un" name="주우재" score="160" />
                 </div>
             </div>
         </Container>
