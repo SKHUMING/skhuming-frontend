@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import LogoImg from "../images/skhumingLogo.png";
+import LogoImg from "../images/skhuming_logo_ai.png";
 
 // const slideIn = keyframes`
 // to{
@@ -89,8 +89,7 @@ const Container = styled.div`
     }
 
     img {
-        width: 500px;
-        height: 150px;
+        width: 330px;
     }
 `;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
-import LogoImg from "../images/skhumingLogo.png";
+import LogoImg from "../images/skhuming_logo_ai.png";
 
 const slideBox1 = keyframes`
 to{
@@ -35,10 +35,10 @@ const Container = styled.div`
     height: 20vh;
 
     .box1 {
-        width: 90vw;
+        width: 80vw;
         height: 15vh;
 
-        padding: 0 5vw;
+        padding: 0 10vw;
         flex-shrink: 0;
 
         display: flex;
@@ -83,8 +83,7 @@ const Container = styled.div`
     }
 
     img {
-        width: 230px;
-        height: 80px;
+        width: 200px;
     }
 
     .linkBox {
