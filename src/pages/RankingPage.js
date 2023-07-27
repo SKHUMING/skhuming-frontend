@@ -99,7 +99,76 @@ const Container = styled.div`
     }
 `;
 
+// 동일 점수는 같은 등수로 매기는 함수
+let r = 0;
+let s = null;
+function rankIndex(score) {
+    if (score !== s) r++;
+    s = score;
+
+    return r;
+}
+
 function RankingPage() {
+    let database = [
+        {
+            memberId: 3,
+            tear: "A",
+            score: 320,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 3,
+            tear: "A",
+            score: 320,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 3,
+            tear: "A",
+            score: 320,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 3,
+            tear: "A",
+            score: 320,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 3,
+            tear: "A",
+            score: 320,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 3,
+            tear: "A",
+            score: 300,
+            nickname: "침착맨",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 2,
+            tear: "Un",
+            score: 150,
+            nickname: "주호민",
+            department: "IT융합자율학부",
+        },
+        {
+            memberId: 1,
+            tear: "Un",
+            score: 0,
+            nickname: "주우재",
+            department: "IT융합자율학부",
+        },
+    ];
+
     return (
         <Container>
             <MainHeader />
@@ -110,11 +179,15 @@ function RankingPage() {
                 </div>
 
                 <div className="ranking">
-                    <RankBox rank="1" tier="SS" name="침착맨" score="200" />
-                    <RankBox rank="2" tier="S" name="주펄" score="190" />
-                    <RankBox rank="3" tier="A" name="김풍" score="180" />
-                    <RankBox rank="4" tier="B" name="기안84" score="170" />
-                    <RankBox rank="5" tier="Un" name="주우재" score="160" />
+                    {database.map((item) => (
+                        <RankBox
+                            rank={rankIndex(item.score)}
+                            tier={item.tear}
+                            name={item.nickname}
+                            department={item.department}
+                            score={item.score}
+                        />
+                    ))}
                 </div>
             </div>
         </Container>

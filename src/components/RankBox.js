@@ -93,9 +93,23 @@ const Container = styled.div`
         align-items: center;
     }
 
+    .rank_user_profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
     .rank_name {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         color: #204782;
+    }
+
+    .rank_department {
+        margin-top: 0.1rem;
+
+        color: #3a73c9;
+        font-size: 0.75rem;
     }
 
     .rank_score {
@@ -121,7 +135,7 @@ function rankImg(tier) {
     }
 }
 
-function RankBox({ rank, tier, name, score }) {
+function RankBox({ rank, tier, name, department, score }) {
     return (
         <Container>
             <div className="ranking">
@@ -130,7 +144,12 @@ function RankBox({ rank, tier, name, score }) {
                     <div className="rank_profile">
                         <div className="rank_img">{rankImg(tier)}</div>
                         <div className="rank_user">
-                            <div className="rank_name">{name}</div>
+                            <div className="rank_user_profile">
+                                <div className="rank_name">{name}</div>
+                                <div className="rank_department">
+                                    {department}
+                                </div>
+                            </div>
                             <div className="rank_score">{score}점</div>
                         </div>
                     </div>
