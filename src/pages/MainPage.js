@@ -99,7 +99,7 @@ const Container = styled.div`
         width: 11vw;
         min-width: 150px;
         height: 20vh;
-        min-height: 250px;
+        min-height: 200px;
         padding: 4vh 0;
 
         display: flex;
@@ -116,7 +116,7 @@ const Container = styled.div`
         width: 11vw;
         min-width: 150px;
         height: 20vh;
-        min-height: 250px;
+        min-height: 200px;
         padding: 4vh 0;
 
         display: flex;
