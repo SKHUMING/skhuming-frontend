@@ -6,15 +6,6 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
 
-    .noticeListBox {
-        width: 60vw;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
     .noticeContentBox {
         width: 50vw;
         height: 10vh;
