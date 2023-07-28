@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
+import NoticeBox from "../components/NoticeBox.js";
 
 const Container = styled.div`
     display: flex;
@@ -138,31 +139,8 @@ function NoticePage() {
                 </div>
 
                 <div className="noticeListBox">
-                    <div className="noticeContentBox">
-                        <p className="noticeContentTitle">
-                            2023학년도 1학기 한솥밥 모집 안내
-                        </p>
-                    </div>
-
-                    <div className="noticeContentBox">
-                        <p className="noticeContentTitle">
-                            2023학년도 1학기 한솥밥 모집 안내
-                        </p>
-                    </div>
-
-                    <div className="noticeContentBox">
-                        <div className="noticeContentEnd">종료</div>
-                        <p className="noticeContentTitle">
-                            2023학년도 1학기 한솥밥 모집 안내
-                        </p>
-                    </div>
-
-                    <div className="noticeContentBox">
-                        <div className="noticeContentEnd">종료</div>
-                        <p className="noticeContentTitle">
-                            2023학년도 1학기 한솥밥 모집 안내
-                        </p>
-                    </div>
+                    <NoticeBox end={false} title="23년도 2학기 튜터링" />
+                    <NoticeBox end={true} title="23년도 1학기 한솥밥" />
                 </div>
             </div>
         </Container>
