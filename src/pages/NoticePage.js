@@ -99,8 +99,16 @@ function NoticePage() {
                 </div>
 
                 <div className="noticeListBox">
-                    <NoticeBox end={false} title="23년도 2학기 튜터링" />
-                    <NoticeBox end={true} title="23년도 1학기 한솥밥" />
+                    <NoticeBox
+                        noticeId="1"
+                        end={false}
+                        title="23년도 2학기 튜터링"
+                    />
+                    <NoticeBox
+                        noticeId="2"
+                        end={true}
+                        title="23년도 1학기 한솥밥"
+                    />
                 </div>
             </div>
         </Container>

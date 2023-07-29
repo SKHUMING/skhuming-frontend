@@ -21,7 +21,11 @@ function App() {
             <Route path="/mileage" element={<MileagePage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/notice" element={<NoticePage />} />
-            <Route path="/noticeDetail" element={<NoticeDetailsPage />} />
+            {/* <Route path="/noticeDetail" element={<NoticeDetailsPage />} /> */}
+            <Route
+                path="/notice/detail/:noticeId"
+                element={<NoticeDetailsPage />}
+            />
             <Route path="/ranking" element={<RankingPage />} />
             <Route path="/scrap" element={<ScrapPage />} />
         </Routes>

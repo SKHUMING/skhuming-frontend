@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -47,13 +48,31 @@ const Container = styled.div`
     }
 `;
 
-function NoticeBox({ end, title }) {
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    font-size: 1rem;
+    color: #204782;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        font-size: 1rem;
+        color: #204782;
+    }
+`;
+
+function NoticeBox({ noticeId, end, title }) {
     return (
         <Container>
-            <div className="noticeContentBox">
-                {end ? <div className="noticeContentEnd">종료</div> : ""}
-                <p className="noticeContentTitle">{title}</p>
-            </div>
+            <StyledLink to={`/notice/detail/${noticeId}`}>
+                <div className="noticeContentBox">
+                    {end ? <div className="noticeContentEnd">종료</div> : ""}
+                    <p className="noticeContentTitle">{title}</p>
+                </div>
+            </StyledLink>
         </Container>
     );
 }

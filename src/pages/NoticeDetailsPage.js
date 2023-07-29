@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 
 const Container = styled.div`
@@ -9,10 +10,12 @@ const Container = styled.div`
 `;
 
 function NoticeDetailsPage() {
+    const { noticeId } = useParams();
+
     return (
         <Container>
             <MainHeader />
-            <h1>NoticeDetailsPage</h1>
+            <h1>NoticeDetailsPage {noticeId}</h1>
         </Container>
     );
 }
