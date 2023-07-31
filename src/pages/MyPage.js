@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
 import tier_SS from "../images/tier_SS.png";
@@ -30,10 +31,10 @@ const Container = styled.div`
     }
 
     .userScrapBox {
-        width: 48vw;
-        height: 50vh;
-        padding: 0 2vw;
-        margin-right: 1.5vw;
+        /* width: 48vw; */
+        /* height: 50vh; */
+        padding: 2vh 2vw;
+        margin-right: 1vw;
 
         border-radius: 0.625rem;
         background: #fbfbfb;
@@ -41,9 +42,9 @@ const Container = styled.div`
     }
 
     .userMileageBox {
-        width: 20vw;
-        height: 50vh;
-        padding: 0 2vw;
+        /* width: 20vw; */
+        /* height: 50vh; */
+        padding: 2vh 2vw;
 
         border-radius: 0.625rem;
         background: #fbfbfb;
@@ -85,7 +86,7 @@ const Container = styled.div`
 
     .scrapTitleBox {
         width: 40vw;
-        margin-top: 3vh;
+        margin-top: 2vh;
     }
 
     .scrapContentBox {
@@ -96,7 +97,7 @@ const Container = styled.div`
 
     .mileageTitleBox {
         width: 16vw;
-        margin-top: 3vh;
+        margin-top: 2vh;
     }
 
     .scrapTitle > p,
@@ -154,6 +155,18 @@ const Container = styled.div`
     }
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 function MyPage() {
     return (
         <Container>
@@ -168,40 +181,46 @@ function MyPage() {
                 </div>
 
                 <div className="userMyPageBox">
-                    <div className="userScrapBox">
-                        <div className="scrapTitleBox">
-                            <div className="scrapTitle">
-                                <p>MY SCRAP</p>
-                                <hr />
-                            </div>
-                        </div>
-
-                        <div className="scrapContentBox">
-                            <ScrapBox />
-                            <ScrapBox />
-                            <ScrapBox />
-                            <ScrapBox />
-                        </div>
-                    </div>
-
-                    <div className="userMileageBox">
-                        <div className="mileageTitleBox">
-                            <div className="mileageTitle">
-                                <p>MY SKHUM</p>
-                                <hr />
-                            </div>
-
-                            <div className="mileageBox">
-                                <div className="tierImg">
-                                    <img src={tier_SS} alt="tier"></img>
-                                </div>
-                                <div className="userScoreBox">
-                                    <p className="nickname">몽디우 프론트</p>
-                                    <p className="score">200점</p>
+                    <StyledLink to="/scrap">
+                        <div className="userScrapBox">
+                            <div className="scrapTitleBox">
+                                <div className="scrapTitle">
+                                    <p>MY SCRAP</p>
+                                    <hr />
                                 </div>
                             </div>
+
+                            <div className="scrapContentBox">
+                                <ScrapBox />
+                                <ScrapBox />
+                                <ScrapBox />
+                                <ScrapBox />
+                            </div>
                         </div>
-                    </div>
+                    </StyledLink>
+
+                    <StyledLink to="/mileage">
+                        <div className="userMileageBox">
+                            <div className="mileageTitleBox">
+                                <div className="mileageTitle">
+                                    <p>MY SKHUM</p>
+                                    <hr />
+                                </div>
+
+                                <div className="mileageBox">
+                                    <div className="tierImg">
+                                        <img src={tier_SS} alt="tier"></img>
+                                    </div>
+                                    <div className="userScoreBox">
+                                        <p className="nickname">
+                                            몽디우 프론트
+                                        </p>
+                                        <p className="score">200점</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </StyledLink>
                 </div>
             </div>
         </Container>
