@@ -99,17 +99,17 @@ const Container = styled.div`
     }
 `;
 
-// 동일 점수는 같은 등수로 매기는 함수
-let r = 0;
-let s = null;
-function rankIndex(score) {
-    if (score !== s) r++;
-    s = score;
-
-    return r;
-}
-
 function RankingPage() {
+    // 동일 점수는 같은 등수로 매기는 함수
+    let r = 0;
+    let s = null;
+    function rankIndex(score) {
+        if (score !== s) r++;
+        s = score;
+
+        return r;
+    }
+
     let database = [
         {
             memberId: 3,

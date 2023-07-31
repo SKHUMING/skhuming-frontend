@@ -23,7 +23,6 @@ const Container = styled.div`
         margin: 0;
 
         color: #2d6dcc;
-        color: #2d6dcc;
     }
 
     .awardTitle > hr,
