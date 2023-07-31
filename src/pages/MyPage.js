@@ -1,16 +1,228 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import MainHeader from "../components/MainHeader.js";
+import ScrapBox from "../components/ScrapBox_widget.js";
+import tier_SS from "../images/tier_SS.png";
 
 const Container = styled.div`
-    h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .myPageBox {
+        width: 65vw;
+        height: 70vh;
+        margin: 5vh 0;
+    }
+
+    .userProfileBox {
+        height: 18vh;
+        margin-bottom: 2.5vh;
+
+        border-radius: 0.625rem;
+        background: #fbfbfb;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .userMyPageBox {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .userScrapBox {
+        /* width: 48vw; */
+        /* height: 50vh; */
+        padding: 2vh 2vw;
+        margin-right: 1vw;
+
+        border-radius: 0.625rem;
+        background: #fbfbfb;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .userMileageBox {
+        /* width: 20vw; */
+        /* height: 50vh; */
+        padding: 2vh 2vw;
+
+        border-radius: 0.625rem;
+        background: #fbfbfb;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .userProfileBox {
+        padding: 0 4vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .userName {
+        margin: 0;
+        margin-bottom: 1.5vh;
+
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #204782;
+    }
+
+    .userName > span {
+        margin-left: 0.5vw;
+
+        font-size: 1rem;
+        font-weight: lighter;
+    }
+
+    .userInfo {
+        margin: 0;
+
+        color: #204782;
+    }
+
+    .logout {
+        font-size: 1.7rem;
+    }
+
+    .scrapTitleBox {
+        width: 40vw;
+        margin-top: 2vh;
+    }
+
+    .scrapContentBox {
+        height: 38vh;
+
+        overflow-y: scroll;
+    }
+
+    .mileageTitleBox {
+        width: 16vw;
+        margin-top: 2vh;
+    }
+
+    .scrapTitle > p,
+    .mileageTitle > p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+
         color: #2d6dcc;
+    }
+
+    .scrapTitle > hr,
+    .mileageTitle > hr {
+        height: 2.5px;
+        border: 0;
+        background-color: #2d6dcc;
+    }
+
+    .mileageBox {
+        width: 16vw;
+        height: 38vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .tierImg > img {
+        width: 8.5vw;
+        margin-top: 4vh;
+    }
+
+    .userScoreBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nickname {
+        margin: 0;
+
+        color: #204782;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .score {
+        margin: 0;
+        margin-top: 1vh;
+
+        color: #204782;
+        font-size: 1rem;
+    }
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
     }
 `;
 
 function MyPage() {
     return (
         <Container>
-            <h1>MyPage</h1>
+            <MainHeader />
+            <div className="myPageBox">
+                <div className="userProfileBox">
+                    <div className="user">
+                        <p className="userName">명지우</p>
+                        <p className="userInfo">IT융합자율학부 202014051</p>
+                    </div>
+                    <div className="logout">💔</div>
+                </div>
+
+                <div className="userMyPageBox">
+                    <StyledLink to="/scrap">
+                        <div className="userScrapBox">
+                            <div className="scrapTitleBox">
+                                <div className="scrapTitle">
+                                    <p>MY SCRAP</p>
+                                    <hr />
+                                </div>
+                            </div>
+
+                            <div className="scrapContentBox">
+                                <ScrapBox />
+                                <ScrapBox />
+                                <ScrapBox />
+                                <ScrapBox />
+                            </div>
+                        </div>
+                    </StyledLink>
+
+                    <StyledLink to="/mileage">
+                        <div className="userMileageBox">
+                            <div className="mileageTitleBox">
+                                <div className="mileageTitle">
+                                    <p>MY SKHUM</p>
+                                    <hr />
+                                </div>
+
+                                <div className="mileageBox">
+                                    <div className="tierImg">
+                                        <img src={tier_SS} alt="tier"></img>
+                                    </div>
+                                    <div className="userScoreBox">
+                                        <p className="nickname">
+                                            몽디우 프론트
+                                        </p>
+                                        <p className="score">200점</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </StyledLink>
+                </div>
+            </div>
         </Container>
     );
 }

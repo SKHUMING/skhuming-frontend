@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import LogoImg from "../images/skhumingLogo.png";
+import LogoImg from "../images/skhuming_logo_ai.png";
 
 // const slideIn = keyframes`
 // to{
@@ -51,7 +51,7 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
 
-        position: fixed;
+        position: absolute;
         z-index: 2;
 
         background: #2d6dcc;
@@ -65,7 +65,7 @@ const Container = styled.div`
         height: 35vh;
         flex-shrink: 0;
 
-        position: fixed;
+        position: absolute;
         z-index: 1;
 
         background: #5a95ec;
@@ -79,7 +79,7 @@ const Container = styled.div`
         height: 40vh;
         flex-shrink: 0;
 
-        position: fixed;
+        position: absolute;
         z-index: 0;
 
         background: #9dc4ff;
@@ -89,8 +89,7 @@ const Container = styled.div`
     }
 
     img {
-        width: 500px;
-        height: 150px;
+        width: 330px;
     }
 `;
 
