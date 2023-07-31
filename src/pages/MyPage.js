@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
-import ScrapBox from "../components/ScrapBox.js";
+import ScrapBox from "../components/ScrapBox_widget.js";
 import tier_SS from "../images/tier_SS.png";
 
 const Container = styled.div`
