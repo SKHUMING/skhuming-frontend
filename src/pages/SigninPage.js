@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     .box {
@@ -172,7 +174,71 @@ const StyledLink = styled(Link)`
     }
 `;
 
+// 닉네임, 이메일 중복
+
 function SigninPage() {
+    const navigate = useNavigate();
+
+    // 비밀번호 체크
+    const [password, setPassword] = useState("");
+
+    // 재학생 인증 성공
+    const [studentCheck, setStudentCheck] = useState(true);
+
+    async function submitSignin() {
+        if (studentCheck) {
+            console.log("모든 인증 완료");
+
+            // 닉네임, 이메일 중복 안되게
+            const signinData = {
+                email: "rldnd123456@office.skhu.ac.kr",
+                pwd: "chlrldnd",
+                nickname: "기웅웅이2",
+                memberName: "최기웅",
+                department: "IT융합자율학부",
+                studentNumber: "202014098",
+            };
+
+            try {
+                const response = await axios.post(
+                    "http://15.164.131.248:8080/api/join",
+                    signinData
+                );
+                console.log(response.data);
+                navigate("/main");
+            } catch (error) {
+                console.error(error.response.data.message);
+                // window.confirm(error.response.data.message);
+            }
+        } else {
+            window.confirm("모든 인증을 완료해주세요");
+        }
+    }
+
+    async function checkEmail() {
+        const emailData = { email: "rldnd123456@office.skhu.ac.kr" };
+        try {
+            const response = await axios.post(
+                "http://15.164.131.248:8080/api/email-check",
+                emailData
+            );
+            console.log(response.data);
+            // 인증 확인하는 input text 만들기
+            if (response.data === "123456") {
+                console.log("인증 성공");
+            } else {
+                console.log("인증 실패");
+            }
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    }
+
+    const pwChange = (event) => {
+        setPassword(event.target.value);
+        console.log(password);
+    };
+
     return (
         <Container>
             <Header />
@@ -190,7 +256,9 @@ function SigninPage() {
                                     type="email"
                                     placeholder="EMAIL   (@skhu.office.ac.kr)"
                                 ></input>
-                                <div className="iconBox">📧</div>
+                                <div className="iconBox" onClick={checkEmail}>
+                                    📧
+                                </div>
                             </div>
                             <div className="inputExplanation">
                                 📢
@@ -208,14 +276,26 @@ function SigninPage() {
                                 <input
                                     type="password"
                                     placeholder="PASSWORD"
+                                    onChange={pwChange}
+                                    value={password}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
                             <div className="inputExplanation">
-                                📢{" "}
-                                <div className="expDetail">
-                                    <span> 8자리 이상</span>으로 입력해주세요!
-                                </div>
+                                {password.length <= 8 ? (
+                                    <div className="expDetail">
+                                        📢 <span> 8자리 이상</span>으로
+                                        입력해주세요!
+                                    </div>
+                                ) : (
+                                    <div className="expDetail">
+                                        ✅
+                                        <span>
+                                            비밀번호가 8자리 이상입니다!
+                                        </span>
+                                    </div>
+                                )}
+                                {/* 📢 */}
                             </div>
 
                             <div className="inputBox">
@@ -261,8 +341,12 @@ function SigninPage() {
                     </div>
 
                     <div className="linkBox">
-                        <div className="signinBtn">
-                            <StyledLink to="/main">SIGN IN</StyledLink>
+                        <div className="signinBtn" onClick={submitSignin}>
+                            {" "}
+                            SIGN IN
+                            {/* <StyledLink to="/main" >
+                                SIGN IN
+                            </StyledLink> */}
                         </div>
                     </div>
                 </div>
