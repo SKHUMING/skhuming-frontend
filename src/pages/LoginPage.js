@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     .box {
@@ -156,6 +159,30 @@ const StyledLink2 = styled(Link)`
 `;
 
 function LoginPage() {
+    const navigate = useNavigate();
+
+    async function submitLogin() {
+        const loginData = {
+            email: "rldnd123456@office.skhu.ac.kr",
+            pwd: "chlrldnd",
+        };
+        try {
+            const response = await axios.post(
+                "http://15.164.131.248:8080/api/login",
+                loginData
+            );
+            // console.log(response.data);
+            window.localStorage.setItem(
+                "token",
+                "Bearer " + response.data.token
+            );
+            navigate("/main");
+        } catch (error) {
+            console.error(error.response.data.message);
+            window.confirm(error.response.data.message);
+        }
+    }
+
     return (
         <Container>
             <Header />
@@ -182,8 +209,9 @@ function LoginPage() {
                         <div className="signinBtn">
                             <StyledLink1 to="/signin">SIGN IN</StyledLink1>
                         </div>
-                        <div className="loginBtn">
-                            <StyledLink2 to="/main">LOGIN</StyledLink2>
+                        <div className="loginBtn" onClick={submitLogin}>
+                            Login
+                            {/* <StyledLink2 to="/main">LOGIN</StyledLink2> */}
                         </div>
                     </div>
                 </div>
