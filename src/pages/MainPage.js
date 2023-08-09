@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
 import tier_A from "../images/tier_A.png";
+
+import axios from "axios";
+
+// import { CustomAxios } from "../api/Axios/customAxios";
 
 const Container = styled.div`
     display: flex;
@@ -208,6 +213,29 @@ const Container = styled.div`
 `;
 
 function MainPage() {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    async function getData() {
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/api/main"
+            );
+            setData(response.data);
+            if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // console.log(data.length > 0 ? data[0].nickname : "No nickname available");
+    // console.log(loading ? data[0].nickname : "");
+    // console.log(loading);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <Container>
             <MainHeader />
@@ -226,8 +254,21 @@ function MainPage() {
                                 <img src={tier_S} alt="tier"></img>
                             </div>
                             <div className="profile_2nd">
-                                <p className="name_2nd">홍길동</p>
-                                <p className="score_2nd">100점</p>
+                                {loading ? (
+                                    <p className="name_2nd">
+                                        {data[1].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_2nd">
+                                        {data[1].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -238,8 +279,21 @@ function MainPage() {
                                 <img src={tier_SS} alt="tier"></img>
                             </div>
                             <div className="profile_1st">
-                                <p className="name_1st">홍길동</p>
-                                <p className="score_1st">100점</p>
+                                {loading ? (
+                                    <p className="name_1st">
+                                        {data[0].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_1st">
+                                        {data[0].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -250,8 +304,21 @@ function MainPage() {
                                 <img src={tier_A} alt="tier"></img>
                             </div>
                             <div className="profile_3rd">
-                                <p className="name_3rd">홍길동</p>
-                                <p className="score_3rd">100점</p>
+                                {loading ? (
+                                    <p className="name_3rd">
+                                        {data[2].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_3rd">
+                                        {data[2].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
