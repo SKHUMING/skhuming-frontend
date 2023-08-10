@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox_widget.js";
 import tier_SS from "../images/tier_SS.png";
+import axios from "axios";
 
 const Container = styled.div`
     display: flex;
@@ -82,6 +83,7 @@ const Container = styled.div`
 
     .logout {
         font-size: 1.7rem;
+        cursor: pointer;
     }
 
     .scrapTitleBox {
@@ -168,16 +170,66 @@ const StyledLink = styled(Link)`
 `;
 
 function MyPage() {
+    const navigate = useNavigate();
+
+    async function submitLogout() {
+        // 로그아웃 시에 필요한 클리어 작업 수행
+        window.localStorage.removeItem("token");
+
+        // 리다이렉트
+        navigate("/");
+    }
+
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    async function getData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/user/api/my-profile",
+                {
+                    params: { memberId: memberId },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            console.log(response);
+            setData(response.data);
+            if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            console.error(error);
+            window.confirm(error.response.data);
+            navigate("/");
+        }
+    }
+
+    // console.log(data.length > 0 ? data[0].nickname : "No nickname available");
+    // console.log(loading ? data[0].nickname : "");
+    // console.log(loading);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <Container>
             <MainHeader />
             <div className="myPageBox">
                 <div className="userProfileBox">
                     <div className="user">
-                        <p className="userName">명지우</p>
-                        <p className="userInfo">IT융합자율학부 202014051</p>
+                        <p className="userName">
+                            {loading ? data.memberName : ""}
+                        </p>
+                        <p className="userInfo">
+                            {loading ? data.department : ""}{" "}
+                            {loading ? data.studentNumber : ""}
+                        </p>
                     </div>
-                    <div className="logout">💔</div>
+                    <div className="logout" onClick={submitLogout}>
+                        💔
+                    </div>
                 </div>
 
                 <div className="userMyPageBox">
@@ -213,7 +265,7 @@ function MyPage() {
                                     </div>
                                     <div className="userScoreBox">
                                         <p className="nickname">
-                                            몽디우 프론트
+                                            {loading ? data.nickname : ""}
                                         </p>
                                         <p className="score">200점</p>
                                     </div>
