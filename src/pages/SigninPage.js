@@ -18,7 +18,7 @@ const Container = styled.div`
 
     .loginBox {
         width: 700px;
-        height: 830px;
+        height: 900px;
 
         padding: 60px 0;
 
@@ -179,65 +179,70 @@ const StyledLink = styled(Link)`
 function SigninPage() {
     const navigate = useNavigate();
 
-    // 비밀번호 체크
-    const [password, setPassword] = useState("");
+    const [inputData, setInputData] = useState({
+        email: "",
+        pwd: "",
+        nickname: "",
+        memberName: "",
+        department: "",
+        studentNumber: "",
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setInputData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+        console.log(inputData);
+    };
+
+    // 재학생 인증 이메일 Input
+    const [emailCheck, setEmailCheck] = useState("");
+
+    const handleEmailCheckChange = (event) => {
+        setEmailCheck(event.target.value);
+    };
+
+    const checkCode = () => {
+        if (authenticationCode === emailCheck) setStudentCheck(true);
+        // console.log(studentCheck);
+    };
 
     // 재학생 인증 성공
-    const [studentCheck, setStudentCheck] = useState(true);
+    const [studentCheck, setStudentCheck] = useState(false);
 
     async function submitSignin() {
         if (studentCheck) {
-            console.log("모든 인증 완료");
-
-            // 닉네임, 이메일 중복 안되게
-            const signinData = {
-                email: "rldnd123456@office.skhu.ac.kr",
-                pwd: "chlrldnd",
-                nickname: "기웅웅이2",
-                memberName: "최기웅",
-                department: "IT융합자율학부",
-                studentNumber: "202014098",
-            };
-
             try {
                 const response = await axios.post(
                     "http://15.164.131.248:8080/api/join",
-                    signinData
+                    inputData
                 );
                 console.log(response.data);
-                navigate("/main");
+                navigate("/");
             } catch (error) {
                 console.error(error.response.data.message);
-                // window.confirm(error.response.data.message);
             }
         } else {
             window.confirm("모든 인증을 완료해주세요");
         }
     }
 
+    // 재학생 인증 메일 보내기 (인증 문자열로 응답 후 상태 저장)
+    const [authenticationCode, setAuthenticationCode] = useState("");
     async function checkEmail() {
-        const emailData = { email: "rldnd123456@office.skhu.ac.kr" };
+        const email = { email: inputData.email };
         try {
             const response = await axios.post(
                 "http://15.164.131.248:8080/api/email-check",
-                emailData
+                email
             );
-            console.log(response.data);
-            // 인증 확인하는 input text 만들기
-            if (response.data === "123456") {
-                console.log("인증 성공");
-            } else {
-                console.log("인증 실패");
-            }
+            setAuthenticationCode(response.data);
         } catch (error) {
             console.log(error.response.data.message);
         }
     }
-
-    const pwChange = (event) => {
-        setPassword(event.target.value);
-        console.log(password);
-    };
 
     return (
         <Container>
@@ -255,6 +260,9 @@ function SigninPage() {
                                 <input
                                     type="email"
                                     placeholder="EMAIL   (@skhu.office.ac.kr)"
+                                    name="email"
+                                    value={inputData.email}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox" onClick={checkEmail}>
                                     📧
@@ -270,19 +278,33 @@ function SigninPage() {
                                     <span> 재학생 인증</span>을 받아주세요!
                                 </div>
                             </div>
+                            <div className="inputBox">
+                                <label>인증 문자</label>
+                                <input
+                                    type="text"
+                                    placeholder="메일로 받은 인증 문자를 적어주세요"
+                                    name="emailCheck"
+                                    value={emailCheck}
+                                    onChange={handleEmailCheckChange}
+                                ></input>
+                                <div className="iconBox" onClick={checkCode}>
+                                    {studentCheck ? "✅" : "❓"}
+                                </div>
+                            </div>
 
                             <div className="inputBox">
                                 <label>비밀번호</label>
                                 <input
                                     type="password"
                                     placeholder="PASSWORD"
-                                    onChange={pwChange}
-                                    value={password}
+                                    name="pwd"
+                                    value={inputData.pwd}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
                             <div className="inputExplanation">
-                                {password.length <= 8 ? (
+                                {inputData.pwd.length < 8 ? (
                                     <div className="expDetail">
                                         📢 <span> 8자리 이상</span>으로
                                         입력해주세요!
@@ -295,7 +317,6 @@ function SigninPage() {
                                         </span>
                                     </div>
                                 )}
-                                {/* 📢 */}
                             </div>
 
                             <div className="inputBox">
@@ -303,6 +324,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="NICKNAME"
+                                    name="nickname"
+                                    value={inputData.nickname}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -316,7 +340,13 @@ function SigninPage() {
 
                             <div className="inputBox">
                                 <label>이름</label>
-                                <input type="text" placeholder="NAME"></input>
+                                <input
+                                    type="text"
+                                    placeholder="NAME"
+                                    name="memberName"
+                                    value={inputData.memberName}
+                                    onChange={handleInputChange}
+                                ></input>
                                 <div className="iconBox"></div>
                             </div>
 
@@ -325,6 +355,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="DEPARTMENT"
+                                    name="department"
+                                    value={inputData.department}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -334,6 +367,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="STUDENT NUMBER"
+                                    name="studentNumber"
+                                    value={inputData.studentNumber}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -344,9 +380,6 @@ function SigninPage() {
                         <div className="signinBtn" onClick={submitSignin}>
                             {" "}
                             SIGN IN
-                            {/* <StyledLink to="/main" >
-                                SIGN IN
-                            </StyledLink> */}
                         </div>
                     </div>
                 </div>
