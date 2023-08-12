@@ -5,6 +5,8 @@ import MainHeader from "../components/MainHeader.js";
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
 import tier_A from "../images/tier_A.png";
+import tier_B from "../images/tier_B.png";
+import tier_UN from "../images/tier_UN.png";
 
 import axios from "axios";
 
@@ -228,13 +230,24 @@ function MainPage() {
         }
     }
 
-    // console.log(data.length > 0 ? data[0].nickname : "No nickname available");
-    // console.log(loading ? data[0].nickname : "");
-    // console.log(loading);
-
     useEffect(() => {
         getData();
     }, []);
+
+    const rankImg = (rank) => {
+        switch (data[rank].tier) {
+            case "SS":
+                return <img src={tier_SS} alt="tier"></img>;
+            case "S":
+                return <img src={tier_S} alt="tier"></img>;
+            case "A":
+                return <img src={tier_A} alt="tier"></img>;
+            case "B":
+                return <img src={tier_B} alt="tier"></img>;
+            default:
+                return <img src={tier_UN} alt="tier"></img>;
+        }
+    };
 
     return (
         <Container>
@@ -251,7 +264,7 @@ function MainPage() {
                         <p>🥈 2nd 🥈</p>
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
-                                <img src={tier_S} alt="tier"></img>
+                                {loading ? rankImg(1) : "Loading..."}
                             </div>
                             <div className="profile_2nd">
                                 {loading ? (
@@ -276,7 +289,7 @@ function MainPage() {
                         <p>🥇 1st 🥇</p>
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
-                                <img src={tier_SS} alt="tier"></img>
+                                {loading ? rankImg(0) : "Loading..."}
                             </div>
                             <div className="profile_1st">
                                 {loading ? (
@@ -301,7 +314,7 @@ function MainPage() {
                         <p>🥉 3rd 🥉</p>
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
-                                <img src={tier_A} alt="tier"></img>
+                                {loading ? rankImg(2) : "Loading..."}
                             </div>
                             <div className="profile_3rd">
                                 {loading ? (
