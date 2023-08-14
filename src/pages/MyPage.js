@@ -175,6 +175,7 @@ function MyPage() {
     async function submitLogout() {
         // 로그아웃 시에 필요한 클리어 작업 수행
         window.localStorage.removeItem("token");
+        window.localStorage.removeItem("memberId");
 
         // 리다이렉트
         navigate("/");
@@ -204,10 +205,6 @@ function MyPage() {
             navigate("/");
         }
     }
-
-    // console.log(data.length > 0 ? data[0].nickname : "No nickname available");
-    // console.log(loading ? data[0].nickname : "");
-    // console.log(loading);
 
     useEffect(() => {
         getData();

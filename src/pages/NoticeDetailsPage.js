@@ -45,7 +45,7 @@ const Container = styled.div`
     .noticeScrap {
         margin: 0;
         font-size: 23px;
-        opacity: 0.25;
+        /* opacity: 0.25; */
 
         cursor: pointer;
     }
@@ -87,6 +87,8 @@ function NoticeDetailsPage() {
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [scrap, setScrap] = useState(false);
+
     async function getData() {
         try {
             const response = await axios.get(
@@ -94,18 +96,74 @@ function NoticeDetailsPage() {
                 { params: { noticeId: noticeId } }
             );
             setData(response.data);
-            if (data.length > 0) setLoading(true);
+            console.log(response.data);
             setLoading(true);
+
+            // 스크랩 상태를 확인하고 변경
+            if (
+                response.data &&
+                response.data.memberId.includes(
+                    Number(window.localStorage.getItem("memberId"))
+                )
+            ) {
+                setScrap(true);
+            } else {
+                setScrap(false);
+            }
         } catch (error) {
             console.error(error);
         }
     }
 
-    console.log(loading ? data : "loading");
+    // 스크랩
+    async function getScrap() {
+        try {
+            await axios.post(
+                "http://15.164.131.248:8080/user/api/notice/scrap",
+                null,
+                {
+                    params: {
+                        memberId: window.localStorage.getItem("memberId"),
+                        noticeId: noticeId,
+                    },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            setScrap(true);
+            window.confirm("⭐️ 스크랩 되었습니다.");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async function delScrap() {
+        try {
+            await axios.post(
+                "http://15.164.131.248:8080/user/api/notice/scrap/cancel",
+                null,
+                {
+                    params: {
+                        memberId: window.localStorage.getItem("memberId"),
+                        noticeId: noticeId,
+                    },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            setScrap(false);
+            window.confirm("👋🏻 스크랩을 취소하였습니다.");
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
         getData();
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [scrap]);
 
     return (
         <Container>
@@ -114,7 +172,13 @@ function NoticeDetailsPage() {
                 <div className="noticeTitleBox">
                     <div className="noticeTitleBox_inner">
                         <p className="noticeTitle">{data.title}</p>
-                        <p className="noticeScrap">📌</p>
+                        <p className="noticeScrap">
+                            {scrap ? (
+                                <span onClick={delScrap}>⭐️</span>
+                            ) : (
+                                <span onClick={getScrap}>📌</span>
+                            )}
+                        </p>
                     </div>
                     <hr />
                 </div>
