@@ -118,7 +118,7 @@ function RankingPage() {
     async function getData() {
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/api/main"
+                "http://15.164.131.248:8080/api/ranking/list"
             );
             setData(response.data);
             if (data.length > 0) setLoading(true);
