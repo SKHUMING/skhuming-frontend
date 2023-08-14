@@ -205,8 +205,8 @@ function SigninPage() {
     };
 
     const checkCode = () => {
-        if (authenticationCode === emailCheck) setStudentCheck(true);
-        // console.log(studentCheck);
+        if (authenticationCode === emailCheck && authenticationCode !== "")
+            setStudentCheck(true);
     };
 
     // 재학생 인증 성공
