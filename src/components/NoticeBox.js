@@ -33,7 +33,7 @@ const Container = styled.div`
         align-items: center;
 
         border-radius: 0.25rem;
-        background: #204782;
+        background: #cdced3;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 
         font-size: 0.8rem;
