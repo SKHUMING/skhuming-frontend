@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     display: flex;
@@ -110,64 +113,24 @@ function RankingPage() {
         return r;
     }
 
-    let database = [
-        {
-            memberId: 3,
-            tear: "A",
-            score: 320,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 3,
-            tear: "A",
-            score: 320,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 3,
-            tear: "A",
-            score: 320,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 3,
-            tear: "A",
-            score: 320,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 3,
-            tear: "A",
-            score: 320,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 3,
-            tear: "A",
-            score: 300,
-            nickname: "침착맨",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 2,
-            tear: "Un",
-            score: 150,
-            nickname: "주호민",
-            department: "IT융합자율학부",
-        },
-        {
-            memberId: 1,
-            tear: "Un",
-            score: 0,
-            nickname: "주우재",
-            department: "IT융합자율학부",
-        },
-    ];
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    async function getData() {
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/api/ranking/list"
+            );
+            setData(response.data);
+            if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <Container>
@@ -179,10 +142,10 @@ function RankingPage() {
                 </div>
 
                 <div className="ranking">
-                    {database.map((item) => (
+                    {data.map((item) => (
                         <RankBox
                             rank={rankIndex(item.score)}
-                            tier={item.tear}
+                            tier={item.tier}
                             name={item.nickname}
                             department={item.department}
                             score={item.score}
