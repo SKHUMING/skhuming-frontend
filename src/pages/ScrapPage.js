@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
@@ -31,6 +33,34 @@ const Container = styled.div`
 `;
 
 function ScrapPage() {
+    const navigate = useNavigate();
+    const [scrapData, setScrapData] = useState([]);
+
+    async function getScrapData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/user/api/scrap/list",
+                {
+                    params: { memberId: memberId },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            console.log(response);
+            setScrapData(response.data.reverse());
+        } catch (error) {
+            console.error(error);
+            window.confirm(error.response.data);
+            navigate("/");
+        }
+    }
+
+    useEffect(() => {
+        getScrapData();
+    }, []);
+
     return (
         <Container>
             <MainHeader />
@@ -41,26 +71,15 @@ function ScrapPage() {
                 </div>
 
                 <div className="scrapContentBox">
-                    <ScrapBox
-                        noticeId="1"
-                        end={false}
-                        title="23년도 111학기 튜터링"
-                    />
-                    <ScrapBox
-                        noticeId="2"
-                        end={false}
-                        title="23년도 2학기 튜터링"
-                    />
-                    <ScrapBox
-                        noticeId="3"
-                        end={false}
-                        title="23년도 2학기 튜터링"
-                    />
-                    <ScrapBox
-                        noticeId="4"
-                        end={true}
-                        title="23년도 2학기 튜터링"
-                    />
+                    {scrapData
+                        ? scrapData.map((item) => (
+                              <ScrapBox
+                                  noticeId={item.noticeId}
+                                  end={item.end}
+                                  title={item.title}
+                              />
+                          ))
+                        : ""}
                 </div>
             </div>
         </Container>
