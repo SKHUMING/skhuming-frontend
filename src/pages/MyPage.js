@@ -234,9 +234,33 @@ function MyPage() {
         }
     }
 
+    // 마일리지
+    const [mileageData, setMileageData] = useState([]);
+
+    async function getMileageData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/user/api/mileage/get",
+                {
+                    params: { memberId: memberId },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            setMileageData(response.data);
+        } catch (error) {
+            console.error(error);
+            window.confirm(error.response.data);
+            navigate("/");
+        }
+    }
+
     useEffect(() => {
         getData();
         getScrapData();
+        getMileageData();
     }, []);
 
     // 티어 사진
@@ -308,13 +332,17 @@ function MyPage() {
 
                                 <div className="mileageBox">
                                     <div className="tierImg">
-                                        {rankImg(data.tier)}
+                                        {rankImg(mileageData.tier)}
                                     </div>
                                     <div className="userScoreBox">
                                         <p className="nickname">
-                                            {loading ? data.nickname : ""}
+                                            {loading
+                                                ? mileageData.nickname
+                                                : ""}
                                         </p>
-                                        <p className="score">200점</p>
+                                        <p className="score">
+                                            {loading ? mileageData.score : ""}점
+                                        </p>
                                     </div>
                                 </div>
                             </div>
