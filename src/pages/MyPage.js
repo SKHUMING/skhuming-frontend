@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
-import ScrapBox from "../components/ScrapBox_widget.js";
+import ScrapBox_widget from "../components/ScrapBox_widget.js";
 import tier_SS from "../images/tier_SS.png";
 import axios from "axios";
 
@@ -197,8 +197,31 @@ function MyPage() {
             );
             console.log(response);
             setData(response.data);
-            if (data.length > 0) setLoading(true);
+            // if (data.length > 0) setLoading(true);
             setLoading(true);
+        } catch (error) {
+            console.error(error);
+            window.confirm(error.response.data);
+            navigate("/");
+        }
+    }
+
+    // 스크랩
+    const [scrapData, setScrapData] = useState([]);
+    async function getScrapData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/user/api/scrap/list",
+                {
+                    params: { memberId: memberId },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            console.log(response);
+            setScrapData(response.data.reverse());
         } catch (error) {
             console.error(error);
             window.confirm(error.response.data);
@@ -208,6 +231,7 @@ function MyPage() {
 
     useEffect(() => {
         getData();
+        getScrapData();
     }, []);
 
     return (
@@ -240,10 +264,15 @@ function MyPage() {
                             </div>
 
                             <div className="scrapContentBox">
-                                <ScrapBox />
-                                <ScrapBox />
-                                <ScrapBox />
-                                <ScrapBox />
+                                {scrapData
+                                    ? scrapData.map((item) => (
+                                          <ScrapBox_widget
+                                              noticeId={item.noticeId}
+                                              end={item.end}
+                                              title={item.title}
+                                          />
+                                      ))
+                                    : ""}
                             </div>
                         </div>
                     </StyledLink>

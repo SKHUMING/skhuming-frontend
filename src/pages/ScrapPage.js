@@ -44,7 +44,7 @@ function ScrapPage() {
                     <ScrapBox
                         noticeId="1"
                         end={false}
-                        title="23년도 2학기 튜터링"
+                        title="23년도 111학기 튜터링"
                     />
                     <ScrapBox
                         noticeId="2"
@@ -58,11 +58,6 @@ function ScrapPage() {
                     />
                     <ScrapBox
                         noticeId="4"
-                        end={true}
-                        title="23년도 2학기 튜터링"
-                    />
-                    <ScrapBox
-                        noticeId="5"
                         end={true}
                         title="23년도 2학기 튜터링"
                     />
