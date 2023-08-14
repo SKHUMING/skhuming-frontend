@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     .box {
@@ -156,6 +159,45 @@ const StyledLink2 = styled(Link)`
 `;
 
 function LoginPage() {
+    const navigate = useNavigate();
+
+    const [inputData, setInputData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setInputData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    async function submitLogin() {
+        console.log(inputData);
+        const loginData = {
+            email: inputData.email,
+            pwd: inputData.password,
+        };
+        try {
+            const response = await axios.post(
+                "http://15.164.131.248:8080/api/login",
+                loginData
+            );
+            // console.log(response.data);
+            window.localStorage.setItem(
+                "token",
+                "Bearer " + response.data.token
+            );
+            window.localStorage.setItem("memberId", response.data.memberId);
+            navigate("/main");
+        } catch (error) {
+            console.error(error.response.data.message);
+            window.confirm(error.response.data.message);
+        }
+    }
+
     return (
         <Container>
             <Header />
@@ -170,10 +212,16 @@ function LoginPage() {
                             <input
                                 type="email"
                                 placeholder="EMAIL   (@skhu.office.ac.kr)"
+                                name="email"
+                                value={inputData.email}
+                                onChange={handleInputChange}
                             ></input>
                             <input
                                 type="password"
                                 placeholder="PASSWORD"
+                                name="password"
+                                value={inputData.password}
+                                onChange={handleInputChange}
                             ></input>
                         </form>
                     </div>
@@ -182,8 +230,8 @@ function LoginPage() {
                         <div className="signinBtn">
                             <StyledLink1 to="/signin">SIGN IN</StyledLink1>
                         </div>
-                        <div className="loginBtn">
-                            <StyledLink2 to="/main">LOGIN</StyledLink2>
+                        <div className="loginBtn" onClick={submitLogin}>
+                            Login
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     .box {
@@ -16,7 +18,7 @@ const Container = styled.div`
 
     .loginBox {
         width: 700px;
-        height: 830px;
+        height: 900px;
 
         padding: 60px 0;
 
@@ -172,7 +174,76 @@ const StyledLink = styled(Link)`
     }
 `;
 
+// 닉네임, 이메일 중복
+
 function SigninPage() {
+    const navigate = useNavigate();
+
+    const [inputData, setInputData] = useState({
+        email: "",
+        pwd: "",
+        nickname: "",
+        memberName: "",
+        department: "",
+        studentNumber: "",
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setInputData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+        console.log(inputData);
+    };
+
+    // 재학생 인증 이메일 Input
+    const [emailCheck, setEmailCheck] = useState("");
+
+    const handleEmailCheckChange = (event) => {
+        setEmailCheck(event.target.value);
+    };
+
+    const checkCode = () => {
+        if (authenticationCode === emailCheck && authenticationCode !== "")
+            setStudentCheck(true);
+    };
+
+    // 재학생 인증 성공
+    const [studentCheck, setStudentCheck] = useState(false);
+
+    async function submitSignin() {
+        if (studentCheck) {
+            try {
+                const response = await axios.post(
+                    "http://15.164.131.248:8080/api/join",
+                    inputData
+                );
+                console.log(response.data);
+                navigate("/");
+            } catch (error) {
+                console.error(error.response.data.message);
+            }
+        } else {
+            window.confirm("모든 인증을 완료해주세요");
+        }
+    }
+
+    // 재학생 인증 메일 보내기 (인증 문자열로 응답 후 상태 저장)
+    const [authenticationCode, setAuthenticationCode] = useState("");
+    async function checkEmail() {
+        const email = { email: inputData.email };
+        try {
+            const response = await axios.post(
+                "http://15.164.131.248:8080/api/email-check",
+                email
+            );
+            setAuthenticationCode(response.data);
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    }
+
     return (
         <Container>
             <Header />
@@ -189,8 +260,13 @@ function SigninPage() {
                                 <input
                                     type="email"
                                     placeholder="EMAIL   (@skhu.office.ac.kr)"
+                                    name="email"
+                                    value={inputData.email}
+                                    onChange={handleInputChange}
                                 ></input>
-                                <div className="iconBox">📧</div>
+                                <div className="iconBox" onClick={checkEmail}>
+                                    📧
+                                </div>
                             </div>
                             <div className="inputExplanation">
                                 📢
@@ -202,20 +278,45 @@ function SigninPage() {
                                     <span> 재학생 인증</span>을 받아주세요!
                                 </div>
                             </div>
+                            <div className="inputBox">
+                                <label>인증 문자</label>
+                                <input
+                                    type="text"
+                                    placeholder="메일로 받은 인증 문자를 적어주세요"
+                                    name="emailCheck"
+                                    value={emailCheck}
+                                    onChange={handleEmailCheckChange}
+                                ></input>
+                                <div className="iconBox" onClick={checkCode}>
+                                    {studentCheck ? "✅" : "❓"}
+                                </div>
+                            </div>
 
                             <div className="inputBox">
                                 <label>비밀번호</label>
                                 <input
                                     type="password"
                                     placeholder="PASSWORD"
+                                    name="pwd"
+                                    value={inputData.pwd}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
                             <div className="inputExplanation">
-                                📢{" "}
-                                <div className="expDetail">
-                                    <span> 8자리 이상</span>으로 입력해주세요!
-                                </div>
+                                {inputData.pwd.length < 8 ? (
+                                    <div className="expDetail">
+                                        📢 <span> 8자리 이상</span>으로
+                                        입력해주세요!
+                                    </div>
+                                ) : (
+                                    <div className="expDetail">
+                                        ✅
+                                        <span>
+                                            비밀번호가 8자리 이상입니다!
+                                        </span>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="inputBox">
@@ -223,6 +324,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="NICKNAME"
+                                    name="nickname"
+                                    value={inputData.nickname}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -236,7 +340,13 @@ function SigninPage() {
 
                             <div className="inputBox">
                                 <label>이름</label>
-                                <input type="text" placeholder="NAME"></input>
+                                <input
+                                    type="text"
+                                    placeholder="NAME"
+                                    name="memberName"
+                                    value={inputData.memberName}
+                                    onChange={handleInputChange}
+                                ></input>
                                 <div className="iconBox"></div>
                             </div>
 
@@ -245,6 +355,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="DEPARTMENT"
+                                    name="department"
+                                    value={inputData.department}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -254,6 +367,9 @@ function SigninPage() {
                                 <input
                                     type="text"
                                     placeholder="STUDENT NUMBER"
+                                    name="studentNumber"
+                                    value={inputData.studentNumber}
+                                    onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -261,8 +377,9 @@ function SigninPage() {
                     </div>
 
                     <div className="linkBox">
-                        <div className="signinBtn">
-                            <StyledLink to="/main">SIGN IN</StyledLink>
+                        <div className="signinBtn" onClick={submitSignin}>
+                            {" "}
+                            SIGN IN
                         </div>
                     </div>
                 </div>

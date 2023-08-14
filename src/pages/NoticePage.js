@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import NoticeBox from "../components/NoticeBox.js";
+
+import axios from "axios";
 
 const Container = styled.div`
     display: flex;
@@ -18,7 +21,6 @@ const Container = styled.div`
         font-weight: bold;
         margin: 0;
 
-        color: #2d6dcc;
         color: #2d6dcc;
     }
 
@@ -73,9 +75,50 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
     }
+
+    .warning {
+        font-size: 1rem;
+        color: #2d6dcc;
+    }
 `;
 
 function NoticePage() {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    async function getData() {
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/api/search-notice/list",
+                { params: { searchKeyword: searchKeyword } }
+            );
+            setData(response.data);
+            if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    console.log(data);
+
+    // 검색
+    const [inputKeyword, setInputKeyword] = useState("");
+    const [searchKeyword, setSearchKeyword] = useState("");
+
+    const handleInputKeyword = (event) => {
+        setInputKeyword(event.target.value);
+    };
+
+    useEffect(() => {
+        getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchKeyword]);
+
+    const search = (event) => {
+        event.preventDefault();
+        setSearchKeyword(inputKeyword);
+    };
+
     return (
         <Container>
             <MainHeader />
@@ -91,24 +134,33 @@ function NoticePage() {
                             className="searchInput"
                             type="text"
                             placeholder="검색어를 입력하세요"
+                            value={inputKeyword}
+                            onChange={handleInputKeyword}
                         />
-                        <button className="searchBtn" type="submit">
+                        <button
+                            className="searchBtn"
+                            type="submit"
+                            onClick={search}
+                        >
                             검색
                         </button>
                     </form>
                 </div>
 
                 <div className="noticeListBox">
-                    <NoticeBox
-                        noticeId="1"
-                        end={false}
-                        title="23년도 2학기 튜터링"
-                    />
-                    <NoticeBox
-                        noticeId="2"
-                        end={true}
-                        title="23년도 1학기 한솥밥"
-                    />
+                    {data.length > 0 ? (
+                        data.map((item) => (
+                            <NoticeBox
+                                noticeId={item.noticeId}
+                                end={item.end}
+                                title={item.title}
+                            />
+                        ))
+                    ) : (
+                        <p className="warning">
+                            검색된 공지가 없습니다. 다시 검색해주세요! 😓
+                        </p>
+                    )}
                 </div>
             </div>
         </Container>

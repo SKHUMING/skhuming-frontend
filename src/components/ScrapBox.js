@@ -19,7 +19,7 @@ const Container = styled.div`
     }
 
     .noticeContentEnd {
-        width: 3vw;
+        width: 2.5vw;
         height: 3.5vh;
         margin-right: 1.5vw;
 
@@ -28,7 +28,7 @@ const Container = styled.div`
         align-items: center;
 
         border-radius: 0.25rem;
-        background: #204782;
+        background: #cdced3;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 
         font-size: 0.8rem;
@@ -77,7 +77,7 @@ function ScrapBox({ noticeId, end, title }) {
                 <div className="noticeContentBox">
                     {end ? <div className="noticeContentEnd">종료</div> : ""}
                     <p className="noticeContentTitle">{title}</p>
-                    <div className="noticeScrapIcon">📌</div>
+                    <div className="noticeScrapIcon">⭐️</div>
                 </div>
             </StyledLink>
         </Container>

@@ -119,8 +119,6 @@ const Container = styled.div`
 `;
 
 function rankImg(tier) {
-    // if (tier === "SS") return <img src={tier_SS} alt="tier"></img>;
-    // eslint-disable-next-line default-case
     switch (tier) {
         case "SS":
             return <img src={tier_SS} alt="tier"></img>;
@@ -130,7 +128,7 @@ function rankImg(tier) {
             return <img src={tier_A} alt="tier"></img>;
         case "B":
             return <img src={tier_B} alt="tier"></img>;
-        case "Un":
+        default:
             return <img src={tier_Un} alt="tier"></img>;
     }
 }

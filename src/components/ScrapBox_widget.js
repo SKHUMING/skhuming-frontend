@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     .scrapBox {
@@ -15,6 +16,23 @@ const Container = styled.div`
         border-radius: 0.625rem;
         background: #fff;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .scrapContentEnd {
+        width: 3vw;
+        height: 3.5vh;
+        margin-right: 1.5vw;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 0.25rem;
+        background: #cdced3;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+
+        font-size: 0.8rem;
+        color: #fff;
     }
 
     .scrapContentTitle {
@@ -37,15 +55,32 @@ const Container = styled.div`
     }
 `;
 
-function ScrapBox() {
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    font-size: 1rem;
+    color: #204782;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        font-size: 1rem;
+        color: #204782;
+    }
+`;
+
+function ScrapBox({ noticeId, end, title }) {
     return (
         <Container>
-            <div className="scrapBox">
-                <p className="scrapContentTitle">
-                    2023학년도 1학기 전공학습공동체 한솥밥 참여자 모집 안내
-                </p>
-                <div className="scrapIcon">📌</div>
-            </div>
+            <StyledLink to={`/notice/detail/${noticeId}`}>
+                <div className="scrapBox">
+                    {end ? <div className="scrapContentEnd">종료</div> : ""}
+                    <p className="scrapContentTitle">{title}</p>
+                    <div className="scrapIcon">⭐️</div>
+                </div>
+            </StyledLink>
         </Container>
     );
 }

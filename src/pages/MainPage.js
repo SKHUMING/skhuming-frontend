@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
 import tier_A from "../images/tier_A.png";
+import tier_B from "../images/tier_B.png";
+import tier_UN from "../images/tier_UN.png";
+
+import axios from "axios";
+
+// import { CustomAxios } from "../api/Axios/customAxios";
 
 const Container = styled.div`
     display: flex;
@@ -208,6 +215,40 @@ const Container = styled.div`
 `;
 
 function MainPage() {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    async function getData() {
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/api/main"
+            );
+            setData(response.data);
+            if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const rankImg = (rank) => {
+        switch (data[rank].tier) {
+            case "SS":
+                return <img src={tier_SS} alt="tier"></img>;
+            case "S":
+                return <img src={tier_S} alt="tier"></img>;
+            case "A":
+                return <img src={tier_A} alt="tier"></img>;
+            case "B":
+                return <img src={tier_B} alt="tier"></img>;
+            default:
+                return <img src={tier_UN} alt="tier"></img>;
+        }
+    };
+
     return (
         <Container>
             <MainHeader />
@@ -223,11 +264,24 @@ function MainPage() {
                         <p>🥈 2nd 🥈</p>
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
-                                <img src={tier_S} alt="tier"></img>
+                                {loading ? rankImg(1) : "Loading..."}
                             </div>
                             <div className="profile_2nd">
-                                <p className="name_2nd">홍길동</p>
-                                <p className="score_2nd">100점</p>
+                                {loading ? (
+                                    <p className="name_2nd">
+                                        {data[1].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_2nd">
+                                        {data[1].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -235,11 +289,24 @@ function MainPage() {
                         <p>🥇 1st 🥇</p>
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
-                                <img src={tier_SS} alt="tier"></img>
+                                {loading ? rankImg(0) : "Loading..."}
                             </div>
                             <div className="profile_1st">
-                                <p className="name_1st">홍길동</p>
-                                <p className="score_1st">100점</p>
+                                {loading ? (
+                                    <p className="name_1st">
+                                        {data[0].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_1st">
+                                        {data[0].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -247,11 +314,24 @@ function MainPage() {
                         <p>🥉 3rd 🥉</p>
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
-                                <img src={tier_A} alt="tier"></img>
+                                {loading ? rankImg(2) : "Loading..."}
                             </div>
                             <div className="profile_3rd">
-                                <p className="name_3rd">홍길동</p>
-                                <p className="score_3rd">100점</p>
+                                {loading ? (
+                                    <p className="name_3rd">
+                                        {data[2].nickname}
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
+
+                                {loading ? (
+                                    <p className="score_3rd">
+                                        {data[2].score}점
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
