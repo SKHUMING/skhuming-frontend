@@ -182,7 +182,7 @@ function LoginPage() {
         };
         try {
             const response = await axios.post(
-                "http://15.164.131.248:8080/api/login",
+                "//15.164.131.248:8080/api/login",
                 loginData
             );
             // console.log(response.data);
