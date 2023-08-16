@@ -184,7 +184,7 @@ function MileagePage() {
     async function getMileageList() {
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/api/mileage/select-box"
+                "https://api.skhuming-api.store/api/mileage/select-box"
             );
             setMileageList(response.data);
         } catch (error) {
