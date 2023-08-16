@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+import PopUp from "../components/PopUp.js";
 
 import axios from "axios";
 
@@ -144,20 +145,6 @@ const StyledLink1 = styled(Link)`
     }
 `;
 
-const StyledLink2 = styled(Link)`
-    color: #fbfbfb;
-    text-decoration: none;
-
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-        text-decoration: none;
-        color: #fbfbfb;
-    }
-`;
-
 function LoginPage() {
     const navigate = useNavigate();
 
@@ -174,6 +161,10 @@ function LoginPage() {
         }));
     };
 
+    // 팝업창
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+
     async function submitLogin() {
         console.log(inputData);
         const loginData = {
@@ -185,7 +176,6 @@ function LoginPage() {
                 "//15.164.131.248:8080/api/login",
                 loginData
             );
-            // console.log(response.data);
             window.localStorage.setItem(
                 "token",
                 "Bearer " + response.data.token
@@ -193,14 +183,16 @@ function LoginPage() {
             window.localStorage.setItem("memberId", response.data.memberId);
             navigate("/main");
         } catch (error) {
-            console.error(error.response.data.message);
-            window.confirm(error.response.data.message);
+            // console.error(error.response.data.message);
+            setMsg(error.response.data.message);
+            setPopup(true);
         }
     }
 
     return (
         <Container>
             <Header />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
             <div className="box">
                 <div className="loginBox">
                     <div className="titleBox">
