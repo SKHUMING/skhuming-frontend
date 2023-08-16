@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
+import PopUp from "../components/PopUp.js";
 
 import axios from "axios";
 
@@ -95,13 +96,13 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
 
-        font-size: 35px;
+        font-size: 27px;
 
         transition: font-size 0.3s ease-in-out;
     }
     .iconBox:hover {
         cursor: pointer;
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .inputExplanation {
@@ -113,7 +114,7 @@ const Container = styled.div`
     }
 
     .expDetail {
-        margin-left: 10px;
+        margin-left: 8px;
         color: #9dc4ff;
         font-size: 15px;
     }
@@ -160,24 +161,14 @@ const Container = styled.div`
     }
 `;
 
-const StyledLink = styled(Link)`
-    color: #fbfbfb;
-    text-decoration: none;
-
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-        text-decoration: none;
-        color: #fbfbfb;
-    }
-`;
-
 // 닉네임, 이메일 중복
 
 function SigninPage() {
     const navigate = useNavigate();
+
+    // 팝업창
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
 
     const [inputData, setInputData] = useState({
         email: "",
@@ -207,6 +198,10 @@ function SigninPage() {
     const checkCode = () => {
         if (authenticationCode === emailCheck && authenticationCode !== "")
             setStudentCheck(true);
+        else {
+            setMsg("인증 코드가 일치하지 않아요. 😢");
+            setPopup(true);
+        }
     };
 
     // 재학생 인증 성공
@@ -223,9 +218,12 @@ function SigninPage() {
                 navigate("/");
             } catch (error) {
                 console.error(error.response.data.message);
+                setMsg(error.response.data.message);
+                setPopup(true);
             }
         } else {
-            window.confirm("모든 인증을 완료해주세요");
+            setMsg("모든 입력과 인증을 완료해주세요! 🙏🏻");
+            setPopup(true);
         }
     }
 
@@ -241,12 +239,15 @@ function SigninPage() {
             setAuthenticationCode(response.data);
         } catch (error) {
             console.log(error.response.data.message);
+            setMsg(error.response.data.message);
+            setPopup(true);
         }
     }
 
     return (
         <Container>
             <Header />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
             <div className="box">
                 <div className="loginBox">
                     <div className="titleBox">
@@ -279,10 +280,10 @@ function SigninPage() {
                                 </div>
                             </div>
                             <div className="inputBox">
-                                <label>인증 문자</label>
+                                <label>인증 코드</label>
                                 <input
                                     type="text"
-                                    placeholder="메일로 받은 인증 문자를 적어주세요"
+                                    placeholder="office 365 메일로 받은 인증 코드를 적어주세요"
                                     name="emailCheck"
                                     value={emailCheck}
                                     onChange={handleEmailCheckChange}
@@ -305,17 +306,21 @@ function SigninPage() {
                             </div>
                             <div className="inputExplanation">
                                 {inputData.pwd.length < 8 ? (
-                                    <div className="expDetail">
-                                        📢 <span> 8자리 이상</span>으로
-                                        입력해주세요!
-                                    </div>
+                                    <>
+                                        📢
+                                        <div className="expDetail">
+                                            <span> 8자리 이상</span>으로
+                                            입력해주세요!
+                                        </div>
+                                    </>
                                 ) : (
-                                    <div className="expDetail">
+                                    <>
                                         ✅
-                                        <span>
-                                            비밀번호가 8자리 이상입니다!
-                                        </span>
-                                    </div>
+                                        <div className="expDetail">
+                                            비밀번호가 <span>8자리 이상</span>
+                                            입니다!
+                                        </div>
+                                    </>
                                 )}
                             </div>
 
