@@ -40,7 +40,7 @@ function ScrapPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/user/api/scrap/list",
+                "https://api.skhuming-api.store/user/api/scrap/list",
                 {
                     params: { memberId: memberId },
                     headers: {

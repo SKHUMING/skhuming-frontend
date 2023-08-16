@@ -192,7 +192,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/user/api/my-profile",
+                "https://api.skhuming-api.store/user/api/my-profile",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -217,7 +217,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/user/api/scrap/list",
+                "https://api.skhuming-api.store/user/api/scrap/list",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -241,7 +241,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/user/api/mileage/get",
+                "https://api.skhuming-api.store/user/api/mileage/get",
                 {
                     params: { memberId: memberId },
                     headers: {
