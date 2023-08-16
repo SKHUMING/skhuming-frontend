@@ -220,7 +220,7 @@ function MainPage() {
     async function getData() {
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/api/main"
+                "https://api.skhuming-api.store/api/main"
             );
             setData(response.data);
             if (data.length > 0) setLoading(true);

@@ -162,7 +162,7 @@ function MileagePage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/user/api/mileage/get",
+                "https://api.skhuming-api.store/user/api/mileage/get",
                 {
                     params: { memberId: memberId },
                     headers: {
