@@ -179,41 +179,21 @@ function MileagePage() {
         }
     }
 
+    // 마일리지 점수 리스트 get
+    const [mileageList, setMileageList] = useState([]);
+    async function getMileageList() {
+        try {
+            const response = await axios.get(
+                "http://15.164.131.248:8080/api/mileage/select-box"
+            );
+            setMileageList(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // selectbox
     const [addMileage, setAddMileage] = useState("");
-    // 후에 마일리지 점수 리스트 받아서 출력하기
-    const mileageList = [
-        { title: "활동을 완료한 비교과 프로그램을 선택해주세요.", score: 0 },
-        { title: "재학생 핵심역량 진단연구(S-ECA)", score: 50 },
-        { title: "전국단위 학생조사(K-NSSE)", score: 50 },
-        { title: "대학생 핵심역량 진단평가(K-CESA)", score: 70 },
-        { title: "뿌리튼튼", score: 50 },
-        { title: "학습법 워크숍", score: 10 },
-        { title: "학습경험 에세이 콘테스트", score: 20 },
-        { title: "창업역량강화특강", score: 10 },
-        { title: "스타트업 페스티벌", score: 10 },
-        { title: "창업 동아리", score: 80 },
-        { title: "교과목연계 창업강좌(창업과 지식재산)", score: 20 },
-        { title: "교과목연계 창업강좌(스타트업 전략수립)", score: 20 },
-        { title: "2학기 취업역량강화특강", score: 10 },
-        { title: "진로취업페스티벌", score: 10 },
-        { title: "포트폴리오(입사서류) 컨테스트", score: 20 },
-        { title: "2학기 온라인 직무컨퍼런스", score: 20 },
-        { title: "2학기 온라인 직무캠프", score: 60 },
-        { title: "토닥토닥 취업멘토링", score: 20 },
-        { title: "교과목연계 취업강좌(진로탐색과 자기계발)", score: 20 },
-        { title: "교과목연계 취업강좌(취업전략과 사회진출)", score: 20 },
-        { title: "모의토익(600점 이상 취득 시)", score: 20 },
-        { title: "심리검사 워크숍(MBTI)", score: 10 },
-        { title: "심리건강 페스티벌", score: 10 },
-        { title: "2022 북적북적 시즌2(제12회 저자와의 대화)", score: 20 },
-        { title: "제24회 성공회대학교 글쓰기 대회", score: 20 },
-        { title: "집단상담", score: 30 },
-        { title: "워크숍프로그램", score: 20 },
-        { title: "IT&미디어콘텐츠 경진대회", score: 20 },
-        { title: "제28회 영어스피치페스티벌", score: 20 },
-        { title: "제25회 일본어스피치콘테스트", score: 20 },
-        { title: "제10회 중국어스피치대회", score: 20 },
-    ];
 
     const handleMileage = (event) => {
         setAddMileage(event.currentTarget.value);
@@ -226,12 +206,13 @@ function MileagePage() {
 
     // 마일리지 추가 요청
     async function postMileage() {
+        console.log(addMileage);
         try {
             const response = await axios.post(
                 "http://15.164.131.248:8080/user/api/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
-                    score: addMileage,
+                    score: Number(addMileage),
                 },
                 {
                     headers: {
@@ -249,6 +230,7 @@ function MileagePage() {
 
     useEffect(() => {
         getUserData();
+        getMileageList();
     }, []);
 
     // 티어 사진
@@ -303,13 +285,12 @@ function MileagePage() {
                                 >
                                     {mileageList.map((item) => (
                                         <option
-                                            key={item.memberId}
-                                            value={item.score}
+                                            key={item.mileageId}
+                                            value={item.mileageScore}
                                         >
-                                            {item.score === 0
-                                                ? ""
-                                                : `[${item.score}점]`}
-                                            {item.title}
+                                            {item.mileageScore !== 0
+                                                ? `[${item.mileageScore}점] ${item.title}`
+                                                : item.title}
                                         </option>
                                     ))}
                                 </select>
