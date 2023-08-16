@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
+import PopUp from "../components/PopUp.js";
 
 const Container = styled.div`
     display: flex;
@@ -36,6 +37,9 @@ function ScrapPage() {
     const navigate = useNavigate();
     const [scrapData, setScrapData] = useState([]);
 
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+
     async function getScrapData() {
         const memberId = window.localStorage.getItem("memberId");
         try {
@@ -52,7 +56,8 @@ function ScrapPage() {
             setScrapData(response.data.reverse());
         } catch (error) {
             console.error(error);
-            window.confirm(error.response.data);
+            setMsg(error.response.data.message);
+            setPopup(true);
             navigate("/");
         }
     }
@@ -64,6 +69,7 @@ function ScrapPage() {
     return (
         <Container>
             <MainHeader />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
             <div className="scrapBox">
                 <div className="scrapTitle">
                     <p>MY SCRAP</p>
