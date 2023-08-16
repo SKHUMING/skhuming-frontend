@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBoxWidget from "../components/ScrapBox_widget.js";
 import axios from "axios";
+import PopUp from "../components/PopUp.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -177,6 +178,9 @@ const StyledLink = styled(Link)`
 function MyPage() {
     const navigate = useNavigate();
 
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+
     async function submitLogout() {
         // 로그아웃 시에 필요한 클리어 작업 수행
         window.localStorage.removeItem("token");
@@ -206,7 +210,8 @@ function MyPage() {
             setLoading(true);
         } catch (error) {
             console.error(error);
-            window.confirm(error.response.data);
+            setMsg(error.response.data.message);
+            setPopup(true);
             navigate("/");
         }
     }
@@ -229,7 +234,8 @@ function MyPage() {
             setScrapData(response.data.reverse());
         } catch (error) {
             console.error(error);
-            window.confirm(error.response.data);
+            setMsg(error.response.data.message);
+            setPopup(true);
             navigate("/");
         }
     }
@@ -252,7 +258,8 @@ function MyPage() {
             setMileageData(response.data);
         } catch (error) {
             console.error(error);
-            window.confirm(error.response.data);
+            setMsg(error.response.data.message);
+            setPopup(true);
             navigate("/");
         }
     }
@@ -282,6 +289,7 @@ function MyPage() {
     return (
         <Container>
             <MainHeader />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
             <div className="myPageBox">
                 <div className="userProfileBox">
                     <div className="user">
