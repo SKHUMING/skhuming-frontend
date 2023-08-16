@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
+import PopUp from "../components/PopUp.js";
 
 const Container = styled.div`
     display: flex;
@@ -115,6 +116,9 @@ function NoticeDetailsPage() {
         }
     }
 
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+
     // 스크랩
     async function getScrap() {
         try {
@@ -132,7 +136,8 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(true);
-            window.confirm("⭐️ 스크랩 되었습니다.");
+            setMsg("⭐️ 스크랩 되었습니다.");
+            setPopup(true);
         } catch (error) {
             console.error(error);
         }
@@ -154,7 +159,8 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(false);
-            window.confirm("👋🏻 스크랩을 취소하였습니다.");
+            setMsg("👋🏻 스크랩을 취소하였습니다.");
+            setPopup(true);
         } catch (error) {
             console.error(error);
         }
@@ -168,6 +174,8 @@ function NoticeDetailsPage() {
     return (
         <Container>
             <MainHeader />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+
             <div class="noticeBox">
                 <div className="noticeTitleBox">
                     <div className="noticeTitleBox_inner">
