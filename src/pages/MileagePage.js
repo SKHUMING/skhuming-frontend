@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
+import PopUp from "../components/PopUp.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -158,6 +159,9 @@ function MileagePage() {
     const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState([]);
 
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+
     async function getUserData() {
         const memberId = window.localStorage.getItem("memberId");
         try {
@@ -174,7 +178,8 @@ function MileagePage() {
             setLoading(true);
         } catch (error) {
             console.error(error);
-            window.confirm(error.response.data);
+            setMsg(error.response.data.message);
+            setPopup(true);
             navigate("/");
         }
     }
@@ -184,7 +189,7 @@ function MileagePage() {
     async function getMileageList() {
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/api/mileage/select-box"
+                "https://api.skhuming-api.store/api/mileage/select-box"
             );
             setMileageList(response.data);
         } catch (error) {
@@ -209,7 +214,7 @@ function MileagePage() {
         console.log(addMileage);
         try {
             const response = await axios.post(
-                "http://15.164.131.248:8080/user/api/mileage/post",
+                "https://api.skhuming-api.store/user/api/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
                     score: Number(addMileage),
@@ -221,8 +226,9 @@ function MileagePage() {
                 }
             );
             console.log(response);
-            window.confirm("🎉 스쿰 마일리지를 추가하였습니다!");
-            window.location.reload();
+            setMsg("🎉 스쿰 마일리지를 추가하였습니다!");
+            setPopup(true);
+            // window.location.reload();
         } catch (error) {
             console.error(error.response.data);
         }
@@ -231,7 +237,7 @@ function MileagePage() {
     useEffect(() => {
         getUserData();
         getMileageList();
-    }, []);
+    }, [popup]);
 
     // 티어 사진
     function rankImg(tier) {
@@ -252,6 +258,7 @@ function MileagePage() {
     return (
         <Container>
             <MainHeader />
+            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
             <div className="mileageBox">
                 <div className="mileageTitle">
                     <p>MY MILEAGE</p>
