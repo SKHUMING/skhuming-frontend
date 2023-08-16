@@ -93,7 +93,7 @@ function NoticeDetailsPage() {
     async function getData() {
         try {
             const response = await axios.get(
-                "http://15.164.131.248:8080/api/notice/details",
+                "https://api.skhuming-api.store/api/notice/details",
                 { params: { noticeId: noticeId } }
             );
             setData(response.data);
@@ -123,7 +123,7 @@ function NoticeDetailsPage() {
     async function getScrap() {
         try {
             await axios.post(
-                "http://15.164.131.248:8080/user/api/notice/scrap",
+                "https://api.skhuming-api.store/user/api/notice/scrap",
                 null,
                 {
                     params: {
@@ -146,7 +146,7 @@ function NoticeDetailsPage() {
     async function delScrap() {
         try {
             await axios.post(
-                "http://15.164.131.248:8080/user/api/notice/scrap/cancel",
+                "https://api.skhuming-api.store/user/api/notice/scrap/cancel",
                 null,
                 {
                     params: {

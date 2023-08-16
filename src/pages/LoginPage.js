@@ -173,7 +173,7 @@ function LoginPage() {
         };
         try {
             const response = await axios.post(
-                "//15.164.131.248:8080/api/login",
+                "https://api.skhuming-api.store/api/login",
                 loginData
             );
             window.localStorage.setItem(

@@ -211,7 +211,7 @@ function SigninPage() {
         if (studentCheck) {
             try {
                 const response = await axios.post(
-                    "http://15.164.131.248:8080/api/join",
+                    "https://api.skhuming-api.store/api/join",
                     inputData
                 );
                 console.log(response.data);
@@ -233,7 +233,7 @@ function SigninPage() {
         const email = { email: inputData.email };
         try {
             const response = await axios.post(
-                "http://15.164.131.248:8080/api/email-check",
+                "https://api.skhuming-api.store/api/email-check",
                 email
             );
             setAuthenticationCode(response.data);
