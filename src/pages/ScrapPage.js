@@ -57,12 +57,12 @@ function ScrapPage() {
         } catch (error) {
             if (error.response.status === 401) {
                 setMsg(error.response.data);
+                setGoLogin(true);
             } else {
                 setMsg(error.response.data.message);
             }
 
             setPopup(true);
-            setGoLogin(true);
         }
     }
 
