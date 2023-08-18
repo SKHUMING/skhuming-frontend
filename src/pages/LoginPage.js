@@ -180,6 +180,7 @@ function LoginPage() {
                 "token",
                 "Bearer " + response.data.token
             );
+            console.log(response.data);
             window.localStorage.setItem("memberId", response.data.memberId);
             navigate("/main");
         } catch (error) {
