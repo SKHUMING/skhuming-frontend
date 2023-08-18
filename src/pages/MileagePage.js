@@ -278,7 +278,7 @@ function MileagePage() {
         getUserData();
         getMileageList();
         getMileageHistory();
-    }, [popup]);
+    }, []);
 
     // 티어 사진
     function rankImg(tier) {
@@ -354,16 +354,19 @@ function MileagePage() {
                     </div>
                 </div>
 
-                <div className="mileageHistoryTitle">
-                    <p>MY MILEAGE HISTORY</p>
-                    <hr />
-                </div>
+                {mileageHistory.length !== 0 ? (
+                    <div className="mileageHistoryTitle">
+                        <p>MY MILEAGE HISTORY</p>
+                        <hr />
+                    </div>
+                ) : null}
 
                 <div className="mileageHistoryBox">
                     {mileageHistory ? (
                         mileageHistory.map((item) => (
                             <MileageHistoryBox
                                 title={item.title}
+                                mileageId={item.mileageId}
                                 mileageScore={item.mileageScore}
                                 systemDate={item.systemDate}
                             />
