@@ -192,7 +192,9 @@ function LoginPage() {
     return (
         <Container>
             <Header />
-            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+            {popup ? (
+                <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
+            ) : null}
             <div className="box">
                 <div className="loginBox">
                     <div className="titleBox">

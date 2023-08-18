@@ -73,6 +73,9 @@ function PopUp(props) {
                     className="closeBtn"
                     onClick={() => {
                         onClose(false);
+                        if (!props.notReRoad) {
+                            window.location.reload();
+                        }
                     }}
                 >
                     X

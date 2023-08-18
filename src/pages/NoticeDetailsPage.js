@@ -174,7 +174,9 @@ function NoticeDetailsPage() {
     return (
         <Container>
             <MainHeader />
-            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+            {popup ? (
+                <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
+            ) : null}
 
             <div class="noticeBox">
                 <div className="noticeTitleBox">
