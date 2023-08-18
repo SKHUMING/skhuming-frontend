@@ -180,6 +180,7 @@ function MyPage() {
 
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
 
     async function submitLogout() {
         // 로그아웃 시에 필요한 클리어 작업 수행
@@ -209,10 +210,14 @@ function MyPage() {
             // if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
-            console.error(error);
-            setMsg(error.response.data.message);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
             setPopup(true);
-            navigate("/");
+            setGoLogin(true);
         }
     }
 
@@ -233,10 +238,14 @@ function MyPage() {
             console.log(response);
             setScrapData(response.data.reverse());
         } catch (error) {
-            console.error(error);
-            setMsg(error.response.data.message);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
             setPopup(true);
-            navigate("/");
+            setGoLogin(true);
         }
     }
 
@@ -257,10 +266,14 @@ function MyPage() {
             );
             setMileageData(response.data);
         } catch (error) {
-            console.error(error);
-            setMsg(error.response.data.message);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
             setPopup(true);
-            navigate("/");
+            setGoLogin(true);
         }
     }
 
@@ -289,7 +302,9 @@ function MyPage() {
     return (
         <Container>
             <MainHeader />
-            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+            {popup ? (
+                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+            ) : null}
             <div className="myPageBox">
                 <div className="userProfileBox">
                     <div className="user">

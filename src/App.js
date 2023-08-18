@@ -10,6 +10,10 @@ import RankingPage from "./pages/RankingPage.js";
 import ScrapPage from "./pages/ScrapPage.js";
 import SigninPage from "./pages/SigninPage.js";
 
+import AdminNotice from "./pages/AdminNotice.js";
+import AdminAddNotice from "./pages/AdminAddNotice.js";
+import AdminDetailNotice from "./pages/AdminDetailNotice.js";
+
 // import styled from "styled-components";
 
 function App() {
@@ -28,6 +32,13 @@ function App() {
             />
             <Route path="/ranking" element={<RankingPage />} />
             <Route path="/scrap" element={<ScrapPage />} />
+
+            <Route path="/admin/notice" element={<AdminNotice />} />
+            <Route path="/admin/notice/add" element={<AdminAddNotice />} />
+            <Route
+                path="/admin/notice/detail/:noticeId"
+                element={<AdminDetailNotice />}
+            />
         </Routes>
     );
 }

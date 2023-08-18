@@ -118,6 +118,7 @@ function NoticeDetailsPage() {
 
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
 
     // 스크랩
     async function getScrap() {
@@ -139,7 +140,15 @@ function NoticeDetailsPage() {
             setMsg("⭐️ 스크랩 되었습니다.");
             setPopup(true);
         } catch (error) {
-            console.error(error);
+            console.log(error);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
+            setPopup(true);
+            setGoLogin(true);
         }
     }
 
@@ -162,7 +171,15 @@ function NoticeDetailsPage() {
             setMsg("👋🏻 스크랩을 취소하였습니다.");
             setPopup(true);
         } catch (error) {
-            console.error(error);
+            console.log(error);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
+            setPopup(true);
+            setGoLogin(true);
         }
     }
 
@@ -175,7 +192,12 @@ function NoticeDetailsPage() {
         <Container>
             <MainHeader />
             {popup ? (
-                <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
+                <PopUp
+                    onClose={setPopup}
+                    msg={msg}
+                    notReRoad={true}
+                    goLogin={goLogin}
+                />
             ) : null}
 
             <div class="noticeBox">
