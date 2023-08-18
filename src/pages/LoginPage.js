@@ -180,8 +180,11 @@ function LoginPage() {
                 "token",
                 "Bearer " + response.data.token
             );
+            console.log(response.data);
             window.localStorage.setItem("memberId", response.data.memberId);
-            navigate("/main");
+            if (response.data.authorityName === "ROLE_ADMIN")
+                navigate("/admin/notice");
+            else navigate("/main");
         } catch (error) {
             // console.error(error.response.data.message);
             setMsg(error.response.data.message);
