@@ -34,11 +34,11 @@ const Container = styled.div`
 `;
 
 function ScrapPage() {
-    const navigate = useNavigate();
     const [scrapData, setScrapData] = useState([]);
 
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
 
     async function getScrapData() {
         const memberId = window.localStorage.getItem("memberId");
@@ -55,10 +55,14 @@ function ScrapPage() {
             console.log(response);
             setScrapData(response.data.reverse());
         } catch (error) {
-            console.error(error);
-            setMsg(error.response.data.message);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
             setPopup(true);
-            navigate("/");
+            setGoLogin(true);
         }
     }
 
@@ -69,7 +73,9 @@ function ScrapPage() {
     return (
         <Container>
             <MainHeader />
-            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+            {popup ? (
+                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+            ) : null}
             <div className="scrapBox">
                 <div className="scrapTitle">
                     <p>MY SCRAP</p>

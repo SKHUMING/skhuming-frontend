@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -63,7 +64,10 @@ const Container = styled.div`
 `;
 
 function PopUp(props) {
+    const navigate = useNavigate();
     const onClose = props.onClose;
+
+    console.log(props);
 
     return (
         <Container>
@@ -73,8 +77,11 @@ function PopUp(props) {
                     className="closeBtn"
                     onClick={() => {
                         onClose(false);
-                        if (!props.notReRoad) {
+                        if (props.goLogin) {
+                            navigate("/");
+                        } else if (!props.notReRoad) {
                             window.location.reload();
+                            console.log("re");
                         }
                     }}
                 >

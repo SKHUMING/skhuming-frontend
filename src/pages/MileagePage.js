@@ -178,6 +178,7 @@ function MileagePage() {
 
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
 
     async function getUserData() {
         const memberId = window.localStorage.getItem("memberId");
@@ -194,10 +195,16 @@ function MileagePage() {
             setUserData(response.data);
             setLoading(true);
         } catch (error) {
-            console.error(error);
-            setMsg(error.response.data.message);
+            console.log(error.response.status);
+
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
             setPopup(true);
-            navigate("/");
+            setGoLogin(true);
         }
     }
 
@@ -246,9 +253,11 @@ function MileagePage() {
             console.log(response);
             setMsg("🎉 스쿰 마일리지를 추가하였습니다!");
             setPopup(true);
-            // window.location.reload();
         } catch (error) {
-            console.error(error.response.data);
+            // console.log(error.response.status);
+            console.log(error.response.data);
+            // setPopup(true);
+            // setGoLogin(true);
         }
     }
 
@@ -299,7 +308,9 @@ function MileagePage() {
     return (
         <Container>
             <MainHeader />
-            {popup ? <PopUp onClose={setPopup} msg={msg} /> : null}
+            {popup ? (
+                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+            ) : null}
             <div className="mileageBox">
                 <div className="mileageTitle">
                     <p>MY MILEAGE</p>
