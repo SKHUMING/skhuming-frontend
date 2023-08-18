@@ -192,6 +192,7 @@ function MileagePage() {
                 "https://api.skhuming-api.store/api/mileage/select-box"
             );
             setMileageList(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -202,6 +203,7 @@ function MileagePage() {
 
     const handleMileage = (event) => {
         setAddMileage(event.currentTarget.value);
+        // console.log(event.currentTarget.value);
     };
 
     const submitMileage = (event) => {
@@ -217,7 +219,7 @@ function MileagePage() {
                 "https://api.skhuming-api.store/user/api/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
-                    score: Number(addMileage),
+                    mileageId: addMileage,
                 },
                 {
                     headers: {
@@ -293,7 +295,7 @@ function MileagePage() {
                                     {mileageList.map((item) => (
                                         <option
                                             key={item.mileageId}
-                                            value={item.mileageScore}
+                                            value={item.mileageId}
                                         >
                                             {item.mileageScore !== 0
                                                 ? `[${item.mileageScore}점] ${item.title}`
