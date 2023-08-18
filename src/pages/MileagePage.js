@@ -10,6 +10,7 @@ import tier_S from "../images/tier_S.png";
 import tier_A from "../images/tier_A.png";
 import tier_B from "../images/tier_B.png";
 import tier_Un from "../images/tier_UN.png";
+import MileageHistoryBox from "../components/MileageHistoryBox.js";
 
 const Container = styled.div`
     display: flex;
@@ -21,7 +22,8 @@ const Container = styled.div`
         margin: 10vh 0;
     }
 
-    .mileageTitle > p {
+    .mileageTitle > p,
+    .mileageHistoryTitle > p {
         font-size: 30px;
         font-weight: bold;
         margin: 0;
@@ -29,7 +31,12 @@ const Container = styled.div`
         color: #2d6dcc;
     }
 
-    .mileageTitle > hr {
+    .mileageHistoryTitle > p {
+        margin-top: 15vh;
+    }
+
+    .mileageTitle > hr,
+    .mileageHistoryTitle > hr {
         margin-bottom: 4vh;
 
         height: 3px;
@@ -140,6 +147,7 @@ const Container = styled.div`
 
     .skhumListBtn {
         width: 3vw;
+        min-width: 45px;
         padding: 1vh;
         margin-left: 2vw;
 
@@ -151,6 +159,15 @@ const Container = styled.div`
         font-size: 0.8rem;
 
         cursor: pointer;
+    }
+
+    .mileageHistoryBox {
+        /* background-color: red; */
+    }
+
+    .nullMileage {
+        font-size: 1.1rem;
+        color: #204782;
     }
 `;
 
@@ -202,6 +219,7 @@ function MileagePage() {
 
     const handleMileage = (event) => {
         setAddMileage(event.currentTarget.value);
+        // console.log(event.currentTarget.value);
     };
 
     const submitMileage = (event) => {
@@ -217,7 +235,7 @@ function MileagePage() {
                 "https://api.skhuming-api.store/user/api/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
-                    score: Number(addMileage),
+                    mileageId: addMileage,
                 },
                 {
                     headers: {
@@ -234,10 +252,33 @@ function MileagePage() {
         }
     }
 
+    // 마일리지 내역
+    const [mileageHistory, setMileageHistory] = useState([]);
+    async function getMileageHistory() {
+        try {
+            const response = await axios.get(
+                "https://api.skhuming-api.store/user/api/mileage/history/list",
+                {
+                    params: {
+                        memberId: window.localStorage.getItem("memberId"),
+                    },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            setMileageHistory(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         getUserData();
         getMileageList();
-    }, [popup]);
+        getMileageHistory();
+    }, []);
 
     // 티어 사진
     function rankImg(tier) {
@@ -293,7 +334,7 @@ function MileagePage() {
                                     {mileageList.map((item) => (
                                         <option
                                             key={item.mileageId}
-                                            value={item.mileageScore}
+                                            value={item.mileageId}
                                         >
                                             {item.mileageScore !== 0
                                                 ? `[${item.mileageScore}점] ${item.title}`
@@ -311,6 +352,28 @@ function MileagePage() {
                             </form>
                         </div>
                     </div>
+                </div>
+
+                {mileageHistory.length !== 0 ? (
+                    <div className="mileageHistoryTitle">
+                        <p>MY MILEAGE HISTORY</p>
+                        <hr />
+                    </div>
+                ) : null}
+
+                <div className="mileageHistoryBox">
+                    {mileageHistory ? (
+                        mileageHistory.map((item) => (
+                            <MileageHistoryBox
+                                title={item.title}
+                                mileageId={item.mileageId}
+                                mileageScore={item.mileageScore}
+                                systemDate={item.systemDate}
+                            />
+                        ))
+                    ) : (
+                        <p className="nullMileage">내역이 없습니다.</p>
+                    )}
                 </div>
             </div>
         </Container>
