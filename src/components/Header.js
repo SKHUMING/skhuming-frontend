@@ -1,15 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import LogoImg from "../images/skhuming_logo_ai.png";
-
-// const slideIn = keyframes`
-// to{
-//     top: 0vh;
-// }
-// from{
-//     top: 5vh;
-// }
-// `;
+import { Link } from "react-router-dom";
 
 const slideBox1 = keyframes`
 to{
@@ -97,8 +89,11 @@ function Header() {
     return (
         <Container>
             <div className="box1">
-                <img src={LogoImg} alt="Logo"></img>
+                <Link to="/">
+                    <img src={LogoImg} alt="Logo"></img>
+                </Link>
             </div>
+
             <div className="box2"></div>
             <div className="box3"></div>
         </Container>

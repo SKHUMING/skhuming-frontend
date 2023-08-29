@@ -262,7 +262,7 @@ function SigninPage() {
                                 <label>이메일</label>
                                 <input
                                     type="email"
-                                    placeholder="EMAIL   (@skhu.office.ac.kr)"
+                                    placeholder="EMAIL   (@office.skhu.ac.kr)"
                                     name="email"
                                     value={inputData.email}
                                     onChange={handleInputChange}

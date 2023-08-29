@@ -107,7 +107,7 @@ const Container = styled.div`
         transition: border 0.3s ease-in-out;
     }
     .signinBtn:hover {
-        border: #9dc4ff solid 2px;
+        border: #3a73c9 solid 2px;
     }
 
     .loginBtn {

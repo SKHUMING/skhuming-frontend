@@ -172,7 +172,6 @@ const Container = styled.div`
 `;
 
 function MileagePage() {
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState([]);
 
@@ -199,12 +198,12 @@ function MileagePage() {
 
             if (error.response.status === 401) {
                 setMsg(error.response.data);
+                setGoLogin(true);
             } else {
                 setMsg(error.response.data.message);
             }
 
             setPopup(true);
-            setGoLogin(true);
         }
     }
 
@@ -254,10 +253,14 @@ function MileagePage() {
             setMsg("🎉 스쿰 마일리지를 추가하였습니다!");
             setPopup(true);
         } catch (error) {
-            // console.log(error.response.status);
-            console.log(error.response.data);
-            // setPopup(true);
-            // setGoLogin(true);
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+                setGoLogin(true);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
+            setPopup(true);
         }
     }
 
