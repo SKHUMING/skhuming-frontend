@@ -70,7 +70,7 @@ const Container = styled.div`
     }
 
     .inputBox > label {
-        width: 100px;
+        width: 135px;
 
         font-size: 18px;
         font-weight: bold;
@@ -111,7 +111,7 @@ const Container = styled.div`
 
     .inputExplanation {
         width: 400px;
-        margin-left: 113px;
+        margin-left: 138px;
 
         display: flex;
         align-items: center;
@@ -190,6 +190,7 @@ function SigninPage() {
         department: "",
         studentNumber: "",
     });
+    const [pwdCheck, setpwdCheck] = useState("");
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -198,6 +199,11 @@ function SigninPage() {
             [name]: value,
         }));
         console.log(inputData);
+    };
+
+    // 비밀번호 확인 onChange
+    const handleInputChangeCheck = (event) => {
+        setpwdCheck(event.target.value);
     };
 
     // 재학생 인증 이메일 Input
@@ -295,8 +301,8 @@ function SigninPage() {
                                     <span> @office.skhu.ac.kr</span> 이메일을
                                     적고,
                                     <br />
-                                    우측의 인증 메일 버튼을 통해
-                                    <span> 재학생 인증</span>을 받아주세요!
+                                    우측의 메일 전송 버튼으로
+                                    <span> 인증 코드</span>를 받아주세요!
                                 </div>
                             </div>
                             <div className="inputBox">
@@ -331,6 +337,17 @@ function SigninPage() {
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
+                            <div className="inputBox">
+                                <label>비밀번호 확인</label>
+                                <input
+                                    type="password"
+                                    placeholder="PASSWORD"
+                                    name="pwdCheck"
+                                    value={pwdCheck}
+                                    onChange={handleInputChangeCheck}
+                                ></input>
+                                <div className="iconBox"></div>
+                            </div>
                             <div className="inputExplanation">
                                 {inputData.pwd.length < 8 ? (
                                     <>
@@ -350,6 +367,25 @@ function SigninPage() {
                                     </>
                                 )}
                             </div>
+                            {inputData.pwd.length > 0 ? (
+                                <div className="inputExplanation">
+                                    {inputData.pwd === pwdCheck ? (
+                                        <>
+                                            ✅
+                                            <div className="expDetail">
+                                                비밀번호가 일치합니다!
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            ❌
+                                            <div className="expDetail">
+                                                비밀번호가 일치하지 않습니다.
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            ) : null}
 
                             <div className="inputBox">
                                 <label>닉네임</label>
