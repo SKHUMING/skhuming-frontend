@@ -339,7 +339,11 @@ function MainPage() {
                 </div>
 
                 <div className="award">
-                    <div className="box_2nd">
+                    <div
+                        className="box_2nd"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
                         <p>🥈 2nd 🥈</p>
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
@@ -364,7 +368,11 @@ function MainPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="box_1st">
+                    <div
+                        className="box_1st"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
                         <p>🥇 1st 🥇</p>
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
@@ -389,7 +397,11 @@ function MainPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="box_3rd">
+                    <div
+                        className="box_3rd"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
                         <p>🥉 3rd 🥉</p>
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
