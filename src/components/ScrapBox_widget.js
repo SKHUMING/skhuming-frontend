@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+
 const Container = styled.div`
     .scrapBox {
         width: 36vw;
@@ -78,7 +81,12 @@ function ScrapBox({ noticeId, end, title }) {
                 <div className="scrapBox">
                     {end ? <div className="scrapContentEnd">종료</div> : ""}
                     <p className="scrapContentTitle">{title}</p>
-                    <div className="scrapIcon">⭐️</div>
+                    <div className="scrapIcon">
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            style={{ color: "#2d6dcc" }}
+                        />
+                    </div>
                 </div>
             </StyledLink>
         </Container>

@@ -32,7 +32,7 @@ const Container = styled.div`
         align-items: center;
 
         border-radius: 0.625rem;
-        background-color: #fff;
+        background-color: #f6f6f6;
         /* background-color: #204782; */
         border: 3px solid #2d6dcc;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
