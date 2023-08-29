@@ -6,6 +6,10 @@ import PopUp from "../components/PopUp.js";
 
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+
 const Container = styled.div`
     .box {
         width: 100vw;
@@ -66,7 +70,7 @@ const Container = styled.div`
     }
 
     .inputBox > label {
-        width: 70px;
+        width: 100px;
 
         font-size: 18px;
         font-weight: bold;
@@ -87,7 +91,7 @@ const Container = styled.div`
     }
 
     .iconBox {
-        width: 30px;
+        width: 50px;
         height: 30px;
 
         margin-left: 10px;
@@ -96,18 +100,18 @@ const Container = styled.div`
         justify-content: center;
         align-items: center;
 
-        font-size: 27px;
+        font-size: 23px;
 
         transition: font-size 0.3s ease-in-out;
     }
     .iconBox:hover {
         cursor: pointer;
-        font-size: 30px;
+        /* font-size: 30px; */
     }
 
     .inputExplanation {
         width: 400px;
-        margin-left: 105px;
+        margin-left: 113px;
 
         display: flex;
         align-items: center;
@@ -159,6 +163,14 @@ const Container = styled.div`
         border: #9dc4ff solid 2px;
         background-color: #9dc4ff;
     }
+
+    .checkBtn {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        background-color: #2d6dcc;
+        color: #fbfbfb;
+    }
 `;
 
 // 닉네임, 이메일 중복
@@ -199,6 +211,7 @@ function SigninPage() {
         if (authenticationCode === emailCheck && authenticationCode !== "")
             setStudentCheck(true);
         else {
+            setStudentCheck(false);
             setMsg("인증 코드가 일치하지 않아요. 😢");
             setPopup(true);
         }
@@ -237,6 +250,8 @@ function SigninPage() {
                 email
             );
             setAuthenticationCode(response.data);
+            setMsg(`인증 메일이 전송되었습니다.`);
+            setPopup(true);
         } catch (error) {
             console.log(error.response.data.message);
             setMsg(error.response.data.message);
@@ -268,7 +283,10 @@ function SigninPage() {
                                     onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox" onClick={checkEmail}>
-                                    📧
+                                    <FontAwesomeIcon
+                                        icon={faPaperPlane}
+                                        style={{ color: "#2d6dcc" }}
+                                    />
                                 </div>
                             </div>
                             <div className="inputExplanation">
@@ -291,7 +309,14 @@ function SigninPage() {
                                     onChange={handleEmailCheckChange}
                                 ></input>
                                 <div className="iconBox" onClick={checkCode}>
-                                    {studentCheck ? "✅" : "❓"}
+                                    {studentCheck ? (
+                                        <FontAwesomeIcon
+                                            icon={faCheck}
+                                            style={{ color: "#2d6dcc" }}
+                                        />
+                                    ) : (
+                                        <div className="checkBtn">인증</div>
+                                    )}
                                 </div>
                             </div>
 

@@ -4,6 +4,9 @@ import axios from "axios";
 import PopUp from "../components/PopUp.js";
 import styled from "styled-components";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 const Container = styled.div`
     .historyBox {
         padding: 2vh 2vw;
@@ -103,7 +106,10 @@ function MileageHistoryBox({ title, mileageId, mileageScore, systemDate }) {
                     <p className="historyScore">{systemDate}</p>
                 </div>
                 <div className="delMileage" onClick={delMileage}>
-                    🗑
+                    <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{ color: "#204782" }}
+                    />
                 </div>
             </div>
         </Container>

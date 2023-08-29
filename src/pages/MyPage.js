@@ -12,6 +12,9 @@ import tier_A from "../images/tier_A.png";
 import tier_B from "../images/tier_B.png";
 import tier_Un from "../images/tier_UN.png";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -317,7 +320,10 @@ function MyPage() {
                         </p>
                     </div>
                     <div className="logout" onClick={submitLogout}>
-                        💔
+                        <FontAwesomeIcon
+                            icon={faRightFromBracket}
+                            style={{ color: "#2d6dcc" }}
+                        />
                     </div>
                 </div>
 

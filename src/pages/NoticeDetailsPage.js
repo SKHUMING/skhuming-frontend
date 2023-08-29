@@ -6,6 +6,10 @@ import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
 import PopUp from "../components/PopUp.js";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as notFaStar } from "@fortawesome/free-regular-svg-icons";
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -206,9 +210,19 @@ function NoticeDetailsPage() {
                         <p className="noticeTitle">{data.title}</p>
                         <p className="noticeScrap">
                             {scrap ? (
-                                <span onClick={delScrap}>⭐️</span>
+                                <span onClick={delScrap}>
+                                    <FontAwesomeIcon
+                                        icon={faStar}
+                                        style={{ color: "#2d6dcc" }}
+                                    />
+                                </span>
                             ) : (
-                                <span onClick={getScrap}>📌</span>
+                                <span onClick={getScrap}>
+                                    <FontAwesomeIcon
+                                        icon={notFaStar}
+                                        style={{ color: "#2d6dcc" }}
+                                    />
+                                </span>
                             )}
                         </p>
                     </div>

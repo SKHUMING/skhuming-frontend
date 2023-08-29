@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
@@ -280,7 +280,7 @@ function MileagePage() {
                 }
             );
             setMileageHistory(response.data);
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.error(error);
         }
