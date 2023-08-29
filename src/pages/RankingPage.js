@@ -22,7 +22,7 @@ const Container = styled.div`
     }
 
     .myRanking {
-        width: 41vw;
+        width: 40.8vw;
         height: 14vh;
         padding: 0 2vw;
         margin-bottom: 20vh;
@@ -32,12 +32,19 @@ const Container = styled.div`
         align-items: center;
 
         border-radius: 0.625rem;
-        background-color: #f6f6f6;
+        background-color: #fff;
+        /* background-color: #204782; */
+        border: 3px solid #2d6dcc;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
     }
 
+    /* .myRanking > .rank {
+        background-color: #f6f6f6;
+        color: #2d6dcc;
+    } */
+
     .rankingTitle {
-        margin-bottom: 3vh;
+        margin-bottom: 1vh;
     }
 
     .rankingTitle > p {
@@ -77,6 +84,8 @@ const Container = styled.div`
         color: #fff;
         font-size: 1.4rem;
         font-weight: bold;
+
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
     }
 
     .rank_profile {
@@ -112,21 +121,34 @@ const Container = styled.div`
     }
 
     .rank_department {
-        margin-top: 0.1rem;
+        margin-top: 0.3rem;
 
         color: #3a73c9;
         font-size: 0.75rem;
     }
 
+    /* .myRanking > .rank_user > .rank_user_profile > .rank_department {
+        color: #f6f6f678;
+    } */
+
     .rank_name {
+        font-weight: bold;
         font-size: 1.3rem;
         color: #204782;
     }
+
+    /* .myRanking > .rank_user > .rank_user_profile > .rank_name {
+        color: #f6f6f6;
+    } */
 
     .rank_score {
         font-size: 1rem;
         color: #3a73c9;
     }
+
+    /* .myRanking > .rank_user > .rank_score {
+        color: #f6f6f6;
+    } */
 `;
 
 function rankImg(tier) {
@@ -199,7 +221,6 @@ function RankingPage() {
                     <>
                         <div className="rankingTitle">
                             <p>MY RANKING</p>
-                            <hr />
                         </div>
                         <div className="myRanking">
                             <div className="rank">{myData.rank}</div>
