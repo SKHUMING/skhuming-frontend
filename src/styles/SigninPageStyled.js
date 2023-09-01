@@ -13,7 +13,7 @@ export const Container = styled.div`
 
     .loginBox {
         width: 700px;
-        height: 900px;
+        height: 980px;
 
         padding: 60px 0;
 

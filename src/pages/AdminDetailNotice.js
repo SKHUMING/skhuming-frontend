@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import MainHeader from "../components/MainHeader.js";
+import AdminHeader from "../components/AdminHeader.js";
 import NoticeBox from "../components/NoticeBox.js";
 import axios from "axios";
 
@@ -85,7 +85,7 @@ function AdminDetailNotice() {
 
     return (
         <Container>
-            <MainHeader />
+            <AdminHeader />
             <div class="noticeBox">
                 <form>
                     <div className="noticeTitleBox">

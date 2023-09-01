@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import MainHeader from "../components/MainHeader.js";
+import AdminHeader from "../components/AdminHeader.js";
 import AdminNoticeBox from "../components/AdminNoticeBox.js";
 import axios from "axios";
 
 import { Container, StyledLink } from "../styles/AdminNoticeStyled.js";
+
+import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
+import Pagination from "react-js-pagination";
 
 function AdminNotice() {
     const [data, setData] = useState([]);
@@ -15,11 +18,10 @@ function AdminNotice() {
         try {
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/search-notice/list",
-                { params: { searchKeyword: searchKeyword } }
+                { params: { searchKeyword: searchKeyword, page: page - 1 } }
             );
-            setData(response.data);
-            if (data.length > 0) setLoading(true);
-            setLoading(true);
+            setData(response.data.content);
+            setTotalElements(response.data.totalElements);
         } catch (error) {
             console.error(error);
         }
@@ -35,23 +37,32 @@ function AdminNotice() {
         setInputKeyword(event.target.value);
     };
 
-    useEffect(() => {
-        getData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchKeyword]);
-
     const search = (event) => {
         event.preventDefault();
         setSearchKeyword(inputKeyword);
+        setPage(1); // 검색 시 페이지를 1로 리셋
     };
+
+    // 페이지네이션
+    const [page, setPage] = useState(1);
+    const [totalElements, setTotalElements] = useState(0);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
+    useEffect(() => {
+        getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchKeyword, page]);
 
     return (
         <Container>
-            <MainHeader />
+            <AdminHeader />
             <div class="noticeBox">
                 <div className="boxTitle">
                     <div className="titleBar">
-                        <p>🧑🏻‍💻 Admin Page</p>
+                        <p>Admin Page</p>
                         <StyledLink to="/admin/notice/add">
                             <div className="addNoticeBtn">공지 +</div>
                         </StyledLink>
@@ -94,6 +105,19 @@ function AdminNotice() {
                         </p>
                     )}
                 </div>
+
+                {/* pagination */}
+                <PaginationStyle>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={10}
+                        totalItemsCount={totalElements}
+                        pageRangeDisplayed={5}
+                        prevPageText={"<"}
+                        nextPageText={">"}
+                        onChange={handlePageChange}
+                    />
+                </PaginationStyle>
             </div>
         </Container>
     );
