@@ -58,15 +58,19 @@ function ScrapPage() {
                 </div>
 
                 <div className="scrapContentBox">
-                    {scrapData
-                        ? scrapData.map((item) => (
-                              <ScrapBox
-                                  noticeId={item.noticeId}
-                                  end={item.end}
-                                  title={item.title}
-                              />
-                          ))
-                        : ""}
+                    {scrapData.length > 0 ? (
+                        scrapData.map((item) => (
+                            <ScrapBox
+                                noticeId={item.noticeId}
+                                end={item.end}
+                                title={item.title}
+                            />
+                        ))
+                    ) : (
+                        <p>
+                            공지 게시판에서 기억하고 싶은 공지를 스크랩해보세요!
+                        </p>
+                    )}
                 </div>
             </div>
         </Container>
