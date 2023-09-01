@@ -6,32 +6,7 @@ import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
 import PopUp from "../components/PopUp.js";
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .scrapBox {
-        width: 50vw;
-        margin: 15vh 0;
-    }
-
-    .scrapTitle > p {
-        font-size: 30px;
-        font-weight: bold;
-        margin: 0;
-
-        color: #2d6dcc;
-    }
-
-    .scrapTitle > hr {
-        margin-bottom: 5vh;
-
-        height: 3px;
-        border: 0;
-        background-color: #2d6dcc;
-    }
-`;
+import { Container } from "../styles/ScrapPageStyled.js";
 
 function ScrapPage() {
     const [scrapData, setScrapData] = useState([]);
