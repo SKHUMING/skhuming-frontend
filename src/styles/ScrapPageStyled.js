@@ -25,4 +25,8 @@ export const Container = styled.div`
         border: 0;
         background-color: #2d6dcc;
     }
+
+    .scrapContentBox > p {
+        color: #204782;
+    }
 `;
