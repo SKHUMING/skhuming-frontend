@@ -13,6 +13,9 @@ import tier_Un from "../images/tier_UN.png";
 
 import { Container } from "../styles/RankingPageStyled.js";
 
+import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
+import Pagination from "react-js-pagination";
+
 function rankImg(tier) {
     switch (tier) {
         case "SS":
@@ -29,34 +32,20 @@ function rankImg(tier) {
 }
 
 function RankingPage() {
-    // 동일 점수는 같은 등수로 매기는 함수
-    let r = 0;
-    let s = null;
-    function rankIndex(score) {
-        if (score !== s) r++;
-        s = score;
-
-        return r;
-    }
-
     const [data, setData] = useState([]);
     const [myData, setMyData] = useState([]);
     const [loading, setLoading] = useState(false);
     async function getData() {
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/api/ranking/list"
+                "https://api.skhuming-api.store/api/ranking/list",
+                { params: { page: page - 1 } }
             );
 
-            // const modifiedDataList = response.data.map((item) => ({
-            //     ...item,
-            //     rank: rankIndex(item.score),
-            // }));
+            setData(response.data.content);
+            setTotalElements(response.data.totalElements);
 
-            // setData(modifiedDataList);
-            setData(response.data);
-
-            for (r of response.data) {
+            for (let r of response.data.content) {
                 // number라서 ==
                 if (r.memberId == window.localStorage.getItem("memberId")) {
                     setMyData(r);
@@ -70,11 +59,17 @@ function RankingPage() {
         }
     }
 
-    console.log(myData);
+    // 페이지네이션
+    const [page, setPage] = useState(1);
+    const [totalElements, setTotalElements] = useState(0);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [page]);
 
     return (
         <Container>
@@ -123,6 +118,19 @@ function RankingPage() {
                         />
                     ))}
                 </div>
+
+                {/* pagination */}
+                <PaginationStyle>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={10}
+                        totalItemsCount={totalElements}
+                        pageRangeDisplayed={5}
+                        prevPageText={"<"}
+                        nextPageText={">"}
+                        onChange={handlePageChange}
+                    />
+                </PaginationStyle>
             </div>
         </Container>
     );
