@@ -62,7 +62,7 @@ function AdminNotice() {
             <div class="noticeBox">
                 <div className="boxTitle">
                     <div className="titleBar">
-                        <p>🧑🏻‍💻 Admin Page</p>
+                        <p>Admin Page</p>
                         <StyledLink to="/admin/notice/add">
                             <div className="addNoticeBtn">공지 +</div>
                         </StyledLink>

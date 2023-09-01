@@ -14,7 +14,7 @@ function MainHeader() {
                 </Link>
 
                 <div className="linkBox">
-                    <div className="linkBtn">Admin</div>
+                    <StyledLink to="/">Login</StyledLink>
                 </div>
             </div>
             <div className="box2"></div>
