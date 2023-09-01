@@ -7,24 +7,23 @@ import axios from "axios";
 
 import { Container } from "../styles/NoticePageStyled.js";
 
+import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
+import Pagination from "react-js-pagination";
+
 function NoticePage() {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     async function getData() {
         try {
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/search-notice/list",
-                { params: { searchKeyword: searchKeyword } }
+                { params: { searchKeyword: searchKeyword, page: page - 1 } }
             );
-            setData(response.data);
-            if (data.length > 0) setLoading(true);
-            setLoading(true);
+            setData(response.data.content);
+            setTotalElements(response.data.totalElements);
         } catch (error) {
             console.error(error);
         }
     }
-
-    console.log(data);
 
     // 검색
     const [inputKeyword, setInputKeyword] = useState("");
@@ -34,15 +33,24 @@ function NoticePage() {
         setInputKeyword(event.target.value);
     };
 
-    useEffect(() => {
-        getData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchKeyword]);
-
     const search = (event) => {
         event.preventDefault();
         setSearchKeyword(inputKeyword);
+        setPage(1); // 검색 시 페이지를 1로 리셋
     };
+
+    // 페이지네이션
+    const [page, setPage] = useState(1);
+    const [totalElements, setTotalElements] = useState(0);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
+    useEffect(() => {
+        getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchKeyword, page]);
 
     return (
         <Container>
@@ -87,6 +95,19 @@ function NoticePage() {
                         </p>
                     )}
                 </div>
+
+                {/* pagination */}
+                <PaginationStyle>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={10}
+                        totalItemsCount={totalElements}
+                        pageRangeDisplayed={5}
+                        prevPageText={"<"}
+                        nextPageText={">"}
+                        onChange={handlePageChange}
+                    />
+                </PaginationStyle>
             </div>
         </Container>
     );
