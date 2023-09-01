@@ -6,160 +6,11 @@ import PopUp from "../components/PopUp.js";
 
 import axios from "axios";
 
-const Container = styled.div`
-    .box {
-        width: 100vw;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-        margin: 10vh 0;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .loginBox {
-        width: 700px;
-        height: 900px;
-
-        padding: 60px 0;
-
-        display: flex;
-        flex-direction: column;
-
-        /* justify-content: space-evenly; */
-        align-items: center;
-
-        border-radius: 15px;
-        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
-
-        background-color: #fbfbfb;
-    }
-
-    .titleBox {
-        width: 80%;
-
-        display: flex;
-        align-items: flex-start;
-    }
-
-    .title {
-        margin: 0;
-
-        color: #2d6dcc;
-
-        font-size: 35px;
-        font-style: normal;
-        font-weight: bold;
-        line-height: normal;
-    }
-
-    .formBox {
-        width: 80%;
-        margin: 5vh 0;
-    }
-
-    .inputBox {
-        margin: 2.5vh;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .inputBox > label {
-        width: 70px;
-
-        font-size: 18px;
-        font-weight: bold;
-        color: #2d6dcc;
-    }
-
-    input {
-        width: 350px;
-        height: 10px;
-        padding: 20px;
-
-        border-radius: 0.75rem;
-        background: #fff;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-
-        border: none;
-        outline: none;
-    }
-
-    .iconBox {
-        width: 30px;
-        height: 30px;
-
-        margin-left: 10px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-size: 27px;
-
-        transition: font-size 0.3s ease-in-out;
-    }
-    .iconBox:hover {
-        cursor: pointer;
-        font-size: 30px;
-    }
-
-    .inputExplanation {
-        width: 400px;
-        margin-left: 105px;
-
-        display: flex;
-        align-items: center;
-    }
-
-    .expDetail {
-        margin-left: 8px;
-        color: #9dc4ff;
-        font-size: 15px;
-    }
-    .expDetail > span {
-        font-weight: bold;
-    }
-
-    .linkBox {
-        width: 80%;
-
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .linkBox > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-size: 18px;
-        font-weight: bold;
-
-        cursor: pointer;
-    }
-
-    .signinBtn {
-        width: 80px;
-        height: 30px;
-
-        padding: 5px;
-        margin-left: 15px;
-
-        border-radius: 15px;
-        border: #3a73c9 solid 2px;
-
-        background-color: #3a73c9;
-        color: #fbfbfb;
-
-        transition: all 0.3s ease-in-out;
-    }
-    .signinBtn:hover {
-        border: #9dc4ff solid 2px;
-        background-color: #9dc4ff;
-    }
-`;
+import { Container } from "../styles/SigninPageStyled.js";
 
 // 닉네임, 이메일 중복
 
@@ -178,6 +29,7 @@ function SigninPage() {
         department: "",
         studentNumber: "",
     });
+    const [pwdCheck, setpwdCheck] = useState("");
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -186,6 +38,11 @@ function SigninPage() {
             [name]: value,
         }));
         console.log(inputData);
+    };
+
+    // 비밀번호 확인 onChange
+    const handleInputChangeCheck = (event) => {
+        setpwdCheck(event.target.value);
     };
 
     // 재학생 인증 이메일 Input
@@ -199,6 +56,7 @@ function SigninPage() {
         if (authenticationCode === emailCheck && authenticationCode !== "")
             setStudentCheck(true);
         else {
+            setStudentCheck(false);
             setMsg("인증 코드가 일치하지 않아요. 😢");
             setPopup(true);
         }
@@ -237,6 +95,8 @@ function SigninPage() {
                 email
             );
             setAuthenticationCode(response.data);
+            setMsg(`인증 메일이 전송되었습니다.`);
+            setPopup(true);
         } catch (error) {
             console.log(error.response.data.message);
             setMsg(error.response.data.message);
@@ -268,7 +128,10 @@ function SigninPage() {
                                     onChange={handleInputChange}
                                 ></input>
                                 <div className="iconBox" onClick={checkEmail}>
-                                    📧
+                                    <FontAwesomeIcon
+                                        icon={faPaperPlane}
+                                        style={{ color: "#2d6dcc" }}
+                                    />
                                 </div>
                             </div>
                             <div className="inputExplanation">
@@ -277,8 +140,8 @@ function SigninPage() {
                                     <span> @office.skhu.ac.kr</span> 이메일을
                                     적고,
                                     <br />
-                                    우측의 인증 메일 버튼을 통해
-                                    <span> 재학생 인증</span>을 받아주세요!
+                                    우측의 메일 전송 버튼으로
+                                    <span> 인증 코드</span>를 받아주세요!
                                 </div>
                             </div>
                             <div className="inputBox">
@@ -291,7 +154,14 @@ function SigninPage() {
                                     onChange={handleEmailCheckChange}
                                 ></input>
                                 <div className="iconBox" onClick={checkCode}>
-                                    {studentCheck ? "✅" : "❓"}
+                                    {studentCheck ? (
+                                        <FontAwesomeIcon
+                                            icon={faCheck}
+                                            style={{ color: "#2d6dcc" }}
+                                        />
+                                    ) : (
+                                        <div className="checkBtn">인증</div>
+                                    )}
                                 </div>
                             </div>
 
@@ -303,6 +173,17 @@ function SigninPage() {
                                     name="pwd"
                                     value={inputData.pwd}
                                     onChange={handleInputChange}
+                                ></input>
+                                <div className="iconBox"></div>
+                            </div>
+                            <div className="inputBox">
+                                <label>비밀번호 확인</label>
+                                <input
+                                    type="password"
+                                    placeholder="PASSWORD"
+                                    name="pwdCheck"
+                                    value={pwdCheck}
+                                    onChange={handleInputChangeCheck}
                                 ></input>
                                 <div className="iconBox"></div>
                             </div>
@@ -325,6 +206,25 @@ function SigninPage() {
                                     </>
                                 )}
                             </div>
+                            {inputData.pwd.length > 0 ? (
+                                <div className="inputExplanation">
+                                    {inputData.pwd === pwdCheck ? (
+                                        <>
+                                            ✅
+                                            <div className="expDetail">
+                                                비밀번호가 일치합니다!
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            ❌
+                                            <div className="expDetail">
+                                                비밀번호가 일치하지 않습니다.
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            ) : null}
 
                             <div className="inputBox">
                                 <label>닉네임</label>
