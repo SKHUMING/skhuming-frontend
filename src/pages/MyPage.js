@@ -47,7 +47,7 @@ function MyPage() {
                     },
                 }
             );
-            console.log(response);
+            // console.log(response);
             setData(response.data);
             // if (data.length > 0) setLoading(true);
             setLoading(true);
@@ -69,7 +69,8 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/scrap/list",
+                "https://api.skhuming-api.store/user/api/my-page/scrap/list",
+                // "https://api.skhuming-api.store/user/api/scrap/list",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -77,16 +78,16 @@ function MyPage() {
                     },
                 }
             );
-            console.log(response);
+            console.log(response.data);
             setScrapData(response.data.reverse());
         } catch (error) {
+            console.log(error);
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);
             } else {
                 setMsg(error.response.data.message);
             }
-
             setPopup(true);
         }
     }

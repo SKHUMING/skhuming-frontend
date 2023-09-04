@@ -8,6 +8,9 @@ import PopUp from "../components/PopUp.js";
 
 import { Container } from "../styles/ScrapPageStyled.js";
 
+import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
+import Pagination from "react-js-pagination";
+
 function ScrapPage() {
     const [scrapData, setScrapData] = useState([]);
 
@@ -21,15 +24,17 @@ function ScrapPage() {
             const response = await axios.get(
                 "https://api.skhuming-api.store/user/api/scrap/list",
                 {
-                    params: { memberId: memberId },
+                    params: { memberId: memberId, page: page - 1 },
                     headers: {
                         Authorization: window.localStorage.getItem("token"),
                     },
                 }
             );
             console.log(response);
-            setScrapData(response.data.reverse());
+            setScrapData(response.data.content);
+            setTotalElements(response.data.totalElements);
         } catch (error) {
+            console.log(error);
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);
@@ -41,9 +46,18 @@ function ScrapPage() {
         }
     }
 
+    // 페이지네이션
+    const [page, setPage] = useState(1);
+    const [totalElements, setTotalElements] = useState(0);
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
     useEffect(() => {
         getScrapData();
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page]);
 
     return (
         <Container>
@@ -72,6 +86,19 @@ function ScrapPage() {
                         </p>
                     )}
                 </div>
+
+                {/* pagination */}
+                <PaginationStyle>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={10}
+                        totalItemsCount={totalElements}
+                        pageRangeDisplayed={5}
+                        prevPageText={"<"}
+                        nextPageText={">"}
+                        onChange={handlePageChange}
+                    />
+                </PaginationStyle>
             </div>
         </Container>
     );

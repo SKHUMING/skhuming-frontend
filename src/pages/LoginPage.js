@@ -71,7 +71,7 @@ function LoginPage() {
                         <form>
                             <input
                                 type="email"
-                                placeholder="EMAIL   (@skhu.office.ac.kr)"
+                                placeholder="EMAIL   (@office.skhu.ac.kr)"
                                 name="email"
                                 value={inputData.email}
                                 onChange={handleInputChange}
