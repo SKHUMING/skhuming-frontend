@@ -8,7 +8,7 @@ export const Container = styled.div`
     .awardBox,
     .qnaBox {
         width: 60vw;
-        margin: 15vh 0;
+        margin: 3vh 0;
     }
 
     .awardTitle > p,

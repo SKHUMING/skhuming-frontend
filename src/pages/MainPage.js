@@ -21,6 +21,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import { Container } from "../styles/MainPageStyled.js";
+import DisplayBoard from "../components/DisplayBoard.js";
 
 function MainPage() {
     useEffect(() => {
@@ -65,11 +66,13 @@ function MainPage() {
         <Container>
             <MainHeader />
 
+            <DisplayBoard />
+
             <div class="awardBox">
-                <div className="awardTitle">
+                {/* <div className="awardTitle">
                     <p>SKHUMING AWARD</p>
                     <hr />
-                </div>
+                </div> */}
 
                 <div className="award">
                     <div
