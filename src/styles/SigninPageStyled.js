@@ -161,4 +161,16 @@ export const Container = styled.div`
         background-color: #2d6dcc;
         color: #fbfbfb;
     }
+
+    // 학부 select box
+    .selectDepartment > select {
+        width: 348px;
+        height: 48px;
+        padding: 5px 15px;
+
+        border-radius: 0.75rem;
+        border: none;
+        background: #fff;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    }
 `;

@@ -12,8 +12,6 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import { Container } from "../styles/SigninPageStyled.js";
 
-// 닉네임, 이메일 중복
-
 function SigninPage() {
     const navigate = useNavigate();
 
@@ -103,6 +101,21 @@ function SigninPage() {
             setPopup(true);
         }
     }
+
+    // 학부 선택
+    const [department, setDepartment] = useState([
+        { departmentId: 0, department: "인문자율융합학부" },
+        { departmentId: 1, department: "사회융합자율학부" },
+        { departmentId: 2, department: "미디어융합자율학부" },
+        { departmentId: 3, department: "IT융합자율학부" },
+    ]);
+    // 선택한 학부 (select box)
+    const [selectDepartment, setSelectDepartment] = useState("");
+
+    const handleAward = (event) => {
+        setSelectDepartment(event.currentTarget.value);
+        console.log(event.currentTarget);
+    };
 
     return (
         <Container>
@@ -259,13 +272,28 @@ function SigninPage() {
 
                             <div className="inputBox">
                                 <label>소속 학부</label>
-                                <input
+                                {/* <input
                                     type="text"
                                     placeholder="DEPARTMENT"
                                     name="department"
                                     value={inputData.department}
                                     onChange={handleInputChange}
-                                ></input>
+                                ></input> */}
+                                <form className="selectDepartment">
+                                    <select
+                                        onChange={handleAward}
+                                        value={selectDepartment}
+                                    >
+                                        {department.map((item) => (
+                                            <option
+                                                key={item.departmentId}
+                                                value={item.departmentId}
+                                            >
+                                                {item.department}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
                                 <div className="iconBox"></div>
                             </div>
 

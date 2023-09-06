@@ -94,7 +94,7 @@ function MainPage() {
                                 {award.map((item) => (
                                     <option
                                         key={item.departmentId}
-                                        value={item.department}
+                                        value={item.departmentId}
                                     >
                                         {item.department}
                                     </option>
