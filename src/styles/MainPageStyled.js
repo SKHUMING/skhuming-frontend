@@ -66,7 +66,7 @@ export const Container = styled.div`
 
     .award {
         height: 40vh;
-        margin: 10vh 0 40vh 0;
+        margin: 10px 0 200px 0;
 
         display: flex;
         justify-content: space-around;

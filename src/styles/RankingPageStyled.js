@@ -36,12 +36,37 @@ export const Container = styled.div`
         margin-bottom: 1vh;
     }
 
+    .rankingTitle > .rankingTitleBox > p,
     .rankingTitle > p {
         font-size: 30px;
         font-weight: bold;
         margin: 0;
 
         color: #2d6dcc;
+    }
+
+    .rankingTitle > .rankingTitleBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .selectAward > select {
+        width: 15vw;
+        padding: 5px 15px;
+
+        background-color: #f1f1f1;
+        color: #204782;
+        /* color: #fff; */
+        font-size: 12.5px;
+
+        /* border: 3px solid #2d6dcc; */
+        border: none;
+        border-radius: 15px;
+        /* box-shadow: rgba(173, 173, 173, 0.1) 0px 30px 60px -12px inset,
+            rgba(160, 160, 160, 0.2) 0px 18px 36px -18px inset; */
+
+        /* background-color: red; */
     }
 
     .rankingTitle > hr {

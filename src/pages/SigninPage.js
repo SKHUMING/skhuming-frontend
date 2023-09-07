@@ -24,7 +24,7 @@ function SigninPage() {
         pwd: "",
         nickname: "",
         memberName: "",
-        department: "",
+        department: 0,
         studentNumber: "",
     });
     const [pwdCheck, setpwdCheck] = useState("");
@@ -104,17 +104,16 @@ function SigninPage() {
 
     // 학부 선택
     const [department, setDepartment] = useState([
-        { departmentId: 0, department: "인문자율융합학부" },
-        { departmentId: 1, department: "사회융합자율학부" },
-        { departmentId: 2, department: "미디어융합자율학부" },
-        { departmentId: 3, department: "IT융합자율학부" },
+        { departmentId: 1, department: "인문자율융합학부" },
+        { departmentId: 2, department: "사회융합자율학부" },
+        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 4, department: "IT융합자율학부" },
     ]);
     // 선택한 학부 (select box)
-    const [selectDepartment, setSelectDepartment] = useState("");
-
     const handleAward = (event) => {
-        setSelectDepartment(event.currentTarget.value);
-        console.log(event.currentTarget);
+        let addDepartmentData = { ...inputData };
+        addDepartmentData.department = event.currentTarget.value;
+        setInputData(addDepartmentData);
     };
 
     return (
@@ -272,18 +271,8 @@ function SigninPage() {
 
                             <div className="inputBox">
                                 <label>소속 학부</label>
-                                {/* <input
-                                    type="text"
-                                    placeholder="DEPARTMENT"
-                                    name="department"
-                                    value={inputData.department}
-                                    onChange={handleInputChange}
-                                ></input> */}
                                 <form className="selectDepartment">
-                                    <select
-                                        onChange={handleAward}
-                                        value={selectDepartment}
-                                    >
+                                    <select onChange={handleAward}>
                                         {department.map((item) => (
                                             <option
                                                 key={item.departmentId}
