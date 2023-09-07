@@ -1,23 +1,60 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const shine = keyframes`
+0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+`;
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    p {
+        margin: 0;
+    }
+
     .awardBox,
     .qnaBox {
         width: 60vw;
-        margin: 15vh 0;
+        margin: 3vh 0;
     }
 
-    .awardTitle > p,
+    .awardTitle > .awardTitleBox > p,
     .qnaTitle > p {
         font-size: 30px;
         font-weight: bold;
-        margin: 0;
+        margin-top: 5vh;
 
         color: #2d6dcc;
+    }
+
+    .awardTitle > .awardTitleBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .selectAward > select {
+        width: 15vw;
+        padding: 5px 15px;
+
+        background-color: #f1f1f1;
+        color: #204782;
+        /* color: #fff; */
+        font-size: 12.5px;
+
+        /* border: 3px solid #2d6dcc; */
+        border: none;
+        border-radius: 15px;
+        /* box-shadow: rgba(173, 173, 173, 0.1) 0px 30px 60px -12px inset,
+            rgba(160, 160, 160, 0.2) 0px 18px 36px -18px inset; */
+
+        /* background-color: red; */
     }
 
     .awardTitle > hr,
@@ -51,6 +88,12 @@ export const Container = styled.div`
         margin: 1.5vh 0;
 
         color: #fbb709;
+        /* background: linear-gradient(
+            -75deg,
+            #fbb709 30%,
+            #fff3d3 50%,
+            #ffe299 70%
+        ); */
         font-size: 2rem;
         font-weight: bold;
     }
@@ -59,6 +102,12 @@ export const Container = styled.div`
         margin: 1.5vh 0;
 
         color: #a2a2a2;
+        /* background: linear-gradient(
+            -75deg,
+            #a2a2a2 30%,
+            #eaeaea 50%,
+            #c4c4c4 70%
+        ); */
         font-size: 1.5rem;
         font-weight: bold;
     }
@@ -67,16 +116,22 @@ export const Container = styled.div`
         margin: 1.5vh 0;
 
         color: #b2571c;
+        /* background: linear-gradient(
+            -75deg,
+            #b2571c 30%,
+            #e4cab8 50%,
+            #d0936a 70%
+        ); */
         font-size: 1.5rem;
         font-weight: bold;
     }
 
     .profileBox_1st {
-        width: 15vw;
+        width: 19vw;
         min-width: 200px;
         height: 30vh;
         min-height: 300px;
-        padding: 4vh 0;
+        padding: 1vh 0;
 
         display: flex;
         flex-direction: column;
@@ -85,16 +140,20 @@ export const Container = styled.div`
 
         border-radius: 0.625rem;
         background: #fbfbfb;
-        /* box-shadow: 0px 4px 10px 5px rgba(251, 183, 9, 0.2); */
-        box-shadow: 0px 4px 10px 5px #a2a2a23d;
+        /* box-shadow: 0px 4px 10px 5px #a2a2a23d; */
+        /* box-shadow: rgba(127, 127, 127, 0.1) 0px 30px 60px -12px inset,
+            rgba(205, 205, 205, 0.2) 0px 18px 36px -18px inset; */
+        box-shadow: rgba(44, 109, 203, 0.4) 0px 5px,
+            rgba(44, 109, 203, 0.3) 0px 10px, rgba(44, 109, 203, 0.2) 0px 15px,
+            rgba(44, 109, 203, 0.1) 0px 20px, rgba(44, 109, 203, 0.05) 0px 25px;
     }
 
     .profileBox_2nd {
-        width: 11vw;
+        width: 15vw;
         min-width: 150px;
         height: 20vh;
         min-height: 200px;
-        padding: 4vh 0;
+        padding: 1vh 0;
 
         display: flex;
         flex-direction: column;
@@ -103,15 +162,22 @@ export const Container = styled.div`
 
         border-radius: 0.625rem;
         background: #fbfbfb;
-        box-shadow: 0px 4px 10px 5px #a2a2a23d;
+        /* box-shadow: 0px 4px 10px 5px #a2a2a23d; */
+        /* box-shadow: rgba(127, 127, 127, 0.1) 0px 30px 60px -12px inset,
+            rgba(205, 205, 205, 0.2) 0px 18px 36px -18px inset; */
+        box-shadow: rgba(44, 109, 203, 0.4) -5px 5px,
+            rgba(44, 109, 203, 0.3) -10px 10px,
+            rgba(44, 109, 203, 0.2) -15px 15px,
+            rgba(44, 109, 203, 0.1) -20px 20px,
+            rgba(44, 109, 203, 0.05) -25px 25px;
     }
 
     .profileBox_3rd {
-        width: 11vw;
+        width: 15vw;
         min-width: 150px;
         height: 20vh;
         min-height: 200px;
-        padding: 4vh 0;
+        padding: 1vh 0;
 
         display: flex;
         flex-direction: column;
@@ -120,23 +186,30 @@ export const Container = styled.div`
 
         border-radius: 0.625rem;
         background: #fbfbfb;
-        /* box-shadow: 0px 4px 10px 5px #b2581c51; */
-        box-shadow: 0px 4px 10px 5px #a2a2a23d;
+        /* box-shadow: 0px 4px 10px 5px #a2a2a23d; */
+        /* box-shadow: rgba(127, 127, 127, 0.1) 0px 30px 60px -12px inset,
+            rgba(205, 205, 205, 0.2) 0px 18px 36px -18px inset; */
+        box-shadow: rgba(44, 109, 203, 0.4) 5px 5px,
+            rgba(44, 109, 203, 0.3) 10px 10px, rgba(44, 109, 203, 0.2) 15px 15px,
+            rgba(44, 109, 203, 0.1) 20px 20px,
+            rgba(44, 109, 203, 0.05) 25px 25px;
     }
 
     .tierImg_1st > img {
-        width: 7.5vw;
+        width: 9vw;
         min-width: 110px;
+        margin-bottom: 30px;
     }
 
     .tierImg_2nd > img,
     .tierImg_3rd > img {
-        width: 5vw;
+        width: 6vw;
         min-width: 80px;
+        margin-bottom: 10px;
     }
 
     .profile_1st {
-        width: 10vw;
+        width: 14vw;
         min-width: 140px;
 
         display: flex;
@@ -146,7 +219,7 @@ export const Container = styled.div`
 
     .profile_2nd,
     .profile_3rd {
-        width: 8vw;
+        width: 13vw;
         min-width: 110px;
 
         display: flex;
@@ -248,5 +321,21 @@ export const Container = styled.div`
     }
     .cardNews_subContent > p {
         margin: 0.7vh 0;
+    }
+
+    // 윤기나는 효과
+    .effect-shine {
+        /* background: linear-gradient(
+            -75deg,
+            #fbb709 30%,
+            #fff3d3 50%,
+            #ffe299 70%
+        ); */
+        background-size: 200%;
+        display: inline; /* 텍스트를 인라인으로 표시 */
+        color: transparent; /* 텍스트의 색상을 투명으로 설정 */
+        -webkit-background-clip: text; /* 텍스트를 마스킹하여 배경 그라데이션을 표시 */
+        background-clip: text; /* 텍스트를 마스킹하여 배경 그라데이션을 표시 */
+        animation: ${shine} 2s infinite;
     }
 `;

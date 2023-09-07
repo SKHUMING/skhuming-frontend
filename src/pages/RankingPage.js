@@ -16,6 +16,8 @@ import { Container } from "../styles/RankingPageStyled.js";
 import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
 import Pagination from "react-js-pagination";
 
+import DisplayBoard from "../components/DisplayBoard.js";
+
 function rankImg(tier) {
     switch (tier) {
         case "SS":
@@ -74,6 +76,9 @@ function RankingPage() {
     return (
         <Container>
             <MainHeader />
+
+            <DisplayBoard />
+
             <div class="rankingBox">
                 {myData ? (
                     <>
