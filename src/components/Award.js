@@ -15,7 +15,7 @@ import tier_UN from "../images/tier_UN.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function Award() {
+function Award({ department }) {
     useEffect(() => {
         AOS.init(); // AOS 초기화
     }, []);
@@ -24,9 +24,16 @@ function Award() {
     const [loading, setLoading] = useState(false);
     async function getData() {
         try {
+            // console.log("department: " + department);
             const response = await axios.get(
-                "https://api.skhuming-api.store/api/main"
+                "https://api.skhuming-api.store/api/main",
+                {
+                    params: {
+                        departmentNumber: department,
+                    },
+                }
             );
+            console.log(response.data);
             setData(response.data);
             if (data.length > 0) setLoading(true);
             setLoading(true);
@@ -37,7 +44,7 @@ function Award() {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [department]);
 
     const rankImg = (rank) => {
         switch (data[rank].tier) {
@@ -66,10 +73,10 @@ function Award() {
                         <p>2nd</p>
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
-                                {loading ? rankImg(1) : "Loading..."}
+                                {data[1] ? rankImg(1) : "Loading..."}
                             </div>
                             <div className="profile_2nd">
-                                {loading ? (
+                                {data[1] ? (
                                     <p className="name_2nd">
                                         {data[1].nickname}
                                     </p>
@@ -77,7 +84,7 @@ function Award() {
                                     ""
                                 )}
 
-                                {loading ? (
+                                {data[1] ? (
                                     <p className="score_2nd">
                                         {data[1].score}점
                                     </p>
@@ -95,10 +102,10 @@ function Award() {
                         <p>1st</p>
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
-                                {loading ? rankImg(0) : "Loading..."}
+                                {data[0] ? rankImg(0) : "Loading..."}
                             </div>
                             <div className="profile_1st">
-                                {loading ? (
+                                {data[0] ? (
                                     <p className="name_1st">
                                         {data[0].nickname}
                                     </p>
@@ -106,7 +113,7 @@ function Award() {
                                     ""
                                 )}
 
-                                {loading ? (
+                                {data[0] ? (
                                     <p className="score_1st">
                                         {data[0].score}점
                                     </p>
@@ -124,10 +131,10 @@ function Award() {
                         <p>3rd</p>
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
-                                {loading ? rankImg(2) : "Loading..."}
+                                {data[2] ? rankImg(2) : "Loading..."}
                             </div>
                             <div className="profile_3rd">
-                                {loading ? (
+                                {data[2] ? (
                                     <p className="name_3rd">
                                         {data[2].nickname}
                                     </p>
@@ -135,7 +142,7 @@ function Award() {
                                     ""
                                 )}
 
-                                {loading ? (
+                                {data[2] ? (
                                     <p className="score_3rd">
                                         {data[2].score}점
                                     </p>

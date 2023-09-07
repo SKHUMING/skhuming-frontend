@@ -14,7 +14,8 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
 
-    margin-top: 5vh;
+    margin-top: 10vh;
+    margin-bottom: 20vh;
 
     .rankingBox {
         width: 35vw;

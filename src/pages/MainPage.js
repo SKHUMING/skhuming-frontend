@@ -47,14 +47,15 @@ function MainPage() {
 
     // 랭킹 선택
     const [award, setAward] = useState([
-        { departmentId: 0, department: "전체학부" },
+        { departmentId: 0, department: "재학생 전체" },
         { departmentId: 1, department: "인문자율융합학부" },
         { departmentId: 2, department: "사회융합자율학부" },
         { departmentId: 3, department: "미디어융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
+        { departmentId: 5, department: "학부" },
     ]);
     // 선택한 학부 (select box)
-    const [selectAward, setSelectAward] = useState("");
+    const [selectAward, setSelectAward] = useState(0);
 
     const handleAward = (event) => {
         setSelectAward(event.currentTarget.value);
@@ -105,9 +106,12 @@ function MainPage() {
                     <hr />
                 </div>
 
-                <AllDepartmentAward />
-
-                <Award />
+                {/* <AllDepartmentAward /> */}
+                {selectAward < 5 ? (
+                    <Award department={selectAward} />
+                ) : (
+                    <AllDepartmentAward />
+                )}
 
                 {/* <div className="award">
                     <div
