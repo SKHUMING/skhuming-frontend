@@ -34,6 +34,21 @@ function rankImg(tier) {
 }
 
 function RankingPage() {
+    // 랭킹 선택
+    const [award, setAward] = useState([
+        { departmentId: 0, department: "재학생 전체" },
+        { departmentId: 1, department: "인문자율융합학부" },
+        { departmentId: 2, department: "사회융합자율학부" },
+        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 4, department: "IT융합자율학부" },
+    ]);
+    // 선택한 학부 (select box)
+    const [selectAward, setSelectAward] = useState(0);
+
+    const handleAward = (event) => {
+        setSelectAward(event.currentTarget.value);
+    };
+
     const [data, setData] = useState([]);
     const [myData, setMyData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -41,8 +56,15 @@ function RankingPage() {
         try {
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/ranking/list",
-                { params: { page: page - 1 } }
+                {
+                    params: {
+                        departmentNumber: selectAward,
+                        page: page - 1,
+                    },
+                }
             );
+
+            console.log(response.data.content);
 
             setData(response.data.content);
             setTotalElements(response.data.totalElements);
@@ -71,7 +93,7 @@ function RankingPage() {
 
     useEffect(() => {
         getData();
-    }, [page]);
+    }, [selectAward, page]);
 
     return (
         <Container>
@@ -108,7 +130,21 @@ function RankingPage() {
                 ) : null}
 
                 <div className="rankingTitle">
-                    <p>SKHUMING RANKING</p>
+                    <div className="rankingTitleBox">
+                        <p>SKHUM RANKING</p>
+                        <form className="selectAward">
+                            <select onChange={handleAward} value={selectAward}>
+                                {award.map((item) => (
+                                    <option
+                                        key={item.departmentId}
+                                        value={item.departmentId}
+                                    >
+                                        {item.department}
+                                    </option>
+                                ))}
+                            </select>
+                        </form>
+                    </div>
                     <hr />
                 </div>
 

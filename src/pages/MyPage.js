@@ -39,7 +39,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/my-profile",
+                "https://api.skhuming-api.store/api/user/my-profile",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -69,7 +69,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/my-page/scrap/list",
+                "https://api.skhuming-api.store/api/user/my-page/scrap/list",
                 // "https://api.skhuming-api.store/user/api/scrap/list",
                 {
                     params: { memberId: memberId },
@@ -99,7 +99,7 @@ function MyPage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/mileage/get",
+                "https://api.skhuming-api.store/api/user/mileage/get",
                 {
                     params: { memberId: memberId },
                     headers: {

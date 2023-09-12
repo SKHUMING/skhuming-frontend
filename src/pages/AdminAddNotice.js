@@ -30,7 +30,7 @@ function AdminAddNotice() {
     async function saveData() {
         try {
             const response = await axios.post(
-                "https://api.skhuming-api.store/admin/api/notice/save",
+                "https://api.skhuming-api.store/api/admin/notice/save",
                 inputData,
                 {
                     headers: {

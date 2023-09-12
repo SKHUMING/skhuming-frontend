@@ -43,7 +43,7 @@ function AdminDetailNotice() {
     async function putData() {
         try {
             const response = await axios.put(
-                "https://api.skhuming-api.store/admin/api/notice/update",
+                "https://api.skhuming-api.store/api/admin/notice/update",
                 inputData,
                 {
                     params: { noticeId: noticeId },
@@ -62,7 +62,7 @@ function AdminDetailNotice() {
     async function delData() {
         try {
             const response = await axios.post(
-                "https://api.skhuming-api.store/admin/api/notice/delete",
+                "https://api.skhuming-api.store/api/admin/notice/delete",
                 null,
                 {
                     params: { noticeId: noticeId },

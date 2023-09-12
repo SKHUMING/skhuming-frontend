@@ -33,7 +33,7 @@ function Award({ department }) {
                     },
                 }
             );
-            console.log(response.data);
+            // console.log(response.data);
             setData(response.data);
             if (data.length > 0) setLoading(true);
             setLoading(true);
