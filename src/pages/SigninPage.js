@@ -18,6 +18,7 @@ function SigninPage() {
     // 팝업창
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
 
     const [inputData, setInputData] = useState({
         email: "",
@@ -71,7 +72,10 @@ function SigninPage() {
                     inputData
                 );
                 console.log(response.data);
-                navigate("/");
+                setMsg("🎉 회원가입에 성공했습니다! 다시 로그인 해주세요.");
+                setGoLogin(true);
+                setPopup(true);
+                // navigate("/");
             } catch (error) {
                 console.error(error.response.data.message);
                 setMsg(error.response.data.message);
@@ -120,7 +124,12 @@ function SigninPage() {
         <Container>
             <Header />
             {popup ? (
-                <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
+                <PopUp
+                    onClose={setPopup}
+                    msg={msg}
+                    notReRoad={true}
+                    goLogin={goLogin}
+                />
             ) : null}
             <div className="box">
                 <div className="loginBox">

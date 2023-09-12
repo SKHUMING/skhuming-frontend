@@ -26,7 +26,7 @@ function MileagePage() {
         const memberId = window.localStorage.getItem("memberId");
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/mileage/get",
+                "https://api.skhuming-api.store/api/user/mileage/get",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -81,7 +81,7 @@ function MileagePage() {
         console.log(addMileage);
         try {
             const response = await axios.post(
-                "https://api.skhuming-api.store/user/api/mileage/post",
+                "https://api.skhuming-api.store/api/user/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
                     mileageId: addMileage,
@@ -112,7 +112,7 @@ function MileagePage() {
     async function getMileageHistory() {
         try {
             const response = await axios.get(
-                "https://api.skhuming-api.store/user/api/mileage/history/list",
+                "https://api.skhuming-api.store/api/user/mileage/history/list",
                 {
                     params: {
                         memberId: window.localStorage.getItem("memberId"),

@@ -16,7 +16,7 @@ function MileageHistoryBox({ title, mileageId, mileageScore, systemDate }) {
     async function delMileage() {
         try {
             await axios.post(
-                "https://api.skhuming-api.store/user/api/mileage/history/cancel",
+                "https://api.skhuming-api.store/api/user/mileage/history/cancel",
                 null,
                 {
                     params: {
