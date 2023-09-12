@@ -54,6 +54,7 @@ export const Container = styled.div`
     .noticeContentBox {
         width: 50vw;
         margin-top: 3vh;
+        /* margin-bottom: 0vh; */
     }
 
     .noticeContent {
