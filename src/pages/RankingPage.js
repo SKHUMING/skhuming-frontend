@@ -150,15 +150,20 @@ function RankingPage() {
                 </div>
 
                 <div className="ranking">
-                    {data.map((item) => (
-                        <RankBox
-                            rank={item.myRanking}
-                            tier={item.tier}
-                            name={item.nickname}
-                            department={item.department}
-                            score={item.score}
-                        />
-                    ))}
+                    {console.log(data.length)}
+                    {data.length > 0 ? (
+                        data.map((item) => (
+                            <RankBox
+                                rank={item.myRanking}
+                                tier={item.tier}
+                                name={item.nickname}
+                                department={item.department}
+                                score={item.score}
+                            />
+                        ))
+                    ) : (
+                        <p className="noData">등록된 데이터가 없습니다...🥲</p>
+                    )}
                 </div>
 
                 {/* pagination */}

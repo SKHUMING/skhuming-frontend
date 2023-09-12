@@ -160,6 +160,10 @@ export const Container = styled.div`
     .moreIcon {
         font-size: 20px;
     }
+
+    .noData {
+        color: #2d6dcc;
+    }
 `;
 
 export const StyledLink = styled(Link)`

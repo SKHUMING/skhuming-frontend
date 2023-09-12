@@ -189,15 +189,20 @@ function MyPage() {
                             </div>
 
                             <div className="scrapContentBox">
-                                {scrapData
-                                    ? scrapData.map((item) => (
-                                          <ScrapBoxWidget
-                                              noticeId={item.noticeId}
-                                              end={item.end}
-                                              title={item.title}
-                                          />
-                                      ))
-                                    : ""}
+                                {scrapData.length > 0 ? (
+                                    scrapData.map((item) => (
+                                        <ScrapBoxWidget
+                                            noticeId={item.noticeId}
+                                            end={item.end}
+                                            title={item.title}
+                                        />
+                                    ))
+                                ) : (
+                                    <p className="noData">
+                                        공지 게시판에서 기억하고 싶은 공지를
+                                        스크랩 해보세요!
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </StyledLink>
