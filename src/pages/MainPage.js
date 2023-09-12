@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import AllDepartmentAward from "../components/AllDepartmentAward.js";
 import Award from "../components/Award.js";
+import Footer from "../components/Footer.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -363,6 +364,18 @@ function MainPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* <div className="footer">
+                    <p className="footer__name">SKHUMING, 스쿠밍</p>
+                    <hr />
+                    <p className="footer__content">
+                        <span>Contact</span> | skhuskhuming@gmail.com
+                    </p>
+                    <p className="footer__copyright">
+                        Copyright © 2023 SKHUMING. All rights reserved.
+                    </p>
+                </div> */}
+                <Footer />
             </div>
         </Container>
     );

@@ -53,7 +53,7 @@ function NoticeDetailsPage() {
     async function getScrap() {
         try {
             await axios.post(
-                "https://api.skhuming-api.store/user/api/notice/scrap",
+                "https://api.skhuming-api.store/api/user/notice/scrap",
                 null,
                 {
                     params: {
@@ -84,7 +84,7 @@ function NoticeDetailsPage() {
     async function delScrap() {
         try {
             await axios.post(
-                "https://api.skhuming-api.store/user/api/notice/scrap/cancel",
+                "https://api.skhuming-api.store/api/user/notice/scrap/cancel",
                 null,
                 {
                     params: {
