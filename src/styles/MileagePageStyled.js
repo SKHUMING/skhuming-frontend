@@ -20,7 +20,7 @@ export const Container = styled.div`
     }
 
     .mileageHistoryTitle > p {
-        margin-top: 15vh;
+        margin-top: 10vh;
     }
 
     .mileageTitle > hr,

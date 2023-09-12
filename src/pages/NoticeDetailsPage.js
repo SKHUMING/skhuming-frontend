@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
 import PopUp from "../components/PopUp.js";
+import Footer from "../components/Footer.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -173,6 +174,8 @@ function NoticeDetailsPage() {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </Container>
     );
 }

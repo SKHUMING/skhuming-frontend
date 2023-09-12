@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
 import axios from "axios";
+import Footer from "../components/Footer.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -149,15 +150,20 @@ function RankingPage() {
                 </div>
 
                 <div className="ranking">
-                    {data.map((item) => (
-                        <RankBox
-                            rank={item.myRanking}
-                            tier={item.tier}
-                            name={item.nickname}
-                            department={item.department}
-                            score={item.score}
-                        />
-                    ))}
+                    {console.log(data.length)}
+                    {data.length > 0 ? (
+                        data.map((item) => (
+                            <RankBox
+                                rank={item.myRanking}
+                                tier={item.tier}
+                                name={item.nickname}
+                                department={item.department}
+                                score={item.score}
+                            />
+                        ))
+                    ) : (
+                        <p className="noData">등록된 데이터가 없습니다...🥲</p>
+                    )}
                 </div>
 
                 {/* pagination */}
@@ -172,6 +178,8 @@ function RankingPage() {
                         onChange={handlePageChange}
                     />
                 </PaginationStyle>
+
+                <Footer />
             </div>
         </Container>
     );

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
 import PopUp from "../components/PopUp.js";
+import Footer from "../components/Footer.js";
 
 import { Container } from "../styles/ScrapPageStyled.js";
 
@@ -100,6 +101,7 @@ function ScrapPage() {
                     />
                 </PaginationStyle>
             </div>
+            <Footer />
         </Container>
     );
 }

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import NoticeBox from "../components/NoticeBox.js";
 import axios from "axios";
+import Footer from "../components/Footer.js";
 
 import { Container } from "../styles/NoticePageStyled.js";
 
@@ -108,6 +109,8 @@ function NoticePage() {
                         onChange={handlePageChange}
                     />
                 </PaginationStyle>
+
+                <Footer />
             </div>
         </Container>
     );
