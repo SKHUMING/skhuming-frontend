@@ -13,7 +13,10 @@ import tier_B from "../images/tier_B.png";
 import tier_Un from "../images/tier_UN.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+    faRightFromBracket,
+    faSquarePlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Container, StyledLink } from "../styles/MyPageStyled.js";
 
@@ -155,7 +158,7 @@ function MyPage() {
                             {loading ? data.memberName : ""}
                         </p>
                         <p className="userInfo">
-                            {loading ? data.department : ""}{" "}
+                            {loading ? data.department : ""}
                             {loading ? data.studentNumber : ""}
                         </p>
                     </div>
@@ -172,21 +175,34 @@ function MyPage() {
                         <div className="userScrapBox">
                             <div className="scrapTitleBox">
                                 <div className="scrapTitle">
-                                    <p>MY SCRAP</p>
+                                    <div className="titleIconBox">
+                                        <p>MY SCRAP</p>
+                                        <div className="moreIcon">
+                                            <FontAwesomeIcon
+                                                icon={faSquarePlus}
+                                                style={{ color: "#2d6dcc" }}
+                                            />
+                                        </div>
+                                    </div>
                                     <hr />
                                 </div>
                             </div>
 
                             <div className="scrapContentBox">
-                                {scrapData
-                                    ? scrapData.map((item) => (
-                                          <ScrapBoxWidget
-                                              noticeId={item.noticeId}
-                                              end={item.end}
-                                              title={item.title}
-                                          />
-                                      ))
-                                    : ""}
+                                {scrapData.length > 0 ? (
+                                    scrapData.map((item) => (
+                                        <ScrapBoxWidget
+                                            noticeId={item.noticeId}
+                                            end={item.end}
+                                            title={item.title}
+                                        />
+                                    ))
+                                ) : (
+                                    <p className="noData">
+                                        공지 게시판에서 기억하고 싶은 공지를
+                                        스크랩 해보세요!
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </StyledLink>
@@ -195,7 +211,15 @@ function MyPage() {
                         <div className="userMileageBox">
                             <div className="mileageTitleBox">
                                 <div className="mileageTitle">
-                                    <p>MY SKHUM</p>
+                                    <div className="titleIconBox">
+                                        <p>MY SKHUM</p>
+                                        <div className="moreIcon">
+                                            <FontAwesomeIcon
+                                                icon={faSquarePlus}
+                                                style={{ color: "#2d6dcc" }}
+                                            />
+                                        </div>
+                                    </div>
                                     <hr />
                                 </div>
 

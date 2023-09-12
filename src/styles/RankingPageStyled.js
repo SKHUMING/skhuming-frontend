@@ -7,14 +7,14 @@ export const Container = styled.div`
 
     .rankingBox {
         width: 45vw;
-        margin: 15vh 0;
+        margin: 10vh 0;
     }
 
     .myRanking {
         width: 40.8vw;
         height: 14vh;
         padding: 0 2vw;
-        margin-bottom: 20vh;
+        margin-bottom: 15vh;
 
         display: flex;
         justify-content: space-between;
@@ -163,4 +163,8 @@ export const Container = styled.div`
     /* .myRanking > .rank_user > .rank_score {
     color: #f6f6f6;
 } */
+
+    .noData {
+        color: #2d6dcc;
+    }
 `;

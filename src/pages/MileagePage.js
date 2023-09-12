@@ -4,6 +4,7 @@ import styled from "styled-components";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
 import PopUp from "../components/PopUp.js";
+import Footer from "../components/Footer.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -233,6 +234,7 @@ function MileagePage() {
                     )}
                 </div>
             </div>
+            <Footer />
         </Container>
     );
 }
