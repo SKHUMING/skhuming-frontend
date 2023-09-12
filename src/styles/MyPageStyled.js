@@ -97,13 +97,19 @@ export const Container = styled.div`
         margin-top: 2vh;
     }
 
-    .scrapTitle > p,
-    .mileageTitle > p {
+    .scrapTitle > .titleIconBox > p,
+    .mileageTitle > .titleIconBox > p {
         font-size: 1.5rem;
         font-weight: bold;
         margin: 0;
 
         color: #2d6dcc;
+    }
+
+    .titleIconBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .scrapTitle > hr,
@@ -149,6 +155,10 @@ export const Container = styled.div`
 
         color: #204782;
         font-size: 1rem;
+    }
+
+    .moreIcon {
+        font-size: 20px;
     }
 `;
 
