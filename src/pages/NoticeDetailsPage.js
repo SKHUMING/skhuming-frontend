@@ -26,8 +26,12 @@ function NoticeDetailsPage() {
                 "https://api.skhuming-api.store/api/notice/details",
                 { params: { noticeId: noticeId } }
             );
-            setData(response.data);
-            console.log(response.data);
+            let prevData = { ...response.data };
+            prevData.contents = response.data.contents.replaceAll(
+                "<br />",
+                "\n"
+            );
+            setData(prevData);
             setLoading(true);
 
             // 스크랩 상태를 확인하고 변경
@@ -171,6 +175,7 @@ function NoticeDetailsPage() {
                     <div className="noticeContent">
                         <p className="noticeMiniTitle">활동 내용</p>
                         <p className="noticeContentDetail">{data.contents}</p>
+                        {console.log(data.contents)}
                     </div>
                 </div>
             </div>

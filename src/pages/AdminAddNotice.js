@@ -28,6 +28,7 @@ function AdminAddNotice() {
     };
 
     async function saveData() {
+        inputData.contents = inputData.contents.replaceAll(/\n/g, "<br />");
         try {
             const response = await axios.post(
                 "https://api.skhuming-api.store/api/admin/notice/save",
@@ -110,6 +111,7 @@ function AdminAddNotice() {
                                     name="contents"
                                     value={inputData.contents}
                                     onChange={handleInputChange}
+                                    wrap="hard"
                                 ></textarea>
                             </p>
                         </div>
