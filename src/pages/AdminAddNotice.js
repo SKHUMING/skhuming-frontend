@@ -96,13 +96,21 @@ function AdminAddNotice() {
                         <div className="noticeContent">
                             <p className="noticeMiniTitle">활동 내용</p>
                             <p className="noticeContentDetail">
-                                <input
+                                {/* <input
                                     type="text"
                                     placeholder="활동 내용을 입력하세요."
                                     name="contents"
                                     value={inputData.contents}
                                     onChange={handleInputChange}
-                                ></input>
+                                ></input> */}
+                                <textarea
+                                    cols={90}
+                                    rows={20}
+                                    placeholder="활동 내용을 입력하세요."
+                                    name="contents"
+                                    value={inputData.contents}
+                                    onChange={handleInputChange}
+                                ></textarea>
                             </p>
                         </div>
                     </div>
