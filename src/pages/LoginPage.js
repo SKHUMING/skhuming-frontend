@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import { Desktop } from "../components/ReactResponse.js";
 import Header from "../components/Header.js";
 import PopUp from "../components/PopUp.js";
 import axios from "axios";
@@ -56,47 +57,49 @@ function LoginPage() {
     }
 
     return (
-        <Container>
-            <Header />
-            {popup ? (
-                <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
-            ) : null}
-            <div className="box">
-                <div className="loginBox">
-                    <div className="titleBox">
-                        <p className="title">LOGIN</p>
-                    </div>
-
-                    <div className="formBox">
-                        <form>
-                            <input
-                                type="email"
-                                placeholder="EMAIL   (@office.skhu.ac.kr)"
-                                name="email"
-                                value={inputData.email}
-                                onChange={handleInputChange}
-                            ></input>
-                            <input
-                                type="password"
-                                placeholder="PASSWORD"
-                                name="password"
-                                value={inputData.password}
-                                onChange={handleInputChange}
-                            ></input>
-                        </form>
-                    </div>
-
-                    <div className="linkBox">
-                        <div className="signinBtn">
-                            <StyledLink to="/signin">SIGN IN</StyledLink>
+        <Desktop>
+            <Container>
+                <Header />
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} notReRoad={true} />
+                ) : null}
+                <div className="box">
+                    <div className="loginBox">
+                        <div className="titleBox">
+                            <p className="title">LOGIN</p>
                         </div>
-                        <div className="loginBtn" onClick={submitLogin}>
-                            Login
+
+                        <div className="formBox">
+                            <form>
+                                <input
+                                    type="email"
+                                    placeholder="EMAIL   (@office.skhu.ac.kr)"
+                                    name="email"
+                                    value={inputData.email}
+                                    onChange={handleInputChange}
+                                ></input>
+                                <input
+                                    type="password"
+                                    placeholder="PASSWORD"
+                                    name="password"
+                                    value={inputData.password}
+                                    onChange={handleInputChange}
+                                ></input>
+                            </form>
+                        </div>
+
+                        <div className="linkBox">
+                            <div className="signinBtn">
+                                <StyledLink to="/signin">SIGN IN</StyledLink>
+                            </div>
+                            <div className="loginBtn" onClick={submitLogin}>
+                                Login
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </Desktop>
     );
 }
 

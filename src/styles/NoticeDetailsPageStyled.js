@@ -75,5 +75,7 @@ export const Container = styled.div`
 
         color: #204782;
         font-size: 1rem;
+
+        white-space: pre-line;
     }
 `;

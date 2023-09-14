@@ -162,7 +162,7 @@ export const Container = styled.div`
     }
 
     .noData {
-        color: #2d6dcc;
+        color: #204782;
     }
 `;
 

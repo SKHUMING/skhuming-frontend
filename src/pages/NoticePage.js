@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import NoticeBox from "../components/NoticeBox.js";
 import axios from "axios";
@@ -54,65 +55,67 @@ function NoticePage() {
     }, [searchKeyword, page]);
 
     return (
-        <Container>
-            <MainHeader />
-            <div class="noticeBox">
-                <div className="boxTitle">
-                    <p>비교과 프로그램 공지</p>
-                    <hr />
-                </div>
+        <Desktop>
+            <Container>
+                <MainHeader />
+                <div class="noticeBox">
+                    <div className="boxTitle">
+                        <p>비교과 프로그램 공지</p>
+                        <hr />
+                    </div>
 
-                <div className="searchBox">
-                    <form>
-                        <input
-                            className="searchInput"
-                            type="text"
-                            placeholder="검색어를 입력하세요"
-                            value={inputKeyword}
-                            onChange={handleInputKeyword}
-                        />
-                        <button
-                            className="searchBtn"
-                            type="submit"
-                            onClick={search}
-                        >
-                            검색
-                        </button>
-                    </form>
-                </div>
-
-                <div className="noticeListBox">
-                    {data.length > 0 ? (
-                        data.map((item) => (
-                            <NoticeBox
-                                noticeId={item.noticeId}
-                                end={item.end}
-                                title={item.title}
+                    <div className="searchBox">
+                        <form>
+                            <input
+                                className="searchInput"
+                                type="text"
+                                placeholder="검색어를 입력하세요"
+                                value={inputKeyword}
+                                onChange={handleInputKeyword}
                             />
-                        ))
-                    ) : (
-                        <p className="warning">
-                            검색된 공지가 없습니다. 다시 검색해주세요! 😓
-                        </p>
-                    )}
+                            <button
+                                className="searchBtn"
+                                type="submit"
+                                onClick={search}
+                            >
+                                검색
+                            </button>
+                        </form>
+                    </div>
+
+                    <div className="noticeListBox">
+                        {data.length > 0 ? (
+                            data.map((item) => (
+                                <NoticeBox
+                                    noticeId={item.noticeId}
+                                    end={item.end}
+                                    title={item.title}
+                                />
+                            ))
+                        ) : (
+                            <p className="warning">
+                                검색된 공지가 없습니다. 다시 검색해주세요! 😓
+                            </p>
+                        )}
+                    </div>
+
+                    {/* pagination */}
+                    <PaginationStyle>
+                        <Pagination
+                            activePage={page}
+                            itemsCountPerPage={10}
+                            totalItemsCount={totalElements}
+                            pageRangeDisplayed={5}
+                            prevPageText={"<"}
+                            nextPageText={">"}
+                            onChange={handlePageChange}
+                        />
+                    </PaginationStyle>
+
+                    <Footer />
                 </div>
-
-                {/* pagination */}
-                <PaginationStyle>
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={10}
-                        totalItemsCount={totalElements}
-                        pageRangeDisplayed={5}
-                        prevPageText={"<"}
-                        nextPageText={">"}
-                        onChange={handlePageChange}
-                    />
-                </PaginationStyle>
-
-                <Footer />
-            </div>
-        </Container>
+            </Container>
+        </Desktop>
     );
 }
 

@@ -77,7 +77,8 @@ export const Container = styled.div`
         font-size: 1rem;
     }
 
-    input {
+    input,
+    textarea {
         width: 48vw;
         padding: 1vh 1vw;
         font-size: 0.9rem;
