@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBoxWidget from "../components/ScrapBox_widget.js";
 import axios from "axios";
@@ -146,104 +147,109 @@ function MyPage() {
     }
 
     return (
-        <Container>
-            <MainHeader />
-            {popup ? (
-                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
-            ) : null}
-            <div className="myPageBox">
-                <div className="userProfileBox">
-                    <div className="user">
-                        <p className="userName">
-                            {loading ? data.memberName : ""}
-                        </p>
-                        <p className="userInfo">
-                            {loading ? data.department : ""}
-                            {loading ? data.studentNumber : ""}
-                        </p>
+        <Desktop>
+            <Container>
+                <MainHeader />
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                ) : null}
+                <div className="myPageBox">
+                    <div className="userProfileBox">
+                        <div className="user">
+                            <p className="userName">
+                                {loading ? data.memberName : ""}
+                            </p>
+                            <p className="userInfo">
+                                {loading ? data.department : ""}
+                                {loading ? data.studentNumber : ""}
+                            </p>
+                        </div>
+                        <div className="logout" onClick={submitLogout}>
+                            <FontAwesomeIcon
+                                icon={faRightFromBracket}
+                                style={{ color: "#2d6dcc" }}
+                            />
+                        </div>
                     </div>
-                    <div className="logout" onClick={submitLogout}>
-                        <FontAwesomeIcon
-                            icon={faRightFromBracket}
-                            style={{ color: "#2d6dcc" }}
-                        />
-                    </div>
-                </div>
 
-                <div className="userMyPageBox">
-                    <StyledLink to="/scrap">
-                        <div className="userScrapBox">
-                            <div className="scrapTitleBox">
-                                <div className="scrapTitle">
-                                    <div className="titleIconBox">
-                                        <p>MY SCRAP</p>
-                                        <div className="moreIcon">
-                                            <FontAwesomeIcon
-                                                icon={faSquarePlus}
-                                                style={{ color: "#2d6dcc" }}
+                    <div className="userMyPageBox">
+                        <StyledLink to="/scrap">
+                            <div className="userScrapBox">
+                                <div className="scrapTitleBox">
+                                    <div className="scrapTitle">
+                                        <div className="titleIconBox">
+                                            <p>MY SCRAP</p>
+                                            <div className="moreIcon">
+                                                <FontAwesomeIcon
+                                                    icon={faSquarePlus}
+                                                    style={{ color: "#2d6dcc" }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+
+                                <div className="scrapContentBox">
+                                    {scrapData.length > 0 ? (
+                                        scrapData.map((item) => (
+                                            <ScrapBoxWidget
+                                                noticeId={item.noticeId}
+                                                end={item.end}
+                                                title={item.title}
                                             />
+                                        ))
+                                    ) : (
+                                        <p className="noData">
+                                            공지 게시판에서 기억하고 싶은 공지를
+                                            스크랩 해보세요!
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </StyledLink>
+
+                        <StyledLink to="/mileage">
+                            <div className="userMileageBox">
+                                <div className="mileageTitleBox">
+                                    <div className="mileageTitle">
+                                        <div className="titleIconBox">
+                                            <p>MY SKHUM</p>
+                                            <div className="moreIcon">
+                                                <FontAwesomeIcon
+                                                    icon={faSquarePlus}
+                                                    style={{ color: "#2d6dcc" }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+
+                                    <div className="mileageBox">
+                                        <div className="tierImg">
+                                            {rankImg(mileageData.tier)}
+                                        </div>
+                                        <div className="userScoreBox">
+                                            <p className="nickname">
+                                                {loading
+                                                    ? mileageData.nickname
+                                                    : ""}
+                                            </p>
+                                            <p className="score">
+                                                {loading
+                                                    ? mileageData.score
+                                                    : ""}
+                                                점
+                                            </p>
                                         </div>
                                     </div>
-                                    <hr />
                                 </div>
                             </div>
-
-                            <div className="scrapContentBox">
-                                {scrapData.length > 0 ? (
-                                    scrapData.map((item) => (
-                                        <ScrapBoxWidget
-                                            noticeId={item.noticeId}
-                                            end={item.end}
-                                            title={item.title}
-                                        />
-                                    ))
-                                ) : (
-                                    <p className="noData">
-                                        공지 게시판에서 기억하고 싶은 공지를
-                                        스크랩 해보세요!
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-                    </StyledLink>
-
-                    <StyledLink to="/mileage">
-                        <div className="userMileageBox">
-                            <div className="mileageTitleBox">
-                                <div className="mileageTitle">
-                                    <div className="titleIconBox">
-                                        <p>MY SKHUM</p>
-                                        <div className="moreIcon">
-                                            <FontAwesomeIcon
-                                                icon={faSquarePlus}
-                                                style={{ color: "#2d6dcc" }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <hr />
-                                </div>
-
-                                <div className="mileageBox">
-                                    <div className="tierImg">
-                                        {rankImg(mileageData.tier)}
-                                    </div>
-                                    <div className="userScoreBox">
-                                        <p className="nickname">
-                                            {loading
-                                                ? mileageData.nickname
-                                                : ""}
-                                        </p>
-                                        <p className="score">
-                                            {loading ? mileageData.score : ""}점
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </StyledLink>
+                        </StyledLink>
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </Desktop>
     );
 }
 

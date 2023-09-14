@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Desktop } from "../components/ReactResponse.js";
 import AdminHeader from "../components/AdminHeader.js";
 import AdminNoticeBox from "../components/AdminNoticeBox.js";
 import axios from "axios";
@@ -57,69 +58,71 @@ function AdminNotice() {
     }, [searchKeyword, page]);
 
     return (
-        <Container>
-            <AdminHeader />
-            <div class="noticeBox">
-                <div className="boxTitle">
-                    <div className="titleBar">
-                        <p>Admin Page</p>
-                        <StyledLink to="/admin/notice/add">
-                            <div className="addNoticeBtn">공지 +</div>
-                        </StyledLink>
+        <Desktop>
+            <Container>
+                <AdminHeader />
+                <div class="noticeBox">
+                    <div className="boxTitle">
+                        <div className="titleBar">
+                            <p>Admin Page</p>
+                            <StyledLink to="/admin/notice/add">
+                                <div className="addNoticeBtn">공지 +</div>
+                            </StyledLink>
+                        </div>
+
+                        <hr />
                     </div>
 
-                    <hr />
-                </div>
-
-                <div className="searchBox">
-                    <form>
-                        <input
-                            className="searchInput"
-                            type="text"
-                            placeholder="검색어를 입력하세요"
-                            value={inputKeyword}
-                            onChange={handleInputKeyword}
-                        />
-                        <button
-                            className="searchBtn"
-                            type="submit"
-                            onClick={search}
-                        >
-                            검색
-                        </button>
-                    </form>
-                </div>
-
-                <div className="noticeListBox">
-                    {data.length > 0 ? (
-                        data.map((item) => (
-                            <AdminNoticeBox
-                                noticeId={item.noticeId}
-                                end={item.end}
-                                title={item.title}
+                    <div className="searchBox">
+                        <form>
+                            <input
+                                className="searchInput"
+                                type="text"
+                                placeholder="검색어를 입력하세요"
+                                value={inputKeyword}
+                                onChange={handleInputKeyword}
                             />
-                        ))
-                    ) : (
-                        <p className="warning">
-                            검색된 공지가 없습니다. 다시 검색해주세요! 😓
-                        </p>
-                    )}
-                </div>
+                            <button
+                                className="searchBtn"
+                                type="submit"
+                                onClick={search}
+                            >
+                                검색
+                            </button>
+                        </form>
+                    </div>
 
-                {/* pagination */}
-                <PaginationStyle>
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={10}
-                        totalItemsCount={totalElements}
-                        pageRangeDisplayed={5}
-                        prevPageText={"<"}
-                        nextPageText={">"}
-                        onChange={handlePageChange}
-                    />
-                </PaginationStyle>
-            </div>
-        </Container>
+                    <div className="noticeListBox">
+                        {data.length > 0 ? (
+                            data.map((item) => (
+                                <AdminNoticeBox
+                                    noticeId={item.noticeId}
+                                    end={item.end}
+                                    title={item.title}
+                                />
+                            ))
+                        ) : (
+                            <p className="warning">
+                                검색된 공지가 없습니다. 다시 검색해주세요! 😓
+                            </p>
+                        )}
+                    </div>
+
+                    {/* pagination */}
+                    <PaginationStyle>
+                        <Pagination
+                            activePage={page}
+                            itemsCountPerPage={10}
+                            totalItemsCount={totalElements}
+                            pageRangeDisplayed={5}
+                            prevPageText={"<"}
+                            nextPageText={">"}
+                            onChange={handlePageChange}
+                        />
+                    </PaginationStyle>
+                </div>
+            </Container>
+        </Desktop>
     );
 }
 
