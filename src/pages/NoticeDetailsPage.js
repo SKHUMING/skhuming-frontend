@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { Desktop } from "../components/ReactResponse.js";
 import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
@@ -123,65 +124,71 @@ function NoticeDetailsPage() {
     }, [scrap]);
 
     return (
-        <Container>
-            <MainHeader />
-            {popup ? (
-                <PopUp
-                    onClose={setPopup}
-                    msg={msg}
-                    notReRoad={true}
-                    goLogin={goLogin}
-                />
-            ) : null}
+        <Desktop>
+            <Container>
+                <MainHeader />
+                {popup ? (
+                    <PopUp
+                        onClose={setPopup}
+                        msg={msg}
+                        notReRoad={true}
+                        goLogin={goLogin}
+                    />
+                ) : null}
 
-            <div class="noticeBox">
-                <div className="noticeTitleBox">
-                    <div className="noticeTitleBox_inner">
-                        <p className="noticeTitle">{data.title}</p>
-                        <p className="noticeScrap">
-                            {scrap ? (
-                                <span onClick={delScrap}>
-                                    <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "#2d6dcc" }}
-                                    />
-                                </span>
-                            ) : (
-                                <span onClick={getScrap}>
-                                    <FontAwesomeIcon
-                                        icon={notFaStar}
-                                        style={{ color: "#2d6dcc" }}
-                                    />
-                                </span>
-                            )}
-                        </p>
+                <div class="noticeBox">
+                    <div className="noticeTitleBox">
+                        <div className="noticeTitleBox_inner">
+                            <p className="noticeTitle">{data.title}</p>
+                            <p className="noticeScrap">
+                                {scrap ? (
+                                    <span onClick={delScrap}>
+                                        <FontAwesomeIcon
+                                            icon={faStar}
+                                            style={{ color: "#2d6dcc" }}
+                                        />
+                                    </span>
+                                ) : (
+                                    <span onClick={getScrap}>
+                                        <FontAwesomeIcon
+                                            icon={notFaStar}
+                                            style={{ color: "#2d6dcc" }}
+                                        />
+                                    </span>
+                                )}
+                            </p>
+                        </div>
+                        <hr />
                     </div>
-                    <hr />
+
+                    <div className="noticeContentBox">
+                        <div className="noticeContent">
+                            <p className="noticeMiniTitle">일정</p>
+                            <p className="noticeContentDetail">
+                                {data.schedule}
+                            </p>
+                        </div>
+
+                        <div className="noticeContent">
+                            <p className="noticeMiniTitle">적립 마일리지 </p>
+                            <p className="noticeContentDetail">
+                                {data.mileageScore}점
+                            </p>
+                        </div>
+
+                        <div className="noticeContent">
+                            <p className="noticeMiniTitle">활동 내용</p>
+                            <p className="noticeContentDetail">
+                                {data.contents}
+                            </p>
+                            {console.log(data.contents)}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="noticeContentBox">
-                    <div className="noticeContent">
-                        <p className="noticeMiniTitle">일정</p>
-                        <p className="noticeContentDetail">{data.schedule}</p>
-                    </div>
-
-                    <div className="noticeContent">
-                        <p className="noticeMiniTitle">적립 마일리지 </p>
-                        <p className="noticeContentDetail">
-                            {data.mileageScore}점
-                        </p>
-                    </div>
-
-                    <div className="noticeContent">
-                        <p className="noticeMiniTitle">활동 내용</p>
-                        <p className="noticeContentDetail">{data.contents}</p>
-                        {console.log(data.contents)}
-                    </div>
-                </div>
-            </div>
-
-            <Footer />
-        </Container>
+                <Footer />
+            </Container>
+        </Desktop>
     );
 }
 

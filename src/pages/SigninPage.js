@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
 import PopUp from "../components/PopUp.js";
+import { Desktop } from "../components/ReactResponse.js";
 
 import axios from "axios";
 
@@ -121,203 +122,213 @@ function SigninPage() {
     };
 
     return (
-        <Container>
-            <Header />
-            {popup ? (
-                <PopUp
-                    onClose={setPopup}
-                    msg={msg}
-                    notReRoad={true}
-                    goLogin={goLogin}
-                />
-            ) : null}
-            <div className="box">
-                <div className="loginBox">
-                    <div className="titleBox">
-                        <p className="title">SIGN IN</p>
-                    </div>
+        <Desktop>
+            <Container>
+                <Header />
+                {popup ? (
+                    <PopUp
+                        onClose={setPopup}
+                        msg={msg}
+                        notReRoad={true}
+                        goLogin={goLogin}
+                    />
+                ) : null}
+                <div className="box">
+                    <div className="loginBox">
+                        <div className="titleBox">
+                            <p className="title">SIGN IN</p>
+                        </div>
 
-                    <div className="formBox">
-                        <form>
-                            <div className="inputBox">
-                                <label>이메일</label>
-                                <input
-                                    type="email"
-                                    placeholder="EMAIL   (@office.skhu.ac.kr)"
-                                    name="email"
-                                    value={inputData.email}
-                                    onChange={handleInputChange}
-                                ></input>
-                                <div className="iconBox" onClick={checkEmail}>
-                                    <FontAwesomeIcon
-                                        icon={faPaperPlane}
-                                        style={{ color: "#2d6dcc" }}
-                                    />
-                                </div>
-                            </div>
-                            <div className="inputExplanation">
-                                📢
-                                <div className="expDetail">
-                                    <span> @office.skhu.ac.kr</span> 이메일을
-                                    적고,
-                                    <br />
-                                    우측의 메일 전송 버튼으로
-                                    <span> 인증 코드</span>를 받아주세요!
-                                </div>
-                            </div>
-                            <div className="inputBox">
-                                <label>인증 코드</label>
-                                <input
-                                    type="text"
-                                    placeholder="office 365 메일로 받은 인증 코드를 적어주세요"
-                                    name="emailCheck"
-                                    value={emailCheck}
-                                    onChange={handleEmailCheckChange}
-                                ></input>
-                                <div className="iconBox" onClick={checkCode}>
-                                    {studentCheck ? (
+                        <div className="formBox">
+                            <form>
+                                <div className="inputBox">
+                                    <label>이메일</label>
+                                    <input
+                                        type="email"
+                                        placeholder="EMAIL   (@office.skhu.ac.kr)"
+                                        name="email"
+                                        value={inputData.email}
+                                        onChange={handleInputChange}
+                                    ></input>
+                                    <div
+                                        className="iconBox"
+                                        onClick={checkEmail}
+                                    >
                                         <FontAwesomeIcon
-                                            icon={faCheck}
+                                            icon={faPaperPlane}
                                             style={{ color: "#2d6dcc" }}
                                         />
-                                    ) : (
-                                        <div className="checkBtn">인증</div>
-                                    )}
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div className="inputBox">
-                                <label>비밀번호</label>
-                                <input
-                                    type="password"
-                                    placeholder="PASSWORD"
-                                    name="pwd"
-                                    value={inputData.pwd}
-                                    onChange={handleInputChange}
-                                ></input>
-                                <div className="iconBox"></div>
-                            </div>
-                            <div className="inputBox">
-                                <label>비밀번호 확인</label>
-                                <input
-                                    type="password"
-                                    placeholder="PASSWORD"
-                                    name="pwdCheck"
-                                    value={pwdCheck}
-                                    onChange={handleInputChangeCheck}
-                                ></input>
-                                <div className="iconBox"></div>
-                            </div>
-                            <div className="inputExplanation">
-                                {inputData.pwd.length < 8 ? (
-                                    <>
-                                        📢
-                                        <div className="expDetail">
-                                            <span> 8자리 이상</span>으로
-                                            입력해주세요!
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        ✅
-                                        <div className="expDetail">
-                                            비밀번호가 <span>8자리 이상</span>
-                                            입니다!
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                            {inputData.pwd.length > 0 ? (
                                 <div className="inputExplanation">
-                                    {inputData.pwd === pwdCheck ? (
+                                    📢
+                                    <div className="expDetail">
+                                        <span> @office.skhu.ac.kr</span>{" "}
+                                        이메일을 적고,
+                                        <br />
+                                        우측의 메일 전송 버튼으로
+                                        <span> 인증 코드</span>를 받아주세요!
+                                    </div>
+                                </div>
+                                <div className="inputBox">
+                                    <label>인증 코드</label>
+                                    <input
+                                        type="text"
+                                        placeholder="office 365 메일로 받은 인증 코드를 적어주세요"
+                                        name="emailCheck"
+                                        value={emailCheck}
+                                        onChange={handleEmailCheckChange}
+                                    ></input>
+                                    <div
+                                        className="iconBox"
+                                        onClick={checkCode}
+                                    >
+                                        {studentCheck ? (
+                                            <FontAwesomeIcon
+                                                icon={faCheck}
+                                                style={{ color: "#2d6dcc" }}
+                                            />
+                                        ) : (
+                                            <div className="checkBtn">인증</div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="inputBox">
+                                    <label>비밀번호</label>
+                                    <input
+                                        type="password"
+                                        placeholder="PASSWORD"
+                                        name="pwd"
+                                        value={inputData.pwd}
+                                        onChange={handleInputChange}
+                                    ></input>
+                                    <div className="iconBox"></div>
+                                </div>
+                                <div className="inputBox">
+                                    <label>비밀번호 확인</label>
+                                    <input
+                                        type="password"
+                                        placeholder="PASSWORD"
+                                        name="pwdCheck"
+                                        value={pwdCheck}
+                                        onChange={handleInputChangeCheck}
+                                    ></input>
+                                    <div className="iconBox"></div>
+                                </div>
+                                <div className="inputExplanation">
+                                    {inputData.pwd.length < 8 ? (
+                                        <>
+                                            📢
+                                            <div className="expDetail">
+                                                <span> 8자리 이상</span>으로
+                                                입력해주세요!
+                                            </div>
+                                        </>
+                                    ) : (
                                         <>
                                             ✅
                                             <div className="expDetail">
-                                                비밀번호가 일치합니다!
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <>
-                                            ❌
-                                            <div className="expDetail">
-                                                비밀번호가 일치하지 않습니다.
+                                                비밀번호가{" "}
+                                                <span>8자리 이상</span>
+                                                입니다!
                                             </div>
                                         </>
                                     )}
                                 </div>
-                            ) : null}
+                                {inputData.pwd.length > 0 ? (
+                                    <div className="inputExplanation">
+                                        {inputData.pwd === pwdCheck ? (
+                                            <>
+                                                ✅
+                                                <div className="expDetail">
+                                                    비밀번호가 일치합니다!
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                ❌
+                                                <div className="expDetail">
+                                                    비밀번호가 일치하지
+                                                    않습니다.
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                ) : null}
 
-                            <div className="inputBox">
-                                <label>닉네임</label>
-                                <input
-                                    type="text"
-                                    placeholder="NICKNAME"
-                                    name="nickname"
-                                    value={inputData.nickname}
-                                    onChange={handleInputChange}
-                                ></input>
-                                <div className="iconBox"></div>
-                            </div>
-                            <div className="inputExplanation">
-                                📢{" "}
-                                <div className="expDetail">
-                                    랭킹에 보여질 이름입니다. <br />
-                                    변경이 불가하오니 신중히 입력해주세요!
+                                <div className="inputBox">
+                                    <label>닉네임</label>
+                                    <input
+                                        type="text"
+                                        placeholder="NICKNAME"
+                                        name="nickname"
+                                        value={inputData.nickname}
+                                        onChange={handleInputChange}
+                                    ></input>
+                                    <div className="iconBox"></div>
                                 </div>
-                            </div>
+                                <div className="inputExplanation">
+                                    📢{" "}
+                                    <div className="expDetail">
+                                        랭킹에 보여질 이름입니다. <br />
+                                        변경이 불가하오니 신중히 입력해주세요!
+                                    </div>
+                                </div>
 
-                            <div className="inputBox">
-                                <label>이름</label>
-                                <input
-                                    type="text"
-                                    placeholder="NAME"
-                                    name="memberName"
-                                    value={inputData.memberName}
-                                    onChange={handleInputChange}
-                                ></input>
-                                <div className="iconBox"></div>
-                            </div>
+                                <div className="inputBox">
+                                    <label>이름</label>
+                                    <input
+                                        type="text"
+                                        placeholder="NAME"
+                                        name="memberName"
+                                        value={inputData.memberName}
+                                        onChange={handleInputChange}
+                                    ></input>
+                                    <div className="iconBox"></div>
+                                </div>
 
-                            <div className="inputBox">
-                                <label>소속 학부</label>
-                                <form className="selectDepartment">
-                                    <select onChange={handleAward}>
-                                        {department.map((item) => (
-                                            <option
-                                                key={item.departmentId}
-                                                value={item.departmentId}
-                                            >
-                                                {item.department}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </form>
-                                <div className="iconBox"></div>
-                            </div>
+                                <div className="inputBox">
+                                    <label>소속 학부</label>
+                                    <form className="selectDepartment">
+                                        <select onChange={handleAward}>
+                                            {department.map((item) => (
+                                                <option
+                                                    key={item.departmentId}
+                                                    value={item.departmentId}
+                                                >
+                                                    {item.department}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </form>
+                                    <div className="iconBox"></div>
+                                </div>
 
-                            <div className="inputBox">
-                                <label>학번</label>
-                                <input
-                                    type="text"
-                                    placeholder="STUDENT NUMBER"
-                                    name="studentNumber"
-                                    value={inputData.studentNumber}
-                                    onChange={handleInputChange}
-                                ></input>
-                                <div className="iconBox"></div>
-                            </div>
-                        </form>
-                    </div>
+                                <div className="inputBox">
+                                    <label>학번</label>
+                                    <input
+                                        type="text"
+                                        placeholder="STUDENT NUMBER"
+                                        name="studentNumber"
+                                        value={inputData.studentNumber}
+                                        onChange={handleInputChange}
+                                    ></input>
+                                    <div className="iconBox"></div>
+                                </div>
+                            </form>
+                        </div>
 
-                    <div className="linkBox">
-                        <div className="signinBtn" onClick={submitSignin}>
-                            {" "}
-                            SIGN IN
+                        <div className="linkBox">
+                            <div className="signinBtn" onClick={submitSignin}>
+                                {" "}
+                                SIGN IN
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </Desktop>
     );
 }
 

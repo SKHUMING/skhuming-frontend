@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
 import PopUp from "../components/PopUp.js";
@@ -61,48 +62,51 @@ function ScrapPage() {
     }, [page]);
 
     return (
-        <Container>
-            <MainHeader />
-            {popup ? (
-                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
-            ) : null}
-            <div className="scrapBox">
-                <div className="scrapTitle">
-                    <p>MY SCRAP</p>
-                    <hr />
-                </div>
+        <Desktop>
+            <Container>
+                <MainHeader />
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                ) : null}
+                <div className="scrapBox">
+                    <div className="scrapTitle">
+                        <p>MY SCRAP</p>
+                        <hr />
+                    </div>
 
-                <div className="scrapContentBox">
-                    {scrapData.length > 0 ? (
-                        scrapData.map((item) => (
-                            <ScrapBox
-                                noticeId={item.noticeId}
-                                end={item.end}
-                                title={item.title}
-                            />
-                        ))
-                    ) : (
-                        <p>
-                            공지 게시판에서 기억하고 싶은 공지를 스크랩해보세요!
-                        </p>
-                    )}
-                </div>
+                    <div className="scrapContentBox">
+                        {scrapData.length > 0 ? (
+                            scrapData.map((item) => (
+                                <ScrapBox
+                                    noticeId={item.noticeId}
+                                    end={item.end}
+                                    title={item.title}
+                                />
+                            ))
+                        ) : (
+                            <p>
+                                공지 게시판에서 기억하고 싶은 공지를
+                                스크랩해보세요!
+                            </p>
+                        )}
+                    </div>
 
-                {/* pagination */}
-                <PaginationStyle>
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={10}
-                        totalItemsCount={totalElements}
-                        pageRangeDisplayed={5}
-                        prevPageText={"<"}
-                        nextPageText={">"}
-                        onChange={handlePageChange}
-                    />
-                </PaginationStyle>
-            </div>
-            <Footer />
-        </Container>
+                    {/* pagination */}
+                    <PaginationStyle>
+                        <Pagination
+                            activePage={page}
+                            itemsCountPerPage={10}
+                            totalItemsCount={totalElements}
+                            pageRangeDisplayed={5}
+                            prevPageText={"<"}
+                            nextPageText={">"}
+                            onChange={handlePageChange}
+                        />
+                    </PaginationStyle>
+                </div>
+                <Footer />
+            </Container>
+        </Desktop>
     );
 }
 

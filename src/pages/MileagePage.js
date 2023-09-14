@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
 import PopUp from "../components/PopUp.js";
@@ -153,89 +154,91 @@ function MileagePage() {
     }
 
     return (
-        <Container>
-            <MainHeader />
-            {popup ? (
-                <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
-            ) : null}
-            <div className="mileageBox">
-                <div className="mileageTitle">
-                    <p>MY MILEAGE</p>
-                    <hr />
-                </div>
+        <Desktop>
+            <Container>
+                <MainHeader />
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                ) : null}
+                <div className="mileageBox">
+                    <div className="mileageTitle">
+                        <p>MY MILEAGE</p>
+                        <hr />
+                    </div>
 
-                <div className="userMileageBox">
-                    <div className="userRankingBox">
-                        <div className="userTierImg">
-                            {loading ? rankImg(userData.tier) : ""}
+                    <div className="userMileageBox">
+                        <div className="userRankingBox">
+                            <div className="userTierImg">
+                                {loading ? rankImg(userData.tier) : ""}
+                            </div>
+                            <div className="userRanking">
+                                <p>MY RANKING</p>
+                                <div className="ranking">
+                                    <p>{loading ? userData.nickname : ""}</p>
+                                    <p>{loading ? userData.score : ""}점</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="userRanking">
-                            <p>MY RANKING</p>
-                            <div className="ranking">
-                                <p>{loading ? userData.nickname : ""}</p>
-                                <p>{loading ? userData.score : ""}점</p>
+
+                        <div className="addMileageBox">
+                            <p>ADD MILEAGE</p>
+
+                            <div className="addMileage">
+                                <form>
+                                    <select
+                                        className="skhumList"
+                                        name="skhumList"
+                                        onChange={handleMileage}
+                                        value={addMileage}
+                                    >
+                                        {mileageList.map((item) => (
+                                            <option
+                                                key={item.mileageId}
+                                                value={item.mileageId}
+                                            >
+                                                {item.mileageScore !== 0
+                                                    ? `[${item.mileageScore}점] ${item.title}`
+                                                    : item.title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <button
+                                        type="submit"
+                                        className="skhumListBtn"
+                                        onClick={submitMileage}
+                                    >
+                                        추가
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
 
-                    <div className="addMileageBox">
-                        <p>ADD MILEAGE</p>
-
-                        <div className="addMileage">
-                            <form>
-                                <select
-                                    className="skhumList"
-                                    name="skhumList"
-                                    onChange={handleMileage}
-                                    value={addMileage}
-                                >
-                                    {mileageList.map((item) => (
-                                        <option
-                                            key={item.mileageId}
-                                            value={item.mileageId}
-                                        >
-                                            {item.mileageScore !== 0
-                                                ? `[${item.mileageScore}점] ${item.title}`
-                                                : item.title}
-                                        </option>
-                                    ))}
-                                </select>
-                                <button
-                                    type="submit"
-                                    className="skhumListBtn"
-                                    onClick={submitMileage}
-                                >
-                                    추가
-                                </button>
-                            </form>
+                    {mileageHistory.length !== 0 ? (
+                        <div className="mileageHistoryTitle">
+                            <p>MY MILEAGE HISTORY</p>
+                            <hr />
                         </div>
+                    ) : null}
+
+                    <div className="mileageHistoryBox">
+                        {mileageHistory ? (
+                            mileageHistory.map((item) => (
+                                <MileageHistoryBox
+                                    title={item.title}
+                                    mileageId={item.mileageId}
+                                    mileageScore={item.mileageScore}
+                                    systemDate={item.systemDate}
+                                />
+                            ))
+                        ) : (
+                            <p className="nullMileage">내역이 없습니다.</p>
+                        )}
                     </div>
                 </div>
-
-                {mileageHistory.length !== 0 ? (
-                    <div className="mileageHistoryTitle">
-                        <p>MY MILEAGE HISTORY</p>
-                        <hr />
-                    </div>
-                ) : null}
-
-                <div className="mileageHistoryBox">
-                    {mileageHistory ? (
-                        mileageHistory.map((item) => (
-                            <MileageHistoryBox
-                                title={item.title}
-                                mileageId={item.mileageId}
-                                mileageScore={item.mileageScore}
-                                systemDate={item.systemDate}
-                            />
-                        ))
-                    ) : (
-                        <p className="nullMileage">내역이 없습니다.</p>
-                    )}
-                </div>
-            </div>
-            <Footer />
-        </Container>
+                <Footer />
+            </Container>
+        </Desktop>
     );
 }
 
