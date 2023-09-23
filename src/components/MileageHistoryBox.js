@@ -14,24 +14,27 @@ function MileageHistoryBox({ title, mileageId, mileageScore, systemDate }) {
     const [msg, setMsg] = useState("");
 
     async function delMileage() {
-        try {
-            await axios.post(
-                "https://api.skhuming-api.store/api/user/mileage/history/cancel",
-                null,
-                {
-                    params: {
-                        memberId: window.localStorage.getItem("memberId"),
-                        mileageId: mileageId,
-                    },
-                    headers: {
-                        Authorization: window.localStorage.getItem("token"),
-                    },
-                }
-            );
-            setMsg("👋🏻 마일리지 내역을 삭제하였습니다.");
-            setPopup(true);
-        } catch (error) {
-            console.error(error);
+        const userConfirmed = window.confirm("정말로 삭제하시겠습니까?");
+        if (userConfirmed) {
+            try {
+                await axios.post(
+                    "https://api.skhuming-api.store/api/user/mileage/history/cancel",
+                    null,
+                    {
+                        params: {
+                            memberId: window.localStorage.getItem("memberId"),
+                            mileageId: mileageId,
+                        },
+                        headers: {
+                            Authorization: window.localStorage.getItem("token"),
+                        },
+                    }
+                );
+                setMsg("👋🏻 마일리지 내역을 삭제하였습니다.");
+                setPopup(true);
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
