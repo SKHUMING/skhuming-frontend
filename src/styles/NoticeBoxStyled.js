@@ -40,7 +40,8 @@ export const Container = styled.div`
     }
 
     .titleDateBox {
-        width: 43vw;
+        /* width: 43vw; */
+        width: 100%;
 
         display: flex;
         justify-content: space-between;
@@ -56,7 +57,8 @@ export const Container = styled.div`
     }
 
     .noticeDate {
-        width: 8vw;
+        /* width: 8vw; */
+        margin-right: 2vw;
 
         color: #808285;
         font-size: 0.9rem;
