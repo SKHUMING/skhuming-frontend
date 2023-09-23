@@ -33,7 +33,7 @@ function DisplayBoard() {
     }, []);
 
     return (
-        <Container data-aos="flip-left" data-aos-duration="1000">
+        <Container data-aos="fade-up" data-aos-duration="1000">
             <div className="board">
                 <Marquee velocity={35}>
                     {news.map((text, index) => (

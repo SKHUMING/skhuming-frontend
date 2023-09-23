@@ -32,27 +32,12 @@ function MainPage() {
         AOS.init(); // AOS 초기화
     }, []);
 
-    // const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    // async function getData() {
-    //     try {
-    //         const response = await axios.get(
-    //             "https://api.skhuming-api.store/api/main"
-    //         );
-    //         setData(response.data);
-    //         if (data.length > 0) setLoading(true);
-    //         setLoading(true);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-
     // 랭킹 선택
     const [award, setAward] = useState([
         { departmentId: 0, department: "재학생 전체" },
         { departmentId: 1, department: "인문자율융합학부" },
         { departmentId: 2, department: "사회융합자율학부" },
-        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 3, department: "미디어콘텐츠융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
         { departmentId: 5, department: "학부" },
     ]);
@@ -93,102 +78,11 @@ function MainPage() {
                         <hr />
                     </div>
 
-                    {/* <AllDepartmentAward /> */}
                     {selectAward < 5 ? (
                         <Award department={selectAward} />
                     ) : (
                         <AllDepartmentAward />
                     )}
-
-                    {/* <div className="award">
-                    <div
-                        className="box_2nd"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>2nd</p>
-                        <div className="profileBox_2nd">
-                            <div className="tierImg_2nd">
-                                {loading ? rankImg(1) : "Loading..."}
-                            </div>
-                            <div className="profile_2nd">
-                                {loading ? (
-                                    <p className="name_2nd">
-                                        {data[1].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_2nd">
-                                        {data[1].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="box_1st"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>1st</p>
-                        <div className="profileBox_1st">
-                            <div className="tierImg_1st">
-                                {loading ? rankImg(0) : "Loading..."}
-                            </div>
-                            <div className="profile_1st">
-                                {loading ? (
-                                    <p className="name_1st">
-                                        {data[0].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_1st">
-                                        {data[0].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="box_3rd"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>3rd</p>
-                        <div className="profileBox_3rd">
-                            <div className="tierImg_3rd">
-                                {loading ? rankImg(2) : "Loading..."}
-                            </div>
-                            <div className="profile_3rd">
-                                {loading ? (
-                                    <p className="name_3rd">
-                                        {data[2].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_3rd">
-                                        {data[2].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
 
                     <div className="qnaBox">
                         <div className="qnaTitle">
@@ -225,7 +119,11 @@ function MainPage() {
                                             적립 기준을 바탕으로 장학혜택을 받을
                                             수 있는 제도입니다.
                                         </p>
-                                        <p>
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
                                             skhuming을 통해 다같이 재미있게
                                             모아볼까요?
                                         </p>
@@ -254,6 +152,15 @@ function MainPage() {
                                             (휴학생, 수료생, 등록휴학생,
                                             졸업유예자 제외)
                                         </p>
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
+                                            스쿠밍도 스쿰 마일리지 랭킹을
+                                            제공하는 서비스인만큼, 재학생 모두가
+                                            참여할 수 있습니다!
+                                        </p>
                                     </p>
                                 </div>
                             </div>
@@ -274,24 +181,26 @@ function MainPage() {
                                         <p>
                                             학기 중 운영되는 교내 각 비교과
                                             프로그램을 참여하고, 이수 완료 시
-                                            적립 됩니다. 각 프로그램별로 이수
-                                            완료시 적립되며, 학기 말에
-                                            비교과통합관리센터에서 최종
-                                            취합해요.
+                                            적립 됩니다.정확한 점수는 학기 말에
+                                            종합정보시스템에서 확인 가능합니다.
                                         </p>
-                                        <p>
-                                            마일리지는 학기별로 정산됩니다. 다음
-                                            학기로 이월되지 않아요! 학기 중
-                                            휴학하면 마일리지는 자동 소멸돼요!
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
+                                            스쿠밍에서는 학기 중 자신이
+                                            얼마만큼의 마일리지를 모았는지 직접
+                                            체크하며 재학생 랭킹에 참여합니다.
                                         </p>
-                                        <p>
-                                            마일리지 적립현황은 학기 말에
-                                            종합정보시스템 SKHUM(비교과
-                                            마일리지)에 안내됩니다.
-                                        </p>
-                                        <p>
-                                            방중 프로그램은 마일리지 적립이
-                                            불가합니다.
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
+                                            마이페이지의 마일리지 페이지에서
+                                            활동을 완료한 프로그램을 체크하고,
+                                            마일리지를 적립받아보세요!
                                         </p>
                                     </p>
                                 </div>
@@ -324,6 +233,14 @@ function MainPage() {
                                             선발하기에, 학기당 수혜 인원은
                                             변동될 수 있습니다.
                                         </p>
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
+                                            따라서 스쿠밍의 랭킹 순위는 재미로만
+                                            즐겨주세요!
+                                        </p>
                                     </p>
                                 </div>
                             </div>
@@ -354,22 +271,21 @@ function MainPage() {
                                             제한되며, 연속학기 지급은
                                             불가하답니다!
                                         </p>
+                                        <p
+                                            style={{
+                                                textDecoration: "underline",
+                                            }}
+                                        >
+                                            스쿰 마일리지에 대한 자세한 공지는
+                                            공지페이지에서, 스쿠밍에 대한
+                                            사용법은 하단의 FQA를 참고해주세요!
+                                        </p>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* <div className="footer">
-                    <p className="footer__name">SKHUMING, 스쿠밍</p>
-                    <hr />
-                    <p className="footer__content">
-                        <span>Contact</span> | skhuskhuming@gmail.com
-                    </p>
-                    <p className="footer__copyright">
-                        Copyright © 2023 SKHUMING. All rights reserved.
-                    </p>
-                </div> */}
                     <Footer />
                 </div>
             </Container>

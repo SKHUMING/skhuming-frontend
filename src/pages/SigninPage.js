@@ -57,7 +57,7 @@ function SigninPage() {
             setStudentCheck(true);
         else {
             setStudentCheck(false);
-            setMsg("인증 코드가 일치하지 않아요. 😢");
+            setMsg("인증 코드가 일치하지 않습니다.");
             setPopup(true);
         }
     };
@@ -73,7 +73,7 @@ function SigninPage() {
                     inputData
                 );
                 console.log(response.data);
-                setMsg("🎉 회원가입에 성공했습니다! 다시 로그인 해주세요.");
+                setMsg("회원가입에 성공했습니다! 다시 로그인 해주세요.");
                 setGoLogin(true);
                 setPopup(true);
                 // navigate("/");
@@ -83,7 +83,7 @@ function SigninPage() {
                 setPopup(true);
             }
         } else {
-            setMsg("모든 입력과 인증을 완료해주세요! 🙏🏻");
+            setMsg("모든 입력과 인증을 완료해주세요!");
             setPopup(true);
         }
     }
@@ -111,7 +111,7 @@ function SigninPage() {
     const [department, setDepartment] = useState([
         { departmentId: 1, department: "인문자율융합학부" },
         { departmentId: 2, department: "사회융합자율학부" },
-        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 3, department: "미디어콘텐츠융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
     ]);
     // 선택한 학부 (select box)

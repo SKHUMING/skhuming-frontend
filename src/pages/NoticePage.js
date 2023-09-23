@@ -90,6 +90,7 @@ function NoticePage() {
                                     noticeId={item.noticeId}
                                     end={item.end}
                                     title={item.title}
+                                    date={item.createDate}
                                 />
                             ))
                         ) : (

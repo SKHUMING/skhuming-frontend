@@ -53,12 +53,21 @@ export const Container = styled.div`
 
     .noticeContentBox {
         width: 50vw;
-        margin-top: 3vh;
+        /* margin-top: 3vh; */
         /* margin-bottom: 0vh; */
     }
 
     .noticeContent {
-        margin-top: 5vh;
+        margin-top: 10vh;
+    }
+
+    .mileageBox {
+        margin-left: 100px;
+    }
+
+    .dateMileageBox {
+        display: flex;
+        /* align-items: center; */
     }
 
     .noticeMiniTitle {
@@ -77,5 +86,12 @@ export const Container = styled.div`
         font-size: 1rem;
 
         white-space: pre-line;
+    }
+
+    .createDateBox {
+        display: flex;
+        justify-content: flex-end;
+
+        color: #8e939a;
     }
 `;
