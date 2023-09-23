@@ -36,4 +36,9 @@ export const Container = styled.div`
         /* margin: 0; */
         width: 60vw;
     }
+
+    .faq {
+        color: #898989;
+        text-decoration: none;
+    }
 `;

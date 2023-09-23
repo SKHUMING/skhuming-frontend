@@ -72,7 +72,7 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(true);
-            setMsg("⭐️ 스크랩 되었습니다.");
+            setMsg("스크랩 되었습니다! 마이페이지에서 확인해보세요.");
             setPopup(true);
         } catch (error) {
             console.log(error);
@@ -103,7 +103,7 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(false);
-            setMsg("👋🏻 스크랩을 취소하였습니다.");
+            setMsg("스크랩을 취소하였습니다.");
             setPopup(true);
         } catch (error) {
             console.log(error);
@@ -162,18 +162,29 @@ function NoticeDetailsPage() {
                     </div>
 
                     <div className="noticeContentBox">
-                        <div className="noticeContent">
-                            <p className="noticeMiniTitle">일정</p>
-                            <p className="noticeContentDetail">
-                                {data.schedule}
-                            </p>
-                        </div>
+                        <div className="dateMileageBox">
+                            <div className="noticeContent">
+                                <p className="noticeMiniTitle">활동 일정</p>
+                                <p className="noticeContentDetail">
+                                    {data.schedule}
+                                </p>
+                            </div>
 
-                        <div className="noticeContent">
-                            <p className="noticeMiniTitle">적립 마일리지 </p>
-                            <p className="noticeContentDetail">
-                                {data.mileageScore}점
-                            </p>
+                            <div className="noticeContent mileageBox">
+                                <p className="noticeMiniTitle">적립 마일리지</p>
+                                <p className="noticeContentDetail">
+                                    {data.mileageScore}점
+                                </p>
+                            </div>
+
+                            <div className="noticeContent mileageBox">
+                                <p className="noticeMiniTitle">LMS 링크</p>
+                                <a href={data.links}>
+                                    <p className="noticeContentDetail">
+                                        클릭하여 자세한 내용을 확인하세요.
+                                    </p>
+                                </a>
+                            </div>
                         </div>
 
                         <div className="noticeContent">
@@ -182,6 +193,12 @@ function NoticeDetailsPage() {
                                 {data.contents}
                             </p>
                             {console.log(data.contents)}
+                        </div>
+
+                        <div className="noticeContent">
+                            <p className="noticeContentDetail createDateBox">
+                                - {data.createDate} 작성 -
+                            </p>
                         </div>
                     </div>
                 </div>

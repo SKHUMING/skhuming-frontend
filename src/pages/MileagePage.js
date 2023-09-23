@@ -95,7 +95,9 @@ function MileagePage() {
                 }
             );
             console.log(response);
-            setMsg("🎉 스쿰 마일리지를 추가하였습니다!");
+            setMsg(
+                "스쿰 마일리지를 추가하였습니다! 하단의 my mileage history에서 확인해보세요!"
+            );
             setPopup(true);
         } catch (error) {
             if (error.response.status === 401) {

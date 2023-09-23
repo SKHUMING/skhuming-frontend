@@ -10,6 +10,15 @@ function Footer() {
                 <p className="footer__content">
                     <span>Contact</span> | skhuskhuming@gmail.com
                 </p>
+                <p className="footer__content">
+                    <span>FAQ</span> |{" "}
+                    <a
+                        href="https://spice-eocursor-478.notion.site/FAQ-cd239246f7124a28a16ddcc8c6e647f6?pvs=4"
+                        className="faq"
+                    >
+                        클릭하여 Notion에서 확인하기
+                    </a>
+                </p>
                 <p className="footer__copyright">
                     Copyright © 2023 SKHUMING. All rights reserved.
                 </p>
