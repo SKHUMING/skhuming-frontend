@@ -108,6 +108,7 @@ export const Container = styled.div`
         font-size: 1rem;
         color: #2d6dcc;
         margin-top: 150px;
+        white-space: pre-line;
     }
 
     .closeBtn {
