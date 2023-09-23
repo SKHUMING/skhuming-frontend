@@ -162,18 +162,20 @@ function NoticeDetailsPage() {
                     </div>
 
                     <div className="noticeContentBox">
-                        <div className="noticeContent">
-                            <p className="noticeMiniTitle">일정</p>
-                            <p className="noticeContentDetail">
-                                {data.schedule}
-                            </p>
-                        </div>
+                        <div className="dateMileageBox">
+                            <div className="noticeContent">
+                                <p className="noticeMiniTitle">일정</p>
+                                <p className="noticeContentDetail">
+                                    {data.schedule}
+                                </p>
+                            </div>
 
-                        <div className="noticeContent">
-                            <p className="noticeMiniTitle">적립 마일리지 </p>
-                            <p className="noticeContentDetail">
-                                {data.mileageScore}점
-                            </p>
+                            <div className="noticeContent mileageBox">
+                                <p className="noticeMiniTitle">적립 마일리지</p>
+                                <p className="noticeContentDetail">
+                                    {data.mileageScore}점
+                                </p>
+                            </div>
                         </div>
 
                         <div className="noticeContent">

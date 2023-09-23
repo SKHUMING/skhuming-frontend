@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
 
     .noticeContentEnd {
-        width: 3vw;
+        width: 4vw;
         height: 3.5vh;
         margin-left: 1.5vw;
 
@@ -39,11 +39,31 @@ export const Container = styled.div`
         color: #fff;
     }
 
+    .titleDateBox {
+        width: 43vw;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .noticeContentTitle {
         margin-left: 2vw;
+        width: 30vw;
 
         font-size: 1rem;
         color: #204782;
+    }
+
+    .noticeDate {
+        width: 8vw;
+
+        color: #808285;
+        font-size: 0.9rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 

@@ -157,11 +157,21 @@ function MyPage() {
                     <div className="userProfileBox">
                         <div className="user">
                             <p className="userName">
-                                {loading ? data.memberName : ""}
+                                {loading ? data.memberName : ""}{" "}
+                                {loading ? (
+                                    <span className="nickName">
+                                        ({data.nickname})
+                                    </span>
+                                ) : (
+                                    ""
+                                )}
                             </p>
                             <p className="userInfo">
-                                {loading ? data.department : ""}
+                                {loading ? data.department : ""}{" "}
                                 {loading ? data.studentNumber : ""}
+                            </p>
+                            <p className="userInfo">
+                                {loading ? data.email : ""}
                             </p>
                         </div>
                         <div className="logout" onClick={submitLogout}>

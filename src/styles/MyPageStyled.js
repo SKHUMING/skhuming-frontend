@@ -64,10 +64,8 @@ export const Container = styled.div`
     }
 
     .userName > span {
-        margin-left: 0.5vw;
-
         font-size: 1rem;
-        font-weight: lighter;
+        font-weight: bold;
     }
 
     .userInfo {
