@@ -17,6 +17,7 @@ function AdminDetailNotice() {
         noticeId: "",
         title: "",
         schedule: "",
+        createDate: "",
         mileageScore: 0,
         contents: "",
     });
@@ -121,9 +122,20 @@ function AdminDetailNotice() {
                             </div>
 
                             <div className="noticeContent">
-                                <p className="noticeMiniTitle">
-                                    적립 마일리지{" "}
+                                <p className="noticeMiniTitle">작성 날짜</p>
+                                <p className="noticeContentDetail">
+                                    <input
+                                        type="text"
+                                        placeholder="LMS에 작성된 날짜를 입력하세요."
+                                        name="createDate"
+                                        value={inputData.createDate}
+                                        onChange={handleInputChange}
+                                    ></input>
                                 </p>
+                            </div>
+
+                            <div className="noticeContent">
+                                <p className="noticeMiniTitle">적립 마일리지</p>
                                 <p className="noticeContentDetail">
                                     <input
                                         type="number"
@@ -139,13 +151,6 @@ function AdminDetailNotice() {
                             <div className="noticeContent">
                                 <p className="noticeMiniTitle">활동 내용</p>
                                 <p className="noticeContentDetail">
-                                    {/* <input
-                                    type="text"
-                                    placeholder="활동 내용을 입력하세요."
-                                    name="contents"
-                                    value={inputData.contents}
-                                    onChange={handleInputChange}
-                                ></input> */}
                                     <textarea
                                         cols={90}
                                         rows={20}
@@ -155,6 +160,19 @@ function AdminDetailNotice() {
                                         onChange={handleInputChange}
                                         wrap="hard"
                                     ></textarea>
+                                </p>
+                            </div>
+
+                            <div className="noticeContent">
+                                <p className="noticeMiniTitle">LMS 링크</p>
+                                <p className="noticeContentDetail">
+                                    <input
+                                        type="text"
+                                        placeholder="LMS 링크를 작성해주세요."
+                                        name="links"
+                                        value={inputData.links}
+                                        onChange={handleInputChange}
+                                    ></input>
                                 </p>
                             </div>
                         </div>

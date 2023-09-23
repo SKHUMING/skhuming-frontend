@@ -57,7 +57,7 @@ function SigninPage() {
             setStudentCheck(true);
         else {
             setStudentCheck(false);
-            setMsg("인증 코드가 일치하지 않아요.");
+            setMsg("인증 코드가 일치하지 않습니다.");
             setPopup(true);
         }
     };

@@ -164,7 +164,7 @@ function NoticeDetailsPage() {
                     <div className="noticeContentBox">
                         <div className="dateMileageBox">
                             <div className="noticeContent">
-                                <p className="noticeMiniTitle">일정</p>
+                                <p className="noticeMiniTitle">활동 일정</p>
                                 <p className="noticeContentDetail">
                                     {data.schedule}
                                 </p>
@@ -176,6 +176,15 @@ function NoticeDetailsPage() {
                                     {data.mileageScore}점
                                 </p>
                             </div>
+
+                            <div className="noticeContent mileageBox">
+                                <p className="noticeMiniTitle">LMS 링크</p>
+                                <a href={data.links}>
+                                    <p className="noticeContentDetail">
+                                        클릭하여 자세한 내용을 확인하세요.
+                                    </p>
+                                </a>
+                            </div>
                         </div>
 
                         <div className="noticeContent">
@@ -184,6 +193,12 @@ function NoticeDetailsPage() {
                                 {data.contents}
                             </p>
                             {console.log(data.contents)}
+                        </div>
+
+                        <div className="noticeContent">
+                            <p className="noticeContentDetail createDateBox">
+                                - {data.createDate} 작성 -
+                            </p>
                         </div>
                     </div>
                 </div>

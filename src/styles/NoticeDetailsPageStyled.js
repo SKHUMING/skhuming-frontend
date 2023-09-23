@@ -87,4 +87,11 @@ export const Container = styled.div`
 
         white-space: pre-line;
     }
+
+    .createDateBox {
+        display: flex;
+        justify-content: flex-end;
+
+        color: #8e939a;
+    }
 `;
