@@ -73,7 +73,7 @@ function SigninPage() {
                     inputData
                 );
                 console.log(response.data);
-                setMsg("회원가입에 성공했습니다! 다시 로그인 해주세요.");
+                setMsg("회원가입에 성공했습니다!\n다시 로그인 해주세요.");
                 setGoLogin(true);
                 setPopup(true);
                 // navigate("/");
@@ -109,7 +109,7 @@ function SigninPage() {
 
     // 학부 선택
     const [department, setDepartment] = useState([
-        { departmentId: 1, department: "인문자율융합학부" },
+        { departmentId: 1, department: "인문융합자율학부" },
         { departmentId: 2, department: "사회융합자율학부" },
         { departmentId: 3, department: "미디어콘텐츠융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
