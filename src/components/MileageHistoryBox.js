@@ -30,7 +30,7 @@ function MileageHistoryBox({ title, mileageId, mileageScore, systemDate }) {
                         },
                     }
                 );
-                setMsg("👋🏻 마일리지 내역을 삭제하였습니다.");
+                setMsg("마일리지 내역을 삭제하였습니다.");
                 setPopup(true);
             } catch (error) {
                 console.error(error);

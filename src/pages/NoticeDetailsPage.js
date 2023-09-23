@@ -72,7 +72,7 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(true);
-            setMsg("⭐️ 스크랩 되었습니다.");
+            setMsg("스크랩 되었습니다! 마이페이지에서 확인해보세요.");
             setPopup(true);
         } catch (error) {
             console.log(error);
@@ -103,7 +103,7 @@ function NoticeDetailsPage() {
                 }
             );
             setScrap(false);
-            setMsg("👋🏻 스크랩을 취소하였습니다.");
+            setMsg("스크랩을 취소하였습니다.");
             setPopup(true);
         } catch (error) {
             console.log(error);
