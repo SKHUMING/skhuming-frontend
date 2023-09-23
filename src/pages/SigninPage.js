@@ -111,7 +111,7 @@ function SigninPage() {
     const [department, setDepartment] = useState([
         { departmentId: 1, department: "인문자율융합학부" },
         { departmentId: 2, department: "사회융합자율학부" },
-        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 3, department: "미디어콘텐츠융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
     ]);
     // 선택한 학부 (select box)

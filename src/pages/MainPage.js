@@ -32,27 +32,12 @@ function MainPage() {
         AOS.init(); // AOS 초기화
     }, []);
 
-    // const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    // async function getData() {
-    //     try {
-    //         const response = await axios.get(
-    //             "https://api.skhuming-api.store/api/main"
-    //         );
-    //         setData(response.data);
-    //         if (data.length > 0) setLoading(true);
-    //         setLoading(true);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-
     // 랭킹 선택
     const [award, setAward] = useState([
         { departmentId: 0, department: "재학생 전체" },
         { departmentId: 1, department: "인문자율융합학부" },
         { departmentId: 2, department: "사회융합자율학부" },
-        { departmentId: 3, department: "미디어융합자율학부" },
+        { departmentId: 3, department: "미디어콘텐츠융합자율학부" },
         { departmentId: 4, department: "IT융합자율학부" },
         { departmentId: 5, department: "학부" },
     ]);
@@ -93,102 +78,11 @@ function MainPage() {
                         <hr />
                     </div>
 
-                    {/* <AllDepartmentAward /> */}
                     {selectAward < 5 ? (
                         <Award department={selectAward} />
                     ) : (
                         <AllDepartmentAward />
                     )}
-
-                    {/* <div className="award">
-                    <div
-                        className="box_2nd"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>2nd</p>
-                        <div className="profileBox_2nd">
-                            <div className="tierImg_2nd">
-                                {loading ? rankImg(1) : "Loading..."}
-                            </div>
-                            <div className="profile_2nd">
-                                {loading ? (
-                                    <p className="name_2nd">
-                                        {data[1].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_2nd">
-                                        {data[1].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="box_1st"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>1st</p>
-                        <div className="profileBox_1st">
-                            <div className="tierImg_1st">
-                                {loading ? rankImg(0) : "Loading..."}
-                            </div>
-                            <div className="profile_1st">
-                                {loading ? (
-                                    <p className="name_1st">
-                                        {data[0].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_1st">
-                                        {data[0].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="box_3rd"
-                        data-aos="fade-up"
-                        data-aos-duration="1500"
-                    >
-                        <p>3rd</p>
-                        <div className="profileBox_3rd">
-                            <div className="tierImg_3rd">
-                                {loading ? rankImg(2) : "Loading..."}
-                            </div>
-                            <div className="profile_3rd">
-                                {loading ? (
-                                    <p className="name_3rd">
-                                        {data[2].nickname}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-
-                                {loading ? (
-                                    <p className="score_3rd">
-                                        {data[2].score}점
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
 
                     <div className="qnaBox">
                         <div className="qnaTitle">
@@ -360,16 +254,6 @@ function MainPage() {
                         </div>
                     </div>
 
-                    {/* <div className="footer">
-                    <p className="footer__name">SKHUMING, 스쿠밍</p>
-                    <hr />
-                    <p className="footer__content">
-                        <span>Contact</span> | skhuskhuming@gmail.com
-                    </p>
-                    <p className="footer__copyright">
-                        Copyright © 2023 SKHUMING. All rights reserved.
-                    </p>
-                </div> */}
                     <Footer />
                 </div>
             </Container>
