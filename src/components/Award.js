@@ -73,7 +73,13 @@ function Award({ department }) {
                         <p>2nd</p>
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
-                                {data[1] ? rankImg(1) : "Loading..."}
+                                {data[1] ? (
+                                    rankImg(1)
+                                ) : (
+                                    <p className="noData">
+                                        등록된 데이터가 없습니다..🥲
+                                    </p>
+                                )}
                             </div>
                             <div className="profile_2nd">
                                 {data[1] ? (
@@ -102,7 +108,13 @@ function Award({ department }) {
                         <p>1st</p>
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
-                                {data[0] ? rankImg(0) : "Loading..."}
+                                {data[0] ? (
+                                    rankImg(0)
+                                ) : (
+                                    <p className="noData">
+                                        등록된 데이터가 없습니다..🥲
+                                    </p>
+                                )}
                             </div>
                             <div className="profile_1st">
                                 {data[0] ? (
@@ -131,7 +143,13 @@ function Award({ department }) {
                         <p>3rd</p>
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
-                                {data[2] ? rankImg(2) : "Loading..."}
+                                {data[2] ? (
+                                    rankImg(2)
+                                ) : (
+                                    <p className="noData">
+                                        등록된 데이터가 없습니다..🥲
+                                    </p>
+                                )}
                             </div>
                             <div className="profile_3rd">
                                 {data[2] ? (
