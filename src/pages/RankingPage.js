@@ -6,6 +6,7 @@ import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
 import axios from "axios";
 import Footer from "../components/Footer.js";
+import PopUp from "../components/PopUp.js";
 
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
@@ -54,6 +55,11 @@ function RankingPage() {
     const [data, setData] = useState([]);
     const [myData, setMyData] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
+
     async function getData() {
         try {
             const response = await axios.get(
@@ -66,22 +72,52 @@ function RankingPage() {
                 }
             );
 
-            console.log(response.data.content);
-
             setData(response.data.content);
             setTotalElements(response.data.totalElements);
 
-            for (let r of response.data.content) {
-                // number라서 ==
-                if (r.memberId == window.localStorage.getItem("memberId")) {
-                    setMyData(r);
-                }
-            }
+            // for (let r of response.data.content) {
+            //     // number라서 ==
+            //     if (r.memberId == window.localStorage.getItem("memberId")) {
+            //         setMyData(r);
+            //     }
+            // }
 
             if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    // 마이 데이터 받아오기
+    async function getMyData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "https://api.skhuming-api.store/api/user/ranking/my-ranking",
+                {
+                    params: {
+                        memberId: memberId,
+                        departmentNumber: selectAward,
+                    },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            console.log(response.data);
+            setMyData(response.data);
+            // if (data.length > 0) setLoading(true);
+            setLoading(true);
+        } catch (error) {
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+                setGoLogin(true);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
+            setPopup(true);
         }
     }
 
@@ -95,12 +131,17 @@ function RankingPage() {
 
     useEffect(() => {
         getData();
+        getMyData();
     }, [selectAward, page]);
 
     return (
         <Desktop>
             <Container>
                 <MainHeader />
+
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                ) : null}
 
                 <DisplayBoard />
 
@@ -155,7 +196,6 @@ function RankingPage() {
                     </div>
 
                     <div className="ranking">
-                        {console.log(data.length)}
                         {data.length > 0 ? (
                             data.map((item) => (
                                 <RankBox
