@@ -6,12 +6,6 @@ import Award from "../components/Award.js";
 import Footer from "../components/Footer.js";
 import About from "../components/About.js";
 
-import userIcon from "../images/check-profile.png";
-import graduationIcon from "../images/graduation-hat.png";
-import alertIcon from "../images/alert.png";
-import informationIcon from "../images/chat-information.png";
-import pencilIcon from "../images/pencil.png";
-
 import AOS from "aos";
 import "aos/dist/aos.css";
 

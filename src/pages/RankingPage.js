@@ -5,34 +5,11 @@ import RankBox from "../components/RankBox.js";
 import axios from "axios";
 import Footer from "../components/Footer.js";
 import PopUp from "../components/PopUp.js";
-
-import tier_SS from "../images/tier_SS.png";
-import tier_S from "../images/tier_S.png";
-import tier_A from "../images/tier_A.png";
-import tier_B from "../images/tier_B.png";
-import tier_Un from "../images/tier_UN.png";
-
+import rankImg from "../components/RankImg.js";
 import { Container } from "../styles/RankingPageStyled.js";
-
 import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
 import Pagination from "react-js-pagination";
-
 import DisplayBoard from "../components/DisplayBoard.js";
-
-function rankImg(tier) {
-    switch (tier) {
-        case "SS":
-            return <img src={tier_SS} alt="tier"></img>;
-        case "S":
-            return <img src={tier_S} alt="tier"></img>;
-        case "A":
-            return <img src={tier_A} alt="tier"></img>;
-        case "B":
-            return <img src={tier_B} alt="tier"></img>;
-        default:
-            return <img src={tier_Un} alt="tier"></img>;
-    }
-}
 
 function RankingPage() {
     // 랭킹 선택
