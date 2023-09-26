@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";

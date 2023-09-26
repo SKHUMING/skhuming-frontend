@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Desktop } from "../components/ReactResponse.js";
 import AdminHeader from "../components/AdminHeader.js";
-import NoticeBox from "../components/NoticeBox.js";
 import axios from "axios";
-
 import { Container } from "../styles/AdminAddNoticeStyled.js";
 
 function AdminDetailNotice() {

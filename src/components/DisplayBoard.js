@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import LogoImg from "../images/skhuming_logo_ai.png";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { Container } from "../styles/DisplayBoardStyled.js";
 
@@ -30,6 +27,7 @@ function DisplayBoard() {
     useEffect(() => {
         getData();
         AOS.init(); // AOS 초기화
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

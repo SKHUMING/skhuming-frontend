@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
@@ -39,8 +37,6 @@ function MileagePage() {
             setUserData(response.data);
             setLoading(true);
         } catch (error) {
-            console.log(error.response.status);
-
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);
@@ -70,7 +66,6 @@ function MileagePage() {
 
     const handleMileage = (event) => {
         setAddMileage(event.currentTarget.value);
-        // console.log(event.currentTarget.value);
     };
 
     const submitMileage = (event) => {
@@ -94,7 +89,6 @@ function MileagePage() {
                     },
                 }
             );
-            console.log(response);
             setMsg(
                 "스쿰 마일리지를 추가하였습니다!\n하단의 my mileage history에서 확인해보세요!"
             );
@@ -127,7 +121,6 @@ function MileagePage() {
                 }
             );
             setMileageHistory(response.data);
-            // console.log(response.data);
         } catch (error) {
             console.error(error);
         }

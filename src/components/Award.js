@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import LogoImg from "../images/skhuming_logo_ai.png";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { Container } from "../styles/MainPageStyled.js";
@@ -24,7 +21,6 @@ function Award({ department }) {
     const [loading, setLoading] = useState(false);
     async function getData() {
         try {
-            // console.log("department: " + department);
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/main",
                 {
@@ -33,7 +29,6 @@ function Award({ department }) {
                     },
                 }
             );
-            // console.log(response.data);
             setData(response.data);
             if (data.length > 0) setLoading(true);
             setLoading(true);
@@ -44,6 +39,7 @@ function Award({ department }) {
 
     useEffect(() => {
         getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [department]);
 
     const rankImg = (rank) => {

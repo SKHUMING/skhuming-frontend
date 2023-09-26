@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBoxWidget from "../components/ScrapBox_widget.js";
@@ -51,9 +50,7 @@ function MyPage() {
                     },
                 }
             );
-            // console.log(response);
             setData(response.data);
-            // if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
             if (error.response.status === 401) {
@@ -74,7 +71,6 @@ function MyPage() {
         try {
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/user/my-page/scrap/list",
-                // "https://api.skhuming-api.store/user/api/scrap/list",
                 {
                     params: { memberId: memberId },
                     headers: {
@@ -82,10 +78,8 @@ function MyPage() {
                     },
                 }
             );
-            console.log(response.data);
             setScrapData(response.data.reverse());
         } catch (error) {
-            console.log(error);
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);

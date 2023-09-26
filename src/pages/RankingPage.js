@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
@@ -75,13 +73,6 @@ function RankingPage() {
             setData(response.data.content);
             setTotalElements(response.data.totalElements);
 
-            // for (let r of response.data.content) {
-            //     // number라서 ==
-            //     if (r.memberId == window.localStorage.getItem("memberId")) {
-            //         setMyData(r);
-            //     }
-            // }
-
             if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
@@ -105,9 +96,7 @@ function RankingPage() {
                     },
                 }
             );
-            console.log(response.data);
             setMyData(response.data);
-            // if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
             if (error.response.status === 401) {
@@ -132,6 +121,7 @@ function RankingPage() {
     useEffect(() => {
         getData();
         getMyData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectAward, page]);
 
     return (

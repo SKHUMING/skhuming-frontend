@@ -1,25 +1,15 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import AllDepartmentAward from "../components/AllDepartmentAward.js";
 import Award from "../components/Award.js";
 import Footer from "../components/Footer.js";
 
-import tier_SS from "../images/tier_SS.png";
-import tier_S from "../images/tier_S.png";
-import tier_A from "../images/tier_A.png";
-import tier_B from "../images/tier_B.png";
-import tier_UN from "../images/tier_UN.png";
-
 import userIcon from "../images/check-profile.png";
 import graduationIcon from "../images/graduation-hat.png";
 import alertIcon from "../images/alert.png";
 import informationIcon from "../images/chat-information.png";
 import pencilIcon from "../images/pencil.png";
-
-import axios from "axios";
 
 import AOS from "aos";
 import "aos/dist/aos.css";

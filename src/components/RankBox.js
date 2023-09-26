@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import tier_SS from "../images/tier_SS.png";
 import tier_S from "../images/tier_S.png";
 import tier_A from "../images/tier_A.png";

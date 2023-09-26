@@ -1,7 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import AdminHeader from "../components/AdminHeader.js";
 import AdminNoticeBox from "../components/AdminNoticeBox.js";
@@ -14,7 +11,6 @@ import Pagination from "react-js-pagination";
 
 function AdminNotice() {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     async function getData() {
         try {
             const response = await axios.get(
