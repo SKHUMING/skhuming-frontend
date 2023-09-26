@@ -13,7 +13,7 @@
 | Backend                                                                                 | Frontend                                                                               |
 | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | <img src="https://avatars.githubusercontent.com/u/113246619?v=4" style="width: 200px;"> | <img src="https://avatars.githubusercontent.com/u/63100324?v=4" style="width: 200px;"> |
-| 202014098 최기웅                                                                        | 202014051 명지우                                                                       |
+| [202014098 최기웅](https://github.com/giwoong01)                                        | [202014051 명지우](https://github.com/MyungJiwoo)                                      |
 
 <br/><br/><br/><br />
 
@@ -21,12 +21,15 @@
 
 ### 개발 동기
 
-> 알고리즘 문제 사이트 중 하나인 ‘백준’에서는 자신이 제출한 답안에 따라 점수와 티어가 쌓이고, 그 점수를 가지고 ‘sovled’에서 알고리즘 랭킹을 제공합니다. 알고리즘 스터디에서 만나 프로젝트까지 진행하게 된 알프로팀은 이런 랭킹 서비스에서 아이디어를 얻었습니다.
-> 성공회대학교에서 운영중인 ‘스쿰 마일리지’ 제도는, 학기 중 비교과 프로그램에 참여하면 스쿰 마일리지를 지급하고, 학기 말에 고득점자 일부를 선발해 장학금을 지급합니다. 이렇게 랭킹과 스쿰 마일리지를 합한 스쿠밍이 탄생하게 되었습니다.
+> 알고리즘 문제 사이트 중 하나인 ‘백준’에서는 자신이 제출한 답안에 따라 점수와 티어가 쌓이고, 그 점수를 가지고 ‘sovled’에서 알고리즘 랭킹을 제공합니다. 알고리즘 스터디에서 만나 프로젝트까지 진행하게 된
+> 알프로팀은 이런 랭킹 서비스에서 아이디어를 얻었습니다.
+> 성공회대학교에서 운영중인 ‘스쿰 마일리지’ 제도는, 학기 중 비교과 프로그램에 참여하면 스쿰 마일리지를 지급하고, 학기 말에 고득점자 일부를 선발해 장학금을 지급합니다. 이렇게 랭킹과 스쿰 마일리지를 합한
+> 스쿠밍이 탄생하게 되었습니다.
 
 ### 개발 목표
 
-> 스쿠밍에서 자체 제작한 티어와, 스쿠밍에서 제공하는 다양한 랭킹을 제공합니다. 이로부터 작게는 자신이 활동한 비교과 프로그램의 내역을 확인할 수 있고, 자신이 모은 마일리지 점수를 확인할 수 있으며, 크게는 다른 사용자들과 경쟁하며 비교과 프로그램에 대한 동기부여를 유발하고 전체적인 비교과 프로그램의 활성화를 목표로 하고 있습니다.
+> 스쿠밍에서 자체 제작한 티어와, 스쿠밍에서 제공하는 다양한 랭킹을 제공합니다. 이로부터 작게는 자신이 활동한 비교과 프로그램의 내역을 확인할 수 있고, 자신이 모은 마일리지 점수를 확인할 수 있으며, 크게는 다른
+> 사용자들과 경쟁하며 비교과 프로그램에 대한 동기부여를 유발하고 전체적인 비교과 프로그램의 활성화를 목표로 하고 있습니다.
 
 <br/><br/><br/><br />
 
@@ -83,10 +86,13 @@
 
 Backend
 
-  <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
-  <img src="https://img.shields.io/badge/Mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
-  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=AmazonAWS&logoColor=white" />
-  <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=Spring&logoColor=white" />
+<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
+<img src="https://img.shields.io/badge/Mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
+<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=Spring&logoColor=white" />
+<img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=Swagger&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=flat&logo=AmazonEC2&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon%20RDS-527FFF?style=flat&logo=AmazonRDS&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon%20Route53-8C4FFF?style=flat&logo=AmazonRoute53&logoColor=white">
 
 <br /><br />
 
