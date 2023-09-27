@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-
 import { Container } from "../styles/PopUpStyled.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,9 +30,6 @@ function PopUp(props) {
                     <div className="innerBox"></div>
                     <div className="innerBox2"></div>
                 </div>
-                {/* <div className="topBox"></div>
-                <div className="topBox2"></div>
-                <div className="topBox3"></div> */}
                 <p className="message">{props.msg}</p>
                 <div
                     className="closeBtn"

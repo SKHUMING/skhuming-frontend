@@ -1,5 +1,4 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
 import LogoImg from "../images/skhuming_logo_ai.png";
 import { Link } from "react-router-dom";
 

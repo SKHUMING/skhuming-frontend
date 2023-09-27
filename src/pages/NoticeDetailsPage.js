@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import { useParams } from "react-router-dom";
 import MainHeader from "../components/MainHeader.js";
@@ -75,7 +73,6 @@ function NoticeDetailsPage() {
             setMsg(`스크랩 되었습니다!\n마이페이지에서 확인해보세요.`);
             setPopup(true);
         } catch (error) {
-            console.log(error);
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);

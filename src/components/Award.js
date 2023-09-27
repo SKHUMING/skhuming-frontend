@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import LogoImg from "../images/skhuming_logo_ai.png";
-import { Link } from "react-router-dom";
 import axios from "axios";
-
+import rankImg from "./RankImg";
 import { Container } from "../styles/MainPageStyled.js";
-
-import tier_SS from "../images/tier_SS.png";
-import tier_S from "../images/tier_S.png";
-import tier_A from "../images/tier_A.png";
-import tier_B from "../images/tier_B.png";
-import tier_UN from "../images/tier_UN.png";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -24,7 +15,6 @@ function Award({ department }) {
     const [loading, setLoading] = useState(false);
     async function getData() {
         try {
-            // console.log("department: " + department);
             const response = await axios.get(
                 "https://api.skhuming-api.store/api/main",
                 {
@@ -33,7 +23,6 @@ function Award({ department }) {
                     },
                 }
             );
-            // console.log(response.data);
             setData(response.data);
             if (data.length > 0) setLoading(true);
             setLoading(true);
@@ -44,22 +33,8 @@ function Award({ department }) {
 
     useEffect(() => {
         getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [department]);
-
-    const rankImg = (rank) => {
-        switch (data[rank].tier) {
-            case "SS":
-                return <img src={tier_SS} alt="tier"></img>;
-            case "S":
-                return <img src={tier_S} alt="tier"></img>;
-            case "A":
-                return <img src={tier_A} alt="tier"></img>;
-            case "B":
-                return <img src={tier_B} alt="tier"></img>;
-            default:
-                return <img src={tier_UN} alt="tier"></img>;
-        }
-    };
 
     return (
         <Container>
@@ -74,7 +49,7 @@ function Award({ department }) {
                         <div className="profileBox_2nd">
                             <div className="tierImg_2nd">
                                 {data[1] ? (
-                                    rankImg(1)
+                                    rankImg(data[1].tier)
                                 ) : (
                                     <p className="noData">
                                         등록된 데이터가 없습니다..🥲
@@ -109,7 +84,7 @@ function Award({ department }) {
                         <div className="profileBox_1st">
                             <div className="tierImg_1st">
                                 {data[0] ? (
-                                    rankImg(0)
+                                    rankImg(data[0].tier)
                                 ) : (
                                     <p className="noData">
                                         등록된 데이터가 없습니다..🥲
@@ -144,7 +119,7 @@ function Award({ department }) {
                         <div className="profileBox_3rd">
                             <div className="tierImg_3rd">
                                 {data[2] ? (
-                                    rankImg(2)
+                                    rankImg(data[2].tier)
                                 ) : (
                                     <p className="noData">
                                         등록된 데이터가 없습니다..🥲
