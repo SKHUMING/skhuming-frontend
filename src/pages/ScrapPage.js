@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import ScrapBox from "../components/ScrapBox.js";
@@ -32,11 +30,9 @@ function ScrapPage() {
                     },
                 }
             );
-            console.log(response);
             setScrapData(response.data.content);
             setTotalElements(response.data.totalElements);
         } catch (error) {
-            console.log(error);
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);

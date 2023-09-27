@@ -1,39 +1,15 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
 import axios from "axios";
 import Footer from "../components/Footer.js";
-
-import tier_SS from "../images/tier_SS.png";
-import tier_S from "../images/tier_S.png";
-import tier_A from "../images/tier_A.png";
-import tier_B from "../images/tier_B.png";
-import tier_Un from "../images/tier_UN.png";
-
+import PopUp from "../components/PopUp.js";
+import rankImg from "../components/RankImg.js";
 import { Container } from "../styles/RankingPageStyled.js";
-
 import { PaginationStyle } from "../styles/NoticePaginationStyled.js";
 import Pagination from "react-js-pagination";
-
 import DisplayBoard from "../components/DisplayBoard.js";
-
-function rankImg(tier) {
-    switch (tier) {
-        case "SS":
-            return <img src={tier_SS} alt="tier"></img>;
-        case "S":
-            return <img src={tier_S} alt="tier"></img>;
-        case "A":
-            return <img src={tier_A} alt="tier"></img>;
-        case "B":
-            return <img src={tier_B} alt="tier"></img>;
-        default:
-            return <img src={tier_Un} alt="tier"></img>;
-    }
-}
 
 function RankingPage() {
     // 랭킹 선택
@@ -54,6 +30,11 @@ function RankingPage() {
     const [data, setData] = useState([]);
     const [myData, setMyData] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const [popup, setPopup] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [goLogin, setGoLogin] = useState(false);
+
     async function getData() {
         try {
             const response = await axios.get(
@@ -66,22 +47,43 @@ function RankingPage() {
                 }
             );
 
-            console.log(response.data.content);
-
             setData(response.data.content);
             setTotalElements(response.data.totalElements);
-
-            for (let r of response.data.content) {
-                // number라서 ==
-                if (r.memberId == window.localStorage.getItem("memberId")) {
-                    setMyData(r);
-                }
-            }
 
             if (data.length > 0) setLoading(true);
             setLoading(true);
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    // 마이 데이터 받아오기
+    async function getMyData() {
+        const memberId = window.localStorage.getItem("memberId");
+        try {
+            const response = await axios.get(
+                "https://api.skhuming-api.store/api/user/ranking/my-ranking",
+                {
+                    params: {
+                        memberId: memberId,
+                        departmentNumber: selectAward,
+                    },
+                    headers: {
+                        Authorization: window.localStorage.getItem("token"),
+                    },
+                }
+            );
+            setMyData(response.data);
+            setLoading(true);
+        } catch (error) {
+            if (error.response.status === 401) {
+                setMsg(error.response.data);
+                setGoLogin(true);
+            } else {
+                setMsg(error.response.data.message);
+            }
+
+            setPopup(true);
         }
     }
 
@@ -95,12 +97,18 @@ function RankingPage() {
 
     useEffect(() => {
         getData();
+        getMyData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectAward, page]);
 
     return (
         <Desktop>
             <Container>
                 <MainHeader />
+
+                {popup ? (
+                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                ) : null}
 
                 <DisplayBoard />
 
@@ -155,7 +163,6 @@ function RankingPage() {
                     </div>
 
                     <div className="ranking">
-                        {console.log(data.length)}
                         {data.length > 0 ? (
                             data.map((item) => (
                                 <RankBox

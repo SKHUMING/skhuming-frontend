@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Desktop } from "../components/ReactResponse.js";
 import Header from "../components/Header.js";
 import PopUp from "../components/PopUp.js";
@@ -44,13 +42,11 @@ function LoginPage() {
                 "token",
                 "Bearer " + response.data.token
             );
-            console.log(response.data);
             window.localStorage.setItem("memberId", response.data.memberId);
             if (response.data.authorityName === "ROLE_ADMIN")
                 navigate("/admin/notice");
             else navigate("/main");
         } catch (error) {
-            // console.error(error.response.data.message);
             setMsg(error.response.data.message);
             setPopup(true);
         }

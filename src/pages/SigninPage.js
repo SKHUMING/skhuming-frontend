@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header.js";
 import PopUp from "../components/PopUp.js";
 import { Desktop } from "../components/ReactResponse.js";
@@ -14,8 +12,6 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "../styles/SigninPageStyled.js";
 
 function SigninPage() {
-    const navigate = useNavigate();
-
     // 팝업창
     const [popup, setPopup] = useState(false);
     const [msg, setMsg] = useState("");
@@ -76,7 +72,6 @@ function SigninPage() {
                 setMsg("회원가입에 성공했습니다!\n다시 로그인 해주세요.");
                 setGoLogin(true);
                 setPopup(true);
-                // navigate("/");
             } catch (error) {
                 console.error(error.response.data.message);
                 setMsg(error.response.data.message);

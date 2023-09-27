@@ -1,19 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Desktop } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import axios from "axios";
 import PopUp from "../components/PopUp.js";
 import Footer from "../components/Footer.js";
-
-import tier_SS from "../images/tier_SS.png";
-import tier_S from "../images/tier_S.png";
-import tier_A from "../images/tier_A.png";
-import tier_B from "../images/tier_B.png";
-import tier_Un from "../images/tier_UN.png";
+import rankImg from "../components/RankImg.js";
 import MileageHistoryBox from "../components/MileageHistoryBox.js";
-
 import { Container } from "../styles/MileagePageStyled.js";
 
 function MileagePage() {
@@ -39,8 +31,6 @@ function MileagePage() {
             setUserData(response.data);
             setLoading(true);
         } catch (error) {
-            console.log(error.response.status);
-
             if (error.response.status === 401) {
                 setMsg(error.response.data);
                 setGoLogin(true);
@@ -70,7 +60,6 @@ function MileagePage() {
 
     const handleMileage = (event) => {
         setAddMileage(event.currentTarget.value);
-        // console.log(event.currentTarget.value);
     };
 
     const submitMileage = (event) => {
@@ -82,7 +71,7 @@ function MileagePage() {
     async function postMileage() {
         console.log(addMileage);
         try {
-            const response = await axios.post(
+            await axios.post(
                 "https://api.skhuming-api.store/api/user/mileage/post",
                 {
                     memberId: window.localStorage.getItem("memberId"),
@@ -94,7 +83,6 @@ function MileagePage() {
                     },
                 }
             );
-            console.log(response);
             setMsg(
                 "스쿰 마일리지를 추가하였습니다!\n하단의 my mileage history에서 확인해보세요!"
             );
@@ -127,7 +115,6 @@ function MileagePage() {
                 }
             );
             setMileageHistory(response.data);
-            // console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -138,22 +125,6 @@ function MileagePage() {
         getMileageList();
         getMileageHistory();
     }, []);
-
-    // 티어 사진
-    function rankImg(tier) {
-        switch (tier) {
-            case "SS":
-                return <img src={tier_SS} alt="tier"></img>;
-            case "S":
-                return <img src={tier_S} alt="tier"></img>;
-            case "A":
-                return <img src={tier_A} alt="tier"></img>;
-            case "B":
-                return <img src={tier_B} alt="tier"></img>;
-            default:
-                return <img src={tier_Un} alt="tier"></img>;
-        }
-    }
 
     return (
         <Desktop>
