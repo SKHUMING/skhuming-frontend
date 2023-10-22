@@ -175,7 +175,7 @@ function NoticeDetailsPage() {
                             </div>
 
                             <div className="noticeContent mileageBox">
-                                <p className="noticeMiniTitle">LMS 링크</p>
+                                <p className="noticeMiniTitle">공지 링크</p>
                                 <a href={data.links}>
                                     <p className="noticeContentDetail">
                                         클릭하여 자세한 내용을 확인하세요.
