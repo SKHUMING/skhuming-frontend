@@ -161,24 +161,25 @@ function NoticeDetailsPage() {
                     <div className="noticeContentBox">
                         <div className="dateMileageBox">
                             <div className="noticeContent">
-                                <p className="noticeMiniTitle">활동 일정</p>
+                                <p className="noticeMiniTitle">작성자</p>
                                 <p className="noticeContentDetail">
                                     {data.schedule}
                                 </p>
                             </div>
 
                             <div className="noticeContent mileageBox">
-                                <p className="noticeMiniTitle">적립 마일리지</p>
+                                <p className="noticeMiniTitle">작성일</p>
                                 <p className="noticeContentDetail">
-                                    {data.mileageScore}점
+                                    {data.createDate}
                                 </p>
                             </div>
 
                             <div className="noticeContent mileageBox">
-                                <p className="noticeMiniTitle">LMS 링크</p>
+                                <p className="noticeMiniTitle">공지 링크</p>
                                 <a href={data.links}>
                                     <p className="noticeContentDetail">
-                                        클릭하여 자세한 내용을 확인하세요.
+                                        이곳을 클릭하여 자세한 내용을
+                                        확인하세요.
                                     </p>
                                 </a>
                             </div>
@@ -192,11 +193,11 @@ function NoticeDetailsPage() {
                             {console.log(data.contents)}
                         </div>
 
-                        <div className="noticeContent">
+                        {/* <div className="noticeContent">
                             <p className="noticeContentDetail createDateBox">
                                 - {data.createDate} 작성 -
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

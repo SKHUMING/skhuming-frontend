@@ -32,7 +32,8 @@ export const Container = styled.div`
         align-items: center;
 
         border-radius: 0.25rem;
-        background: #cdced3;
+        /* background: #cdced3; */
+        background-color: #204782a6;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 
         font-size: 0.8rem;
