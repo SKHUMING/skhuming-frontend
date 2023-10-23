@@ -27,12 +27,14 @@ export const Container = styled.div`
     .noticeTitleBox_inner {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .noticeTitle {
         font-size: 23px;
         font-weight: bold;
         margin: 0;
+        width: 95%;
 
         color: #2d6dcc;
     }
@@ -76,6 +78,12 @@ export const Container = styled.div`
         color: #204782;
         font-size: 1.15rem;
         font-weight: bold;
+    }
+    .noticeContent a {
+        color: #204782a2;
+    }
+    .noticeContent a:visited {
+        color: #204782a2;
     }
 
     .noticeContentDetail {
