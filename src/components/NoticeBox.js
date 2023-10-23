@@ -7,7 +7,7 @@ function NoticeBox({ noticeId, end, title, date }) {
         <Container>
             <StyledLink to={`/notice/detail/${noticeId}`}>
                 <div className="noticeContentBox">
-                    {end ? <div className="noticeContentEnd">종료</div> : ""}
+                    {end ? "" : <div className="noticeContentEnd">진행 중</div>}
                     <div className="titleDateBox">
                         <p className="noticeContentTitle">{title}</p>
                         <p className="noticeDate">{date} 작성</p>
