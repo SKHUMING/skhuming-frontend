@@ -20,6 +20,7 @@ function NoticePage() {
             );
             setData(response.data.content);
             setTotalElements(response.data.totalElements);
+            console.log(response.data.content);
         } catch (error) {
             console.error(error);
         }
@@ -86,7 +87,7 @@ function NoticePage() {
                             data.map((item) => (
                                 <NoticeBox
                                     noticeId={item.noticeId}
-                                    end={item.end}
+                                    status={item.status}
                                     title={item.title}
                                     date={item.createDate}
                                 />

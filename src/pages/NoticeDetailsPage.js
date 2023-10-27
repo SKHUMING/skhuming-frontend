@@ -163,7 +163,7 @@ function NoticeDetailsPage() {
                             <div className="noticeContent">
                                 <p className="noticeMiniTitle">작성자</p>
                                 <p className="noticeContentDetail">
-                                    {data.schedule}
+                                    {data.author}
                                 </p>
                             </div>
 
