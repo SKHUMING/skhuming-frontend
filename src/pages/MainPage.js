@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Desktop } from "../components/ReactResponse.js";
+import { Desktop, Mobile } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import AllDepartmentAward from "../components/AllDepartmentAward.js";
 import Award from "../components/Award.js";
@@ -34,47 +34,90 @@ function MainPage() {
     };
 
     return (
-        <Desktop>
-            <Container>
-                <MainHeader />
+        <>
+            <Desktop>
+                <Container>
+                    <MainHeader />
 
-                <DisplayBoard />
+                    <DisplayBoard />
 
-                <div class="awardBox">
-                    <div className="awardTitle">
-                        <div className="awardTitleBox">
-                            <p>SKHUMING AWARD</p>
-                            <form className="selectAward">
-                                <select
-                                    onChange={handleAward}
-                                    value={selectAward}
-                                >
-                                    {award.map((item) => (
-                                        <option
-                                            key={item.departmentId}
-                                            value={item.departmentId}
-                                        >
-                                            {item.department}
-                                        </option>
-                                    ))}
-                                </select>
-                            </form>
+                    <div class="awardBox">
+                        <div className="awardTitle">
+                            <div className="awardTitleBox">
+                                <p>SKHUMING AWARD</p>
+                                <form className="selectAward">
+                                    <select
+                                        onChange={handleAward}
+                                        value={selectAward}
+                                    >
+                                        {award.map((item) => (
+                                            <option
+                                                key={item.departmentId}
+                                                value={item.departmentId}
+                                            >
+                                                {item.department}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
+                            </div>
+                            <hr />
                         </div>
-                        <hr />
+
+                        {selectAward < 5 ? (
+                            <Award department={selectAward} />
+                        ) : (
+                            <AllDepartmentAward />
+                        )}
+
+                        <About />
+
+                        <Footer />
                     </div>
+                </Container>
+            </Desktop>
+            <Mobile>
+                <Container>
+                    <MainHeader />
 
-                    {selectAward < 5 ? (
-                        <Award department={selectAward} />
-                    ) : (
-                        <AllDepartmentAward />
-                    )}
+                    <DisplayBoard />
 
-                    <About />
+                    <div class="m_awardBox">
+                        <div className="m_awardTitle">
+                            <div className="m_awardTitleBox">
+                                <p>SKHUMING AWARD</p>
+                                <form className="m_selectAward">
+                                    <select
+                                        onChange={handleAward}
+                                        value={selectAward}
+                                    >
+                                        {award.map((item) => (
+                                            <option
+                                                key={item.departmentId}
+                                                value={item.departmentId}
+                                            >
+                                                {item.department}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
+                            </div>
+                            <hr />
+                        </div>
 
-                    <Footer />
-                </div>
-            </Container>
-        </Desktop>
+                        {selectAward < 5 ? (
+                            <Award department={selectAward} />
+                        ) : (
+                            <AllDepartmentAward />
+                        )}
+
+                        <About />
+
+                        <Footer />
+                    </div>
+                </Container>
+            </Mobile>
+        </>
     );
 }
 
