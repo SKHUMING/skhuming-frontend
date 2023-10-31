@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container } from "../styles/DisplayBoardStyled.js";
-
+import { Desktop, Mobile } from "../components/ReactResponse.js";
 import Marquee from "react-marquee-slider";
 
 import AOS from "aos";
@@ -31,22 +31,56 @@ function DisplayBoard() {
     }, []);
 
     return (
-        <Container data-aos="fade-up" data-aos-duration="1000">
-            <div className="board">
-                <Marquee velocity={35}>
-                    {news.map((text, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            {text}
+        <>
+            <Desktop>
+                <Container>
+                    <div
+                        className="boardContainer"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    >
+                        <div className="board">
+                            <Marquee velocity={35}>
+                                {news.map((text, index) => (
+                                    <div
+                                        key={index}
+                                        style={{
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    >
+                                        {text}
+                                    </div>
+                                ))}
+                            </Marquee>
                         </div>
-                    ))}
-                </Marquee>
-            </div>
-        </Container>
+                    </div>
+                </Container>
+            </Desktop>
+            <Mobile>
+                <Container>
+                    <div
+                        className="m_boardContainer"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    >
+                        <div className="m_board">
+                            <Marquee velocity={35}>
+                                {news.map((text, index) => (
+                                    <div
+                                        key={index}
+                                        style={{
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    >
+                                        {text}
+                                    </div>
+                                ))}
+                            </Marquee>
+                        </div>
+                    </div>
+                </Container>
+            </Mobile>
+        </>
     );
 }
 

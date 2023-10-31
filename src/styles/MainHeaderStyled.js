@@ -30,7 +30,10 @@ from{
 
 export const Container = styled.div`
     width: 100vw;
-    height: 20vh;
+
+    .mainHeaderContainer {
+        height: 20vh;
+    }
 
     .box1 {
         width: 80vw;
@@ -92,12 +95,96 @@ export const Container = styled.div`
     .linkBtn {
         margin: 0 2vw;
     }
+
+    // mobile
+    .m_mainHeaderContainer {
+        height: 10vh;
+    }
+
+    .m_box1 {
+        width: 90vw;
+        height: 12vh;
+
+        padding: 0 5vw;
+        flex-shrink: 0;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        position: absolute;
+        z-index: 2;
+
+        background: #2d6dcc;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        animation: ${slideBox1} 1s cubic-bezier(0.345, 0.77, 0.395, 0.92);
+    }
+
+    .m_box2 {
+        width: 100vw;
+        height: 13vh;
+        flex-shrink: 0;
+
+        position: absolute;
+        z-index: 1;
+
+        background: #5a95ec;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        animation: ${slideBox2} 1.3s cubic-bezier(0.345, 0.77, 0.395, 0.92);
+    }
+
+    .m_box3 {
+        width: 100vw;
+        height: 14vh;
+        flex-shrink: 0;
+
+        position: absolute;
+        z-index: 0;
+
+        background: #9dc4ff;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+        animation: ${slideBox3} 1.6s cubic-bezier(0.345, 0.77, 0.395, 0.92);
+    }
+
+    .m_box1 img {
+        width: 100px;
+    }
+
+    .m_linkBox {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        /* margin-top: 0.5vh; */
+    }
+
+    .m_linkBtn {
+        margin: 1px 0;
+    }
 `;
 
 export const StyledLink = styled(Link)`
     color: #fbfbfb;
     text-decoration: none;
     font-size: 20px;
+    font-weight: bold;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+        color: #fbfbfb;
+    }
+`;
+
+export const MStyledLink = styled(Link)`
+    color: #fbfbfb;
+    text-decoration: none;
+    font-size: 1.5vh;
     font-weight: bold;
 
     &:focus,

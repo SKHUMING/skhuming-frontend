@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Desktop, Mobile } from "../components/ReactResponse.js";
 import { Container } from "../styles/AllDepartmentAwardStyled";
 
 import AOS from "aos";
@@ -33,60 +33,120 @@ function AllDepartmentAward() {
     }, []);
 
     return (
-        <Container>
-            <div
-                className="rankingBox"
-                data-aos="fade-up"
-                data-aos-duration="1500"
-            >
-                <p className="ranking rank_1st effect-shine">1st</p>
-                <p className="department">
-                    {loading ? data[0].department : "loading..."}
-                </p>
-                <p className="total">
-                    {loading ? data[0].score + "점" : "loading..."}
-                </p>
-            </div>
-            <div
-                className="rankingBox"
-                data-aos="fade-up"
-                data-aos-duration="1500"
-            >
-                <p className="ranking rank_2nd effect-shine">2nd</p>
-                <p className="department">
-                    {loading ? data[1].department : "loading..."}
-                </p>
-                <p className="total">
-                    {loading ? data[1].score + "점" : "loading..."}
-                </p>
-            </div>
-            <div
-                className="rankingBox"
-                data-aos="fade-up"
-                data-aos-duration="1500"
-            >
-                <p className="ranking rank_3rd effect-shine">3rd</p>
-                <p className="department">
-                    {loading ? data[2].department : "loading..."}
-                </p>
-                <p className="total">
-                    {loading ? data[2].score + "점" : "loading..."}
-                </p>
-            </div>
-            <div
-                className="rankingBox"
-                data-aos="fade-up"
-                data-aos-duration="1500"
-            >
-                <p className="ranking rank_4th effect-shine">4th</p>
-                <p className="department">
-                    {loading ? data[3].department : "loading..."}
-                </p>
-                <p className="total">
-                    {loading ? data[3].score + "점" : "loading..."}
-                </p>
-            </div>
-        </Container>
+        <>
+            <Desktop>
+                <Container>
+                    <div
+                        className="rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="ranking rank_1st effect-shine">1st</p>
+                        <p className="department">
+                            {loading ? data[0].department : "loading..."}
+                        </p>
+                        <p className="total">
+                            {loading ? data[0].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="ranking rank_2nd effect-shine">2nd</p>
+                        <p className="department">
+                            {loading ? data[1].department : "loading..."}
+                        </p>
+                        <p className="total">
+                            {loading ? data[1].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="ranking rank_3rd effect-shine">3rd</p>
+                        <p className="department">
+                            {loading ? data[2].department : "loading..."}
+                        </p>
+                        <p className="total">
+                            {loading ? data[2].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="ranking rank_4th effect-shine">4th</p>
+                        <p className="department">
+                            {loading ? data[3].department : "loading..."}
+                        </p>
+                        <p className="total">
+                            {loading ? data[3].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                </Container>
+            </Desktop>
+            <Mobile>
+                <Container>
+                    <div
+                        className="m_rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="m_ranking rank_1st effect-shine">1st</p>
+                        <p className="m_department">
+                            {loading ? data[0].department : "loading..."}
+                        </p>
+                        <p className="m_total">
+                            {loading ? data[0].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="m_rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="m_ranking rank_2nd effect-shine">2nd</p>
+                        <p className="m_department">
+                            {loading ? data[1].department : "loading..."}
+                        </p>
+                        <p className="m_total">
+                            {loading ? data[1].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="m_rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="m_ranking rank_3rd effect-shine">3rd</p>
+                        <p className="m_department">
+                            {loading ? data[2].department : "loading..."}
+                        </p>
+                        <p className="m_total">
+                            {loading ? data[2].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                    <div
+                        className="m_rankingBox"
+                        data-aos="fade-up"
+                        data-aos-duration="1500"
+                    >
+                        <p className="m_ranking rank_4th effect-shine">4th</p>
+                        <p className="m_department">
+                            {loading ? data[3].department : "loading..."}
+                        </p>
+                        <p className="m_total">
+                            {loading ? data[3].score + "점" : "loading..."}
+                        </p>
+                    </div>
+                </Container>
+            </Mobile>
+        </>
     );
 }
 

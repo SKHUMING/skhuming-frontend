@@ -3,7 +3,8 @@ import ResponsiveNotice from "../components/ResponsiveNotice.js";
 
 export const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
-    return isDesktop ? children : <ResponsiveNotice />;
+    // return isDesktop ? children : <ResponsiveNotice />;
+    return isDesktop ? children : null;
 };
 export const Tablet = ({ children }) => {
     const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
@@ -17,3 +18,8 @@ export const Default = ({ children }) => {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
 };
+
+// export const Desktop = ({ children }) => {
+//     const isDesktop = useMediaQuery({ minWidth: 0 });
+//     return isDesktop ? children : <ResponsiveNotice />;
+// };
