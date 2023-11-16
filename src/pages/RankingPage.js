@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Desktop } from "../components/ReactResponse.js";
+import { Desktop, Mobile } from "../components/ReactResponse.js";
 import MainHeader from "../components/MainHeader.js";
 import RankBox from "../components/RankBox.js";
 import axios from "axios";
@@ -102,101 +102,202 @@ function RankingPage() {
     }, [selectAward, page]);
 
     return (
-        <Desktop>
-            <Container>
-                <MainHeader />
+        <>
+            <Desktop>
+                <Container>
+                    <MainHeader />
 
-                {popup ? (
-                    <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
-                ) : null}
-
-                <DisplayBoard />
-
-                <div class="rankingBox">
-                    {myData ? (
-                        <>
-                            <div className="rankingTitle">
-                                <p>MY RANKING</p>
-                            </div>
-                            <div className="myRanking">
-                                <div className="rank">{myData.myRanking}</div>
-                                <div className="rank_img">
-                                    {rankImg(myData.tier)}
-                                </div>
-                                <div className="rank_user">
-                                    <div className="rank_user_profile">
-                                        <div className="rank_name">
-                                            {myData.nickname}
-                                        </div>
-                                        <div className="rank_department">
-                                            {myData.department}
-                                        </div>
-                                    </div>
-                                    <div className="rank_score">
-                                        {myData.score}점
-                                    </div>
-                                </div>
-                            </div>
-                        </>
+                    {popup ? (
+                        <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
                     ) : null}
 
-                    <div className="rankingTitle">
-                        <div className="rankingTitleBox">
-                            <p>SKHUM RANKING</p>
-                            <form className="selectAward">
-                                <select
-                                    onChange={handleAward}
-                                    value={selectAward}
-                                >
-                                    {award.map((item) => (
-                                        <option
-                                            key={item.departmentId}
-                                            value={item.departmentId}
-                                        >
-                                            {item.department}
-                                        </option>
-                                    ))}
-                                </select>
-                            </form>
+                    <DisplayBoard />
+
+                    <div class="rankingBox">
+                        {myData ? (
+                            <>
+                                <div className="rankingTitle">
+                                    <p>MY RANKING</p>
+                                </div>
+                                <div className="myRanking">
+                                    <div className="rank">
+                                        {myData.myRanking}
+                                    </div>
+                                    <div className="rank_img">
+                                        {rankImg(myData.tier)}
+                                    </div>
+                                    <div className="rank_user">
+                                        <div className="rank_user_profile">
+                                            <div className="rank_name">
+                                                {myData.nickname}
+                                            </div>
+                                            <div className="rank_department">
+                                                {myData.department}
+                                            </div>
+                                        </div>
+                                        <div className="rank_score">
+                                            {myData.score}점
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        ) : null}
+
+                        <div className="rankingTitle">
+                            <div className="rankingTitleBox">
+                                <p>SKHUM RANKING</p>
+                                <form className="selectAward">
+                                    <select
+                                        onChange={handleAward}
+                                        value={selectAward}
+                                    >
+                                        {award.map((item) => (
+                                            <option
+                                                key={item.departmentId}
+                                                value={item.departmentId}
+                                            >
+                                                {item.department}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
+                            </div>
+                            <hr />
                         </div>
-                        <hr />
+
+                        <div className="ranking">
+                            {data.length > 0 ? (
+                                data.map((item) => (
+                                    <RankBox
+                                        rank={item.myRanking}
+                                        tier={item.tier}
+                                        name={item.nickname}
+                                        department={item.department}
+                                        score={item.score}
+                                    />
+                                ))
+                            ) : (
+                                <p className="noData">
+                                    등록된 데이터가 없습니다...🥲
+                                </p>
+                            )}
+                        </div>
+
+                        {/* pagination */}
+                        <PaginationStyle>
+                            <Pagination
+                                activePage={page}
+                                itemsCountPerPage={10}
+                                totalItemsCount={totalElements}
+                                pageRangeDisplayed={5}
+                                prevPageText={"<"}
+                                nextPageText={">"}
+                                onChange={handlePageChange}
+                            />
+                        </PaginationStyle>
+
+                        <Footer />
                     </div>
+                </Container>
+            </Desktop>
+            <Mobile>
+                <Container>
+                    <MainHeader />
 
-                    <div className="ranking">
-                        {data.length > 0 ? (
-                            data.map((item) => (
-                                <RankBox
-                                    rank={item.myRanking}
-                                    tier={item.tier}
-                                    name={item.nickname}
-                                    department={item.department}
-                                    score={item.score}
-                                />
-                            ))
-                        ) : (
-                            <p className="noData">
-                                등록된 데이터가 없습니다...🥲
-                            </p>
-                        )}
+                    {popup ? (
+                        <PopUp onClose={setPopup} msg={msg} goLogin={goLogin} />
+                    ) : null}
+
+                    <DisplayBoard />
+
+                    <div class="m_rankingBox">
+                        {myData ? (
+                            <>
+                                <div className="m_rankingTitle">
+                                    <p>MY RANKING</p>
+                                </div>
+                                <div className="m_myRanking">
+                                    <div className="m_rank">
+                                        {myData.myRanking}
+                                    </div>
+                                    <div className="m_rank_img">
+                                        {rankImg(myData.tier)}
+                                    </div>
+                                    <div className="m_rank_user">
+                                        <div className="m_rank_user_profile">
+                                            <div className="m_rank_name">
+                                                {myData.nickname}
+                                            </div>
+                                            <div className="m_rank_department">
+                                                {myData.department}
+                                            </div>
+                                        </div>
+                                        <div className="m_rank_score">
+                                            {myData.score}점
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        ) : null}
+
+                        <div className="m_rankingTitle">
+                            <div className="m_rankingTitleBox">
+                                <p>SKHUM RANKING</p>
+                                <form className="m_selectAward">
+                                    <select
+                                        onChange={handleAward}
+                                        value={selectAward}
+                                    >
+                                        {award.map((item) => (
+                                            <option
+                                                key={item.departmentId}
+                                                value={item.departmentId}
+                                            >
+                                                {item.department}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div className="m_ranking">
+                            {data.length > 0 ? (
+                                data.map((item) => (
+                                    <RankBox
+                                        rank={item.myRanking}
+                                        tier={item.tier}
+                                        name={item.nickname}
+                                        department={item.department}
+                                        score={item.score}
+                                    />
+                                ))
+                            ) : (
+                                <p className="m_noData">
+                                    등록된 데이터가 없습니다...🥲
+                                </p>
+                            )}
+                        </div>
+
+                        {/* pagination */}
+                        <PaginationStyle>
+                            <Pagination
+                                activePage={page}
+                                itemsCountPerPage={10}
+                                totalItemsCount={totalElements}
+                                pageRangeDisplayed={5}
+                                prevPageText={"<"}
+                                nextPageText={">"}
+                                onChange={handlePageChange}
+                            />
+                        </PaginationStyle>
+
+                        <Footer />
                     </div>
-
-                    {/* pagination */}
-                    <PaginationStyle>
-                        <Pagination
-                            activePage={page}
-                            itemsCountPerPage={10}
-                            totalItemsCount={totalElements}
-                            pageRangeDisplayed={5}
-                            prevPageText={"<"}
-                            nextPageText={">"}
-                            onChange={handlePageChange}
-                        />
-                    </PaginationStyle>
-
-                    <Footer />
-                </div>
-            </Container>
-        </Desktop>
+                </Container>
+            </Mobile>
+        </>
     );
 }
 
